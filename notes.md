@@ -17,4 +17,3 @@ er en decorator der fortæller appen hvilken url at bruge.
     - app: 
     - views: 
     - webapp: 
-    - 
