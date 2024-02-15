@@ -5,11 +5,18 @@ from . import app
 
 @app.route("/")
 def home():
+    
     filepath = 'static/note.json'
 
-    file = open(filepath, 'r')
-    notes = json.load(file)
-    return render_template("home.html", len = len(notes), notes = notes)
+    try:
+        with open(filepath, 'r') as file:
+                notes = json.load(file)
+
+    except FileNotFoundError:
+        print("Note fil ikke fundet!")
+        notes = {}
+
+    return render_template("home.html", notes = notes)
 
 @app.route("/about/")
 def about():

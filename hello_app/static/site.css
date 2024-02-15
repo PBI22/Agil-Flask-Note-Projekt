@@ -3,6 +3,14 @@ body {
     margin: 0;
 }
 
+
+hr {
+    width: 60%;
+
+    border: 1px solid black;
+    margin: 20px auto;
+}
+
 .message {
     font-weight: 600;
     color: blue;
@@ -32,29 +40,55 @@ body {
 }
 
 .body-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 5px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .resources {
-    width: 50%;
+    width: 80%;
     display: flex;
     flex-direction: column;
+    align-items: center;
     min-height: calc(100vh - 72px);
     margin-left: 25px;
     
 }
-.resources > p {
-    margin-right: auto;
-    margin-top: 5px;
-    margin-bottom: 5px;
-    font-size: 20px;
-}
 
-.fa-solid fa-wrench {
+/* Tabel CSS */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* Dette sikrer, at alle kolonner har samme bredde */
+  }
 
-}
+  th, td {
+    border: 1px solid #dddddd; /* Let grå kant for at skelne celler */
+    text-align: left;
+    padding: 8px;
+  }
 
-.fa-solid fa-trash-can {
+  th {
+    background-color: #f8f8f8; /* En let grå baggrundsfarve for header */
+    color: #333; /* Mørk tekstfarve for kontrast */
+  }
 
-}
+  tr:nth-child(even) {
+    background-color: #f2f2f2; /* Zebra-striping for rækker */
+  }
+
+  tr:hover {
+    background-color: #eaeaea; /* Hover-effekt for rækker */
+  }
+
+  .fa-wrench, .fa-trash-can {
+    cursor: pointer;
+    color: #333;
+    margin-right: 10px;
+  }
+
+  .fa-wrench:hover, .fa-trash-can:hover {
+    color: #555;
+  }

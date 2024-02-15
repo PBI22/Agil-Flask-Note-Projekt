@@ -25,6 +25,14 @@
     </div>
 
     <div class="body-content">
+      <!-- Undlad og slette min flash message kode denne gang -_- -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+              {% for category, message in messages %}
+                  <div class="flash-{{ category }}" style="text-align: center">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
       {% block content %} {% endblock %}
       <hr />
       <footer>
