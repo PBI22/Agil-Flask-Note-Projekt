@@ -1,21 +1,39 @@
-{% extends "layout.html" %} {% block title %} Landing Page {% endblock %}
-{%block content %}
-<hr />
-<h1>IT Arkitekt IBA Note Landing Page</h1>
-<div class="resources">
-  {% if notes == null %}
-  <p>lol</p>
-  {% else %} {% for title, details in notes.items() %}
-  <li>
-    <p>{{details["author"]}}</p>
-    <p>{{details["note"]}}</p>
-    <p>{{details["created"]}}</p>
-    <div class="row">
-      <i class="fa-solid fa-wrench"></i>
-      <i class="fa-solid fa-trash-can"></i>
-    </div>
-  </li>
-  <hr />
-  {%endfor%} {% endif %}
-</div>
+{% extends "layout.html" %}
+{% block title %} Landing Page {% endblock %}
+{% block head %} 
+
 {% endblock %}
+{% block content %}
+
+<h1 align="center">IT Arkitekt IBA Note Landing Page</h1>
+<hr>
+{% if not notes %}
+  <h2>Du har ingen noter pt! - Opret en nu</h2>
+{% else %}
+
+<table class="resources" style="width: 100%; border-collapse: collapse;">
+
+    <tr>
+      <th>Author</th>
+      <th>Note</th>
+      <th>Created</th>
+      <th>Actions</th>
+    </tr>
+
+  {% for title, details in notes.items() %}
+    <tr>
+      <td>{{ details["author"] }}</td>
+      <td>{{ details["note"] }}</td>
+      <td>{{ details["created"] }}</td>
+      <td>
+        <i class="fa-solid fa-wrench"></i>
+        <i class="fa-solid fa-trash-can"></i>
+      </td>
+    </tr>
+  {% endfor %}
+
+</table>
+{% endif %}
+
+{% endblock %}
+
