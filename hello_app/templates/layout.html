@@ -16,13 +16,22 @@
             <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
            <!-- <a href="{{ url_for('about') }}" class="navbar-item">About</a> -->
             <a href="{{ url_for('create') }}" class="navbar-item">Create Note</a>
+
         </div>
+
 
         <div class="body-content">
             {% block content %}
 
             {% endblock %}
             <hr/>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                    {% for category, message in messages %}
+                        <div class="flash-{{ category }}" style="text-align: center">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
             <footer>
                 <p>&copy; 2018</p>
             </footer>

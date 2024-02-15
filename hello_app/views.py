@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from . import app
 import json
 
@@ -17,28 +17,29 @@ def create():
 
 @app.route("/create/", methods=["POST"])
 def create_note():
-    name = request.form['name']
-    note = request.form['note']
-    author = request.form['author']
-    created = datetime.now()
+    try:
+        name = request.form['name']
+        note = request.form['note']
+        author = request.form['author']
+        created = datetime.now()
 
-    # Stien til din JSON-fil
-    filepath = 'static/note.json'
+        filepath = 'static/note.json'
 
-    # Læs den eksisterende data
-    with open(filepath, 'r') as file:
-        notes = json.load(file)
-    
-    # Tilføj den nye note
-    notes[name] = {
-        "note": note,
-        "author": author,
-        "created": created.strftime("%Y-%m-%d %H:%M:%S")
-    }
+        with open(filepath, 'r') as file:
+            notes = json.load(file)
 
-    # Skriv det opdaterede dictionary tilbage til filen
-    with open(filepath, 'w') as file:
-        json.dump(notes, file, indent=4, ensure_ascii=False)
+        notes[name] = {
+            "note": note,
+            "author": author,
+            "created": created.strftime("%Y-%m-%d %H:%M:%S")
+        }
+
+        with open(filepath, 'w') as file:
+            json.dump(notes, file, indent=4, ensure_ascii=False)
+        
+        flash('Note created successfully!', 'success')  # Viser en success-besked
+    except Exception as e:
+        flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
 
     return redirect(url_for('home'))
 
