@@ -63,7 +63,7 @@ def edit():
     return render_template("editnote.html")
 
 @app.route("/view/")
-def edit():
+def view():
     return render_template("viewnote.html")
 
 @app.route("/contact/")
