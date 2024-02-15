@@ -1,7 +1,6 @@
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, json
 from . import app
-import json
 
 @app.route("/")
 def home():
