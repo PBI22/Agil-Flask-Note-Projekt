@@ -1,41 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8" />
-        <title>{% block title %}
-            
-            {% endblock %}</title>
-        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}"  />
-        <script src="https://kit.fontawesome.com/f9fe3152cb.js" crossorigin="anonymous"></script>
-        {% block head %}
-            
-            {% endblock %}
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <title>{% block title %} {% endblock %}</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='site.css') }}"
+    />
+    <script
+      src="https://kit.fontawesome.com/f9fe3152cb.js"
+      crossorigin="anonymous"
+    ></script>
+    {% block head %} {% endblock %}
+  </head>
 
-    <body>
-        <div class="navbar">
-            <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
-           <!-- <a href="{{ url_for('about') }}" class="navbar-item">About</a> -->
-            <a href="{{ url_for('create') }}" class="navbar-item">Create Note</a>
+  <body>
+    <div class="navbar">
+      <a href="{{ url_for('home') }}" class="navbar-brand">Home</a>
+      <!-- <a href="{{ url_for('about') }}" class="navbar-item">About</a> -->
+      <a href="{{ url_for('create') }}" class="navbar-item">Create Note</a>
+    </div>
 
-        </div>
-
-
-        <div class="body-content">
-            {% block content %}
-
-            {% endblock %}
-            <hr/>
-            {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                    {% for category, message in messages %}
-                        <div class="flash-{{ category }}" style="text-align: center">{{ message }}</div>
-                    {% endfor %}
-                {% endif %}
-            {% endwith %}
-            <footer>
-                <p>&copy; 2018</p>
-            </footer>
-        </div>
-    </body>
+    <div class="body-content">
+      {% block content %} {% endblock %}
+      <hr />
+      <footer>
+        <p>&copy; 2018</p>
+      </footer>
+    </div>
+  </body>
 </html>
