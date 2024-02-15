@@ -1,13 +1,19 @@
-{% extends "layout.html" %}
-{% block title %}
-Landing Page
-{% endblock %}
-{% block content %}
-<hr/>
+{% extends "layout.html" %} {% block title %} Landing Page {% endblock %} {%
+block content %}
+<hr />
 <h1>IT Arkitekt IBA Note Landing Page</h1>
 <div class="resources">
-<p>Note link 1 <i class="fa-solid fa-wrench"></i> <i class="fa-solid fa-trash-can"></i></p> 
-<p>Note link 2 <i class="fa-solid fa-wrench"></i> <i class="fa-solid fa-trash-can"></i></p> 
+  {% for title, details in notes.items() %}
+  <li>
+    <p>{{details["author"]}}</p>
+    <p>{{details["note"]}}</p>
+    <p>{{details["created"]}}</p>
+    <div class="row">
+      <i class="fa-solid fa-wrench"></i>
+      <i class="fa-solid fa-trash-can"></i>
+    </div>
+  </li>
+  <hr />
+  {%endfor%}
 </div>
 {% endblock %}
-
