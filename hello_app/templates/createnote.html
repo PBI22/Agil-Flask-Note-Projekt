@@ -1,11 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create</title>
-</head>
-<body>
-    
-</body>
-</html>
+{% extends "layout.html" %}
+
+{% block title %}
+Create Note    
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
+{% endblock %}
+
+{% block content %}
+<!--
+    # name
+    # note
+    # author
+    # created (genereres automatisk)
+
+-->
+<h1>Create Note</h1>
+
+<!-- Lav input felter -->
+<form action="/create/" method="post">
+    <input type="text" name="name" placeholder="Name" /><br>
+    <textarea name="note" placeholder="Note"></textarea><br>
+    <input type="text" name="author" placeholder="Author" /><br>
+    <input type="submit" value="Create Note" />
+</form>
+
+{% endblock %}

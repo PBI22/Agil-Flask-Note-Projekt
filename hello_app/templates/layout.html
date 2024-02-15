@@ -2,8 +2,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>{% block title %}{% endblock %}</title>
+        <title>{% block title %}
+            
+            {% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='site.css') }}"  />
+        {% block head %}
+            
+            {% endblock %}
     </head>
 
     <body>
@@ -15,6 +20,7 @@
 
         <div class="body-content">
             {% block content %}
+
             {% endblock %}
             <hr/>
             <footer>
