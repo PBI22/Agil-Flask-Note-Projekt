@@ -1,10 +1,22 @@
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, json
 from . import app
+
+# Opening JSON file
+f = open('note.json')
+ 
+# returns JSON object as 
+# a dictionary
+notes = json.load(f)
+ 
+# Iterating through the json
+# list
+for i in notes:
+    print(i)
 
 @app.route("/")
 def home():
-    return render_template("home.html")
+    return render_template("home.html", len = len(notes), notes = notes)
 
 @app.route("/about/")
 def about():
