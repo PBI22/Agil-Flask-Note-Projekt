@@ -1,0 +1,18 @@
+{
+    "Min Note": {
+        "note" : "Dette er blot en test note",
+        "author": "zimula",
+        "created": "2022-01-01"
+    },
+    "En Anden Note": {
+        "note" : "Dette er en anden test note",
+        "author": "thomas",
+        "created": "2022-01-02"
+    },
+    "Lige en hurtig note": {
+        "note" : "Husk når enden er god er alting godt",
+        "author": "steffan",
+        "created": "2022-01-03"
+    }
+
+}
