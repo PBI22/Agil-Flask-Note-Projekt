@@ -5,11 +5,7 @@ import json
 
 @app.route("/")
 def home():
-    filepath = 'static/note.json'
-
-    file = open(filepath)
-    notes = json.load(file)
-    return render_template("home.html", len = len(notes), notes = notes)
+    return render_template("home.html") #, len = len(notes), notes = notes
 
 @app.route("/about/")
 def about():
