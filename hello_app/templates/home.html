@@ -1,14 +1,14 @@
-{% extends "layout.html" %}
-{% block title %}
-Landing Page
-{% endblock %}
-{% block content %}
-<hr/>
+{% extends "layout.html" %} {% block title %} Landing Page {% endblock %} {%
+block content %}
+<hr />
 <h1>IT Arkitekt IBA Note Landing Page</h1>
 <div class="resources">
- 
-<p>Note link 1</p>
-<p>Note link 2</p>
+  {% for title, details in notes.items() %}
+  <li>
+    <p>{{details["author"]}}</p>
+    <p>{{details["note"]}}</p>
+    <p>{{details["created"]}}</p>
+  </li>
+  {%endfor%}
 </div>
 {% endblock %}
-
