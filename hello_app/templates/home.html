@@ -3,7 +3,9 @@ block content %}
 <hr />
 <h1>IT Arkitekt IBA Note Landing Page</h1>
 <div class="resources">
-  {% for title, details in notes.items() %}
+  {% if notes == null %}
+  <p>lol</p>
+  {% else %} {% for title, details in notes.items() %}
   <li>
     <p>{{details["author"]}}</p>
     <p>{{details["note"]}}</p>
@@ -14,6 +16,6 @@ block content %}
     </div>
   </li>
   <hr />
-  {%endfor%}
+  {%endfor%} {% endif %}
 </div>
 {% endblock %}
