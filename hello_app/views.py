@@ -25,6 +25,10 @@ def home():
 def about():
     return render_template("about.html")
 
+@app.route("/note/")
+def note():
+    return render_template("note.html")
+
 @app.route("/create/")
 def create():
     return render_template("createnote.html")
