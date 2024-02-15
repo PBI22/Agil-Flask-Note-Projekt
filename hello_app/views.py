@@ -11,7 +11,7 @@ def about():
     return render_template("about.html")
 
 @app.route("/create/")
-def about():
+def create():
     return render_template("createnote.html")
 
 @app.route("/contact/")
