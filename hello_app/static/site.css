@@ -46,6 +46,15 @@ body {
 }
 .resources > p {
     margin-right: auto;
-    margin-top: 4px;
-    margin-bottom: 4px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-size: 20px;
+}
+
+.fa-solid fa-wrench {
+
+}
+
+.fa-solid fa-trash-can {
+
 }
