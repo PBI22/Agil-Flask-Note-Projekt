@@ -3,6 +3,7 @@ from flask import Flask, render_template, request, redirect, url_for, flash, ses
 from . import app
 import json
 
+"""
 # Opening JSON file
 f = open('note.json')
  
@@ -14,6 +15,7 @@ notes = json.load(f)
 # list
 for i in notes:
     print(i)
+"""
 
 @app.route("/")
 def home():
