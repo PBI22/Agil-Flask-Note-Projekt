@@ -60,7 +60,7 @@ def create_note():
 
 @app.route("/edit/")
 def edit():
-    return render_template("editenote.html")
+    return render_template("editnote.html")
 
 @app.route("/contact/")
 def contact():
