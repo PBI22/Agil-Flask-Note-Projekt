@@ -8,7 +8,13 @@ er en decorator der fortæller appen hvilken url at bruge.
     - @app.route(rule, options)
     - rule: url
     - parametere der bliver givet til rule.
+    f.eks. @app.route('/hello')
+        def hello_world():
+            retuen 'hello world!'
+    - med data 
+        @app.route('/hello/)
 ### hoved elementer i flask web apps
     - app: 
     - views: 
     - webapp: 
+    - 
