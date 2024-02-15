@@ -1,13 +1,14 @@
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session, json
+from flask import Flask, render_template, request, redirect, url_for, flash, session
+import json
 from . import app
 
 @app.route("/")
 def home():
     filepath = 'static/note.json'
 
-    with open(filepath, 'r') as file:
-        notes = json.load(file)
+    file = open(filepath, 'r')
+    notes = json.load(file)
     return render_template("home.html", len = len(notes), notes = notes)
 
 @app.route("/about/")
