@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block title %}
-Edit Note    
+View Notes   
 {% endblock %}
 
 {% block head %}
@@ -16,14 +16,14 @@ Edit Note
     # created (genereres automatisk)
 
 -->
-<h1>Edit Note</h1>
+<h1>View Notes</h1>
 
 <!-- Lav input felter -->
-<form action="/edit/" method="post">
+<form action="/view/" method="post">
     <input type="text" name="name" placeholder="Name" /><br>
     <textarea name="note" placeholder="Note"></textarea><br>
     <input type="text" name="author" placeholder="Author" /><br>
-    <input type="submit" value="Edit Note" />
+    <input type="submit" value="View Notes" />
 </form>
 
 {% endblock %}
