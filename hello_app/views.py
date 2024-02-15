@@ -42,6 +42,10 @@ def create_note():
 
     return redirect(url_for('home'))
 
+@app.route("/edit/")
+def edit():
+    return render_template("editenote.html")
+
 @app.route("/contact/")
 def contact():
     return render_template("contact.html")
