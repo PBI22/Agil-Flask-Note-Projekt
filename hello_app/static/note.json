@@ -1,18 +1,27 @@
 {
     "Min Note": {
-        "note" : "Dette er blot en test note",
+        "note": "Dette er blot en test note",
         "author": "zimula",
-        "created": "2022-01-01"
+        "created": "2022-01-01  12:31:22"
     },
     "En Anden Note": {
-        "note" : "Dette er en anden test note",
+        "note": "Dette er en anden test note",
         "author": "thomas",
-        "created": "2022-01-02"
+        "created": "2022-01-02  12:31:22"
     },
     "Lige en hurtig note": {
-        "note" : "Husk når enden er god er alting godt",
+        "note": "Husk når enden er god er alting godt",
         "author": "steffan",
-        "created": "2022-01-03"
+        "created": "2022-01-03  12:31:22"
+    },
+    "Bumasdas": {
+        "note": "adasdasdasdad",
+        "author": "SUpermandsdads",
+        "created": "2024-02-15 12:31:22"
+    },
+    "ZImulas confessions": {
+        "note": "Hvad er Python?",
+        "author": "Zimula",
+        "created": "2024-02-15 12:33:50"
     }
-
 }

@@ -1,6 +1,7 @@
 from datetime import datetime
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, url_for
 from . import app
+import json
 
 @app.route("/")
 def home():
@@ -13,6 +14,33 @@ def about():
 @app.route("/create/")
 def create():
     return render_template("createnote.html")
+
+@app.route("/create/", methods=["POST"])
+def create_note():
+    name = request.form['name']
+    note = request.form['note']
+    author = request.form['author']
+    created = datetime.now()
+
+    # Stien til din JSON-fil
+    filepath = 'static/note.json'
+
+    # Læs den eksisterende data
+    with open(filepath, 'r') as file:
+        notes = json.load(file)
+    
+    # Tilføj den nye note
+    notes[name] = {
+        "note": note,
+        "author": author,
+        "created": created.strftime("%Y-%m-%d %H:%M:%S")
+    }
+
+    # Skriv det opdaterede dictionary tilbage til filen
+    with open(filepath, 'w') as file:
+        json.dump(notes, file, indent=4, ensure_ascii=False)
+
+    return redirect(url_for('home'))
 
 @app.route("/contact/")
 def contact():
