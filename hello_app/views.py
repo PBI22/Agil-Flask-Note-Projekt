@@ -2,14 +2,15 @@ from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 import json
 from . import app
+import os
 
 @app.route("/")
 def home():
     
-    filepath = 'static/note.json'
+    filename = os.path.join(app.static_folder, 'note.json')
 
     try:
-        with open(filepath, 'r') as file:
+        with open(filename, 'r') as file:
                 notes = json.load(file)
 
     except FileNotFoundError:
@@ -38,9 +39,9 @@ def create_note():
         author = request.form['author']
         created = datetime.now()
 
-        filepath = 'static/note.json'
+        filename = os.path.join(app.static_folder, 'note.json')
 
-        with open(filepath, 'r') as file:
+        with open(filename, 'r') as file:
             notes = json.load(file)
 
         notes[name] = {
@@ -49,7 +50,7 @@ def create_note():
             "created": created.strftime("%Y-%m-%d %H:%M:%S")
         }
 
-        with open(filepath, 'w') as file:
+        with open(filename, 'w') as file:
             json.dump(notes, file, indent=4, ensure_ascii=False)
         
         flash('Note created successfully!', 'success')  # Viser en success-besked
