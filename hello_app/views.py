@@ -79,6 +79,27 @@ def hello_there(name = None):
         name=name,
         date=datetime.now()
     )
+    
+@app.route("/delete/<name>")
+def delete_note(name = None):
+    
+    if name is None:
+        flash('No note name provided', 'error')
+        return redirect(url_for('home'))
+    try:
+        filename = os.path.join(app.static_folder, 'note.json')
+
+        with open(filename, 'r') as file:
+            notes = json.load(file)
+
+        notes.pop(name, None)
+
+        with open(filename, 'w') as file:
+            json.dump(notes, file, indent=4, ensure_ascii=False)
+    except Exception as e:
+        flash(f'Failed to delete note: {str(e)}', 'error')
+
+    return redirect(url_for('home'))
 
 @app.route("/api/data")
 def get_data():

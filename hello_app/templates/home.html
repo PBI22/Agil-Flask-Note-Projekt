@@ -27,7 +27,9 @@
       <td>{{ details["created"] }}</td>
       <td>
         <i class="fa-solid fa-wrench"></i>
-        <i class="fa-solid fa-trash-can"></i>
+        <a href="{{ url_for('delete_note', name=title) }}" class="icon-link">
+          <i class="fa-solid fa-trash-can"></i>
+        </a>
       </td>
     </tr>
   {% endfor %}
