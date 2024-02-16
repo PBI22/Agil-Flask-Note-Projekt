@@ -14,8 +14,9 @@ er en decorator der fortæller appen hvilken url at bruge.
     - med data 
         @app.route('/hello/)
 ### hoved elementer i flask web apps
-    - static: data
+    - static: data, css 
     - templates: html
-    - app: 
-    - views: 
-    - webapp: 
+    - app: instantiation
+    - views: logik og referencer til url
+    - webapp: kombinere app og views 
+
