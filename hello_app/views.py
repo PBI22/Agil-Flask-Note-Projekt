@@ -83,3 +83,10 @@ def hello_there(name = None):
 @app.route("/api/data")
 def get_data():
     return app.send_static_file("data.json")
+@app.route("/edit/<name>")
+def get_edit(name):
+    filepath = 'static/note.json'
+
+    with open(filepath, 'r') as file:
+        notes = json.load(file)
+    return render_template("editnote.html", name=name)
