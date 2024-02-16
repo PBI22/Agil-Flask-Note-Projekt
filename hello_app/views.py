@@ -84,9 +84,19 @@ def hello_there(name = None):
 def get_data():
     return app.send_static_file("data.json")
 @app.route("/edit/<name>")
-def get_edit(name):
-    filepath = 'static/note.json'
+def get_edit(name = None):
+    if name is None:
+        flash(f"Failed to edit - Note is None")  # Viser en failure-besked
 
-    with open(filepath, 'r') as file:
-        notes = json.load(file)
-    return render_template("editnote.html", name=name)
+        return redirect(url_for('home')) 
+    filename = os.path.join(app.static_folder, 'note.json')
+
+    try:
+        with open(filename, 'r') as file:
+                notes = json.load(file)
+
+    except FileNotFoundError:
+        flash(f"Note file not found")
+        notes = {}
+
+    return render_template("editnote.html", name,notes)
