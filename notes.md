@@ -19,4 +19,9 @@ er en decorator der fortæller appen hvilken url at bruge.
     - app: instantiation
     - views: logik og referencer til url
     - webapp: kombinere app og views 
+### run local
+    - install flask 
+    - use: flask --app app_name run
+    - terminate: ctrl + æ
+
 
