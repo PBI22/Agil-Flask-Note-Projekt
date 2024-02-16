@@ -23,5 +23,15 @@ er en decorator der fortæller appen hvilken url at bruge.
     - install flask 
     - use: flask --app app_name run
     - terminate: ctrl + æ
+### azure
+    - cloud in general
+    - shared responsibility model
+    - cloud models: public, private and hybrid
+    - use cases for each model
+    - consumption based mdel 
+    - pricing models
+# to be continued
+
+
 
 
