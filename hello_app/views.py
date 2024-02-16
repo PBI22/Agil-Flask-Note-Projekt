@@ -59,9 +59,35 @@ def create_note():
 
     return redirect(url_for('home'))
 
-@app.route("/edit/")
+@app.route("/edit/", methods=["GET", "POST"])
 def edit():
-    return render_template("editnote.html")
+    if request.method == "POST":
+        # Get the submitted form data
+        name = request.form.get("name")
+        note_content = request.form.get("note")
+        author = request.form.get("author")
+        created = request.form.get("created")
+        filename = os.path.join(app.static_folder, 'note.json')
+
+        try:
+            with open(filename, 'r') as file:
+                notes = json.load(file)
+
+        except FileNotFoundError:
+            print("Note fil ikke fundet!")
+            notes = {}
+    
+        notes[name] = {"author": author, "note": note_content, "created": created}
+
+        # Write the updated notes back to the JSON file
+        with open(filename, 'w') as file:
+            json.dump(notes, file, indent=4)
+
+        flash("Note updated successfully")
+        return redirect(url_for('home'))
+    else:
+        flash("Invalid request method")
+        return redirect(url_for('home'))
 
 @app.route("/view/")
 def view():
@@ -83,7 +109,7 @@ def hello_there(name = None):
 @app.route("/api/data")
 def get_data():
     return app.send_static_file("data.json")
-@app.route("/edit/<name>")
+@app.route("/edit/<name>", methods=["GET", "POST"])
 def get_edit(name = None):
     if name is None:
         flash(f"Failed to edit - Note is None")  # Viser en failure-besked
@@ -99,4 +125,12 @@ def get_edit(name = None):
         flash(f"Note file not found")
         notes = {}
 
-    return render_template("editnote.html", name,notes)
+        # Check if the requested note exists in the notes dictionary
+    if name not in notes:
+        flash("Note not found")
+        return redirect(url_for('home'))
+
+    # Pass the specific note details to the template
+    note_details = notes[name]
+
+    return render_template("editnote.html", name=name, notes=notes)
