@@ -1,5 +1,5 @@
 {% extends "layout.html" %}
-
+<!-- import datetime-->
 {% block title %}
 Create Note    
 {% endblock %}
@@ -20,9 +20,11 @@ Create Note
 
 <!-- Lav input felter -->
 <form action="/create/" method="post">
-    <input type="text" name="name" placeholder="Name" /><br>
+    <input type="text" name="title" placeholder="Name" /><br>
     <textarea name="note" placeholder="Note"></textarea><br>
-    <input type="text" name="author" placeholder="Author" /><br>
+    <!-- <input type="text" name="author" placeholder="Author" /><br> -->
+    <input type="hidden" name="created" value=" {{ datetime }}"/><br>
+    <input type="text" name="imagelink" placeholder="Image Link"/><br>
     <input type="submit" value="Create Note" />
 </form>
 
