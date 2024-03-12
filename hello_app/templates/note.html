@@ -1,0 +1,41 @@
+<!-- FILEPATH: /c:/Users/Steffan/Documents/GitHub/Agil-Flask-Note-Projekt/hello_app/templates/note.html -->
+
+<!-- BEGIN: view-note-setup -->
+{% extends "layout.html" %}
+
+{% block title %}
+View Note
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
+{% endblock %}
+
+{% block content %}
+<!--
+    # name
+    # note
+    # author
+    # created (genereres automatisk)
+-->
+<div align="center">
+<h1>View Note</h1>
+<h2>{{ note.title }}</h2>
+<hr>
+
+<textarea disabled>{{ note.text }}</textarea>
+<p>AccountID: {{ note.account_ID }}</p>
+<p>Created: {{ note.created }}</p>
+<p>LastEdited: {{ note.lastEdited }}</p>
+<img src="{{ note.imagelink }}" alt="Note Image">
+</div>
+<!-- Actions button-->
+<div align="center">
+    <a href="{{ url_for('edit', id=note.id) }}" class="icon-link">
+        <i class="fa-solid fa-wrench"></i>
+    </a>
+    <a href="{{ url_for('delete_note', id=note.id) }}" class="icon-link">
+        <i class="fa-solid fa-trash-can"></i>
+    </a>
+{% endblock %}
+

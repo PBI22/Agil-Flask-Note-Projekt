@@ -14,22 +14,27 @@
 <table class="resources" style="width: 100%; border-collapse: collapse;">
 
     <tr>
-      <th>Author</th>
-      <th>Note</th>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Text</th>
       <th>Created</th>
       <th>Actions</th>
     </tr>
 
-  {% for title, details in notes.items() %}
-    <tr>
-      <td>{{ details["author"] }}</td>
-      <td>{{ details["note"] }}</td>
-      <td>{{ details["created"] }}</td>
+  {% for note in notes %}
+    <tr>  
+      <td>{{ note.id }}</td>
+      <td>{{ note.title }}</td>
+      <!-- Display maximum of 50 characters-->
+      <td>{{ note.text[:50] }}...</td>
+      <td>{{ note.created }}</td>
       <td>
-        <a href="{{ url_for('get_edit', name=title) }}" class="icon-link">
+        <a href="{{ url_for('view', id=note.id) }}" class="icon-link">
+            <i class="fa-solid fa-eye"></i>
+        <a href="{{ url_for('edit', id=note.id) }}" class="icon-link">
             <i class="fa-solid fa-wrench"></i>
         </a>
-        <a href="{{ url_for('delete_note', name=title) }}" class="icon-link">
+        <a href="{{ url_for('delete_note', id=note.id) }}" class="icon-link">
           <i class="fa-solid fa-trash-can"></i>
         </a>
 
