@@ -71,6 +71,5 @@ er en decorator der fortæller appen hvilken url at bruge.
 		{% endif %}
 			<br><br>
 
-
-
-
+## UserRole ER diagram 
+![userRole Img](img/UserRole.PNG)
