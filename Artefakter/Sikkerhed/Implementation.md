@@ -22,16 +22,18 @@ Input validation og sanitization
 En parametiseret forespørgsel **adskiller** SQL-kode, fra den data, som indsættes i forespørgslen. Det betyder, at brugerens input behandles som værdier og ikke en del af en SQL forespørgsel, hvilket forhindre brugeren i at lave en SQL-injection. 
 
 Eksempel på parametiseret forespørgsel
-```
+```sql
 sql_query = "SELECT * FROM users WHERE username = %s AND password = %s"
 ```
+
 Eksempel på en **IKKE** parametiseret forespørgsel
-```
+
+```sql
 sql_query = f"SELECT * FROM users WHERE username = '{username}' AND password = '{password}'"
 ```
 
 # Direkte implementation (ChatGPT guide/punkter)
-```
+```python
 from flask import Flask, request, jsonify
 import re
 
@@ -64,16 +66,18 @@ def handle_input():
 
 if __name__ == '__main__':
 	app.run(debug=True)
-
+```
 Eksempel fra PortSwigger 
 Eksemplet handler om beskyttelse mod brugerinput med først at unicode escape og derefter HTML-encode det. Eksemplet tager stilling mod JavaScript og hermed Client side XSS angreb.
 
 Javascript har ikke sin egen API til at encode HTML og hermed vil man selv nødt til at udvikle en løsning. Hermed vil følgende kode erstatte et string om til HTML entities som hermed vil reducere muligheden for at lave XSS angreb.
+```js
 function htmlEncode(str){
 	return String(str).replace(/[^\w. ]/gi, function(c){
     	return '&#'+c.charCodeAt(0)+';';
 	});
 }
+```
 
 Herefter vil man køre dette script ved steder hvor brugeren kan indsætte data vha. Inputfelter.
 <script>document.body.innerHTML = htmlEncode(untrustedValue)</script>
@@ -89,7 +93,7 @@ Hermed vil man bruge dette script til at sanitize inputtet med hjælp af sampled
 <script>document.write('<script>x="'+jsEscape(untrustedValue)+'";<\/script>')</script>
 
 Her kan man se hvordan man som hacker kan udnytte svagheder i kommunikation mellem SQL og andre programmeringssprog(her python). Man vil altså hermed bypass nødvendigheden for et password, hvilket hæmmer sikkerheden på siden. Eksemplet er fra SecureFlag.
-
+```python
 @app.route("/login")
 def login():
 
@@ -110,12 +114,11 @@ if record:
 session['logged_user'] = username
 
 # disconnect from server
-  db.close()
+db.close()
 
 Parameterized query med SQLAlchemy
 stmt = sqlalchemy.sql.text("SELECT * FROM users WHERE username = :username and password = :password")
 conn.execute(stmt, {"username": username, "password": password })
-
 ```
 
 ### Kilder
