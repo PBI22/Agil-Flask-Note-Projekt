@@ -4,17 +4,16 @@ import json
 from . import app
 import os
 from .models import Note
+from dbconnect import engine, session
 
 """
 Midlertidig Datastorage Liste med 3 Test notes i en liste
 
 """
 
-notes_db = [
-    Note(1, "Note 1", "This is a note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(2, "Note 2", "This is another note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(3, "Note 3", "This is yet another note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1)
-]
+notes_db = []
+for row in session.query(Note).order_by(Note.noteID):
+    notes_db.append(row)
 
 
 
@@ -34,16 +33,19 @@ def create_note():
 
     # Hvis ikke GET, så er det POST, og så kører vi denne logik
     try:
+
         title = request.form['title']
         note = request.form['note']
-
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
         account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
-        notes_db.append(Note(len(notes_db) + 1, title, note, created, lastEdited, imagelink, account_ID))
+        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        session.add(note)
+        session.commit()
         flash('Note created successfully!', 'success')  # Viser en success-besked
     except Exception as e:
+        session.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
 
     return redirect(url_for('home'))
