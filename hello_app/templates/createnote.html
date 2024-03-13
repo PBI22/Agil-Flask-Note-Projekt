@@ -1,14 +1,12 @@
 {% extends "layout.html" %}
 <!-- import datetime-->
-{% block title %}
-Create Note    
-{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
-{% endblock %}
-
-{% block content %}
+{% block title %} Create Note {% endblock %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='note.css') }}"
+/>
+{% endblock %} {% block content %}
 <!--
     # name
     # note
@@ -19,13 +17,13 @@ Create Note
 <h1>Create Note</h1>
 
 <!-- Lav input felter -->
-<form action="/create/" method="post">
-    <input type="text" name="title" placeholder="Name" /><br>
-    <textarea name="note" placeholder="Note"></textarea><br>
-    <!-- <input type="text" name="author" placeholder="Author" /><br> -->
-    <input type="hidden" name="created" value=" {{ datetime }}"/><br>
-    <input type="text" name="imagelink" placeholder="Image Link"/><br>
-    <input type="submit" value="Create Note" />
+<form action="/create/" method="post" enctype="multipart/form-data">
+  <input type="text" name="title" placeholder="Name" /><br />
+  <textarea name="note" placeholder="Note"></textarea><br />
+  <!-- <input type="text" name="author" placeholder="Author" /><br> -->
+  <input type="hidden" name="created" value=" {{ datetime }}" /><br />
+  <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif" />
+  <input type="submit" value="Create Note" />
 </form>
 
 {% endblock %}
