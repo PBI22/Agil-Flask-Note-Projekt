@@ -4,6 +4,8 @@ import json
 from . import app
 import os
 from .models import Note
+import markdown
+
 
 """
 Midlertidig Datastorage Liste med 3 Test notes i en liste
@@ -82,8 +84,12 @@ def edit(id = None):
 @app.route("/view/<id>")
 def view(id = None):
     note = next((note for note in notes_db if note.id == int(id)), None)
-    return render_template("note.html", note=note)
 
+    if note.text.startswith("!MD"):
+        note_markdown = markdown.markdown(note.text.replace("!MD", ""))
+        return render_template("mdnote.html", note=note, note_markdown=note_markdown)
+    else:
+        return render_template("note.html", note=note)
 
 @app.route("/delete/<id>")
 def delete_note(id = None):
