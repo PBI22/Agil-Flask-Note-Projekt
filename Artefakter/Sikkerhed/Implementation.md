@@ -95,8 +95,9 @@ function jsEscape(str){
 
 Hermed vil man bruge dette script til at sanitize inputtet med hjælp af sampled fra før.
 
+```js
 <script>document.write('<script>x="'+jsEscape(untrustedValue)+'";<\/script>')</script>
-
+```
 
 Her kan man se hvordan man som hacker kan udnytte svagheder i kommunikation mellem SQL og andre programmeringssprog(her python). Man vil altså hermed bypass nødvendigheden for et password, hvilket hæmmer sikkerheden på siden. Eksemplet er fra SecureFlag.
 ```python
