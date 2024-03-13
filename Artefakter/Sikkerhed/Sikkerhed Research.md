@@ -64,3 +64,13 @@ Query
 SELECT * FROM products WHERE category = 'books' OR 1=1--'
 
 Et værre eksempel kunne være at logge ind på en konto med brugernavnet og password, hvor man siger OR 1=1, hvilket vil bypass password restriktionen.
+
+
+## Kilder:
+https://owasp.org/www-community/attacks/xss/
+https://owasp.org/www-community/Types_of_Cross-Site_Scripting
+https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html
+https://flask.palletsprojects.com/en/2.3.x/security/
+https://portswigger.net/web-security/sql-injection
+https://towardsdatascience.com/a-simple-approach-to-templated-sql-queries-in-python-adc4f0dc511
+https://chat.openai.com/ (Query til eksempler og til forståelse)

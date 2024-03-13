@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
-{% block title %} Landing Page {% endblock %}
+{% block title %} My Notes {% endblock %}
 {% block head %} 
 
 {% endblock %}
 {% block content %}
 
-<h1 align="center">IT Arkitekt IBA Note Landing Page</h1>
+<h1 align="center">Mine Noter</h1>
 <hr>
 {% if not notes %}
   <h2>Du har ingen noter pt! - Opret en nu</h2>
@@ -15,10 +15,11 @@
 
     <tr>
       <th>ID</th>
-      <th>Title</th>
-      <th>Text</th>
-      <th>Created</th>
-      <th>Actions</th>
+      <th>Titel</th>
+      <th>Note</th>
+      <th>Oprettet</th>
+      <th>Redigeret</th>
+      <th>Handlinger</th>
     </tr>
 
   {% for note in notes %}
@@ -27,7 +28,8 @@
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
-      <td>{{ note.created }}</td>
+      <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
+      <td> {{ note.lastEdited.strftime("%Y-%m-%d %H:%M") }} </td>
       <td>
         <a href="{{ url_for('view', id=note.id) }}" class="icon-link">
             <i class="fa-solid fa-eye"></i>
