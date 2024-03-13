@@ -83,11 +83,13 @@ Herefter vil man køre dette script ved steder hvor brugeren kan indsætte data 
 <script>document.body.innerHTML = htmlEncode(untrustedValue)</script>
 
 Hvis inputtet er i en JavaScript string, så vil man skulle bruge en encoder som laver Unicode escaping. Her er sample Unicode-encoder.
+```js
 function jsEscape(str){
 	return String(str).replace(/[^\w. ]/gi, function(c){
     	return '\\u'+('0000'+c.charCodeAt(0).toString(16)).slice(-4);
 	});
 }
+```
 
 Hermed vil man bruge dette script til at sanitize inputtet med hjælp af sampled fra før.
 <script>document.write('<script>x="'+jsEscape(untrustedValue)+'";<\/script>')</script>
