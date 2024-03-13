@@ -18,17 +18,20 @@ View Note
     # author
     # created (genereres automatisk)
 -->
-<div align="center">
-<h1>View Note</h1>
+<div class="main-body">
 <h2>{{ note.title }}</h2>
 <hr>
 
-<textarea disabled>{{ note.text }}</textarea>
-<p>AccountID: {{ note.account_ID }}</p>
-<p>Created: {{ note.created }}</p>
-<p>LastEdited: {{ note.lastEdited }}</p>
-<img src="{{ note.imagelink }}" alt="Note Image">
+<textarea style="width:50%" disabled>{{ note.text }}</textarea>
+
+{% if note.imagelink %}
+<img class="note-img" src="{{ note.imagelink }}" alt="Note Image">
+{% endif %}
+
 </div>
+ 
+<p class="view-timestamps">Oprettet: {{ note.created.strftime("%Y-%m-%d %H:%M") }} / 
+Redigeret: {{ note.lastEdited.strftime("%Y-%m-%d %H:%M") }}</p>
 <!-- Actions button-->
 <div align="center">
     <a href="{{ url_for('edit', id=note.id) }}" class="icon-link">
