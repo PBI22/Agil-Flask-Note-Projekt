@@ -20,6 +20,18 @@ textarea {
    
 }
 
+.markdown-body {
+    width: 100%;
+    max-width: 800px;
+    padding: 25px;
+    margin: 20px;
+    background-color: #d7d7d763;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+}
+
 .view-timestamps {
     font-style: italic;
     padding: 5px;
@@ -87,4 +99,11 @@ input[type=submit]:hover {
     textarea {
         margin-bottom: 15px;
     }
+}
+
+
+/* eksempel på img sizing via markdown */
+img[alt="500px-img"] {
+    width: 500px;
+    height: auto;
 }
