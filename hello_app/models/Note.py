@@ -1,6 +1,5 @@
 from sqlalchemy import Column, String,ForeignKey, Integer, DateTime, Text, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship
-from hello_app.dbconnect import engine
 """"
 I want to make a model for my note taking app, first im making the model "Note", which has the following fields:
 - id INT
