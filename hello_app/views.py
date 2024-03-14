@@ -21,7 +21,7 @@ for row in session.query(Note).order_by(Note.noteID):
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
-    return render_template("home.html", notes = notes_db, datetime = datetime.now())
+    return render_template("home.html", notes = [row for row in session.query(Note).order_by(Note.noteID)], datetime = datetime.now())
 
 
 # Create note
@@ -54,7 +54,7 @@ def create_note():
 def edit(id = None):
 
     # Tager notes fra vores "notes_db" liste. Hvis notes ikke findes, så returneres en failure-besked. Eller laver vi en ny note.
-    note = next((note for note in notes_db if note.id == int(id)), None)
+    note = next((note for note in notes_db if note.noteID == int(id)), None)
 
     if note is None:
         flash('Note not found', 'error')
@@ -64,14 +64,14 @@ def edit(id = None):
         return render_template("editnote.html", note=note)
     
     elif request.method == "POST":
-        
         try:
-            note.title = request.form['title']
-            note.text = request.form['note']
-            note.lastEdited = datetime.now()
-            note.imagelink = request.form['imagelink']
-            note.account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
-
+            upd = session.query(Note).filter(Note.noteID == id).first()
+            upd.title = request.form['title']
+            upd.text = request.form['note']
+            upd.lastedited = datetime.now()
+            upd.imagelink = request.form['imagelink']
+            upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+            session.commit()
             flash('Note created successfully!', 'success')  # Viser en success-besked
             return redirect(url_for('home'))
     
@@ -83,7 +83,7 @@ def edit(id = None):
 
 @app.route("/view/<id>")
 def view(id = None):
-    note = next((note for note in notes_db if note.id == int(id)), None)
+    note = next((note for note in notes_db if note.noteID == int(id)), None)
     return render_template("note.html", note=note)
 
 
@@ -94,11 +94,13 @@ def delete_note(id = None):
         flash('Id is invalid', 'error')
         return redirect(url_for('home'))
     else:
-        note = next((note for note in notes_db if note.id == int(id)), None)
+        note = next((note for note in notes_db if note.noteID == int(id)), None)
         if note is None:
             flash('Note not found', 'error')
             return redirect(url_for('home'))
         else:
+            session.delete(note)
+            session.commit()
             notes_db.remove(note)
             flash('Note deleted successfully!', 'success')
 

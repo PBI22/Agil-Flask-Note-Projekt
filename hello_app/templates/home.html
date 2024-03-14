@@ -24,19 +24,19 @@
 
   {% for note in notes %}
     <tr>  
-      <td>{{ note.noteid }}</td>
+      <td>{{ note.noteID }}</td>
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
       <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
-      <td> {{ note.lastEdited.strftime("%Y-%m-%d %H:%M") }} </td>
+      <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
       <td>
-        <a href="{{ url_for('view', id=note.id) }}" class="icon-link">
+        <a href="{{ url_for('view', id=note.noteID) }}" class="icon-link">
             <i class="fa-solid fa-eye"></i>
-        <a href="{{ url_for('edit', id=note.id) }}" class="icon-link">
+        <a href="{{ url_for('edit', id=note.noteID) }}" class="icon-link">
             <i class="fa-solid fa-wrench"></i>
         </a>
-        <a href="{{ url_for('delete_note', id=note.id) }}" class="icon-link">
+        <a href="{{ url_for('delete_note', id=note.noteID) }}" class="icon-link">
           <i class="fa-solid fa-trash-can"></i>
         </a>
 

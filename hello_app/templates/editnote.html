@@ -20,7 +20,7 @@ Edit Note
 
 <div class="main-body">
 <!-- Lav input felter -->
-<form action="/edit/{{ note.id }}" method="post">
+<form action="/edit/{{ note.noteID }}" method="post">
     <input type="text" name="title" placeholder="Name"value="{{ note.title }}" /><br>
     <textarea name="note" placeholder="Note">{{ note.text }}</textarea><br>
     <!-- <input type="text" name="author" placeholder="Author" /><br> -->

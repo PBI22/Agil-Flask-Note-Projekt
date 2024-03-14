@@ -31,7 +31,7 @@ View Note
 </div>
  
 <p class="view-timestamps">Oprettet: {{ note.created.strftime("%Y-%m-%d %H:%M") }} / 
-Redigeret: {{ note.lastEdited.strftime("%Y-%m-%d %H:%M") }}</p>
+Redigeret: {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }}</p>
 <!-- Actions button-->
 <div align="center">
     <a href="{{ url_for('edit', id=note.id) }}" class="icon-link">
