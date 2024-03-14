@@ -9,6 +9,9 @@ View Note
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='pycode.css') }}"  />
+<!-- Til custom styling af disse admonitions bokse -->
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='admonitions.css') }}"  />
 {% endblock %}
 
 {% block content %}
@@ -19,11 +22,13 @@ View Note
     # created (genereres automatisk)
 -->
 <div class="main-body">
-<h2>{{ note.title }}</h2>
-<hr>
+
 
 <div class="markdown-body">
-{{ note_markdown|safe }}
+<h1>{{ note.title }}</h1>
+<hr>
+
+{{ note_markdown | safe }}
 </div>
 
 {% if note.imagelink %}
@@ -42,5 +47,26 @@ Redigeret: {{ note.lastEdited.strftime("%Y-%m-%d %H:%M") }}</p>
     <a href="{{ url_for('delete_note', id=note.id) }}" class="icon-link">
         <i class="fa-solid fa-trash-can"></i>
     </a>
+
+
+<!-- Custom Scripts - Til Mermaid-->
+<script type="module" defer>
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@9/dist/mermaid.esm.min.mjs';
+  mermaid. Initialize({
+    securityLevel: 'loose',
+    startOnLoad: true
+  });
+  let observer = new MutationObserver(mutations => {
+    for(let mutation of mutations) {
+      mutation.target.style.visibility = "visible";
+    }
+  });
+  document.querySelectorAll("pre.mermaid-pre div.mermaid").forEach(item => {
+    observer.observe(item, { 
+      attributes: true, 
+      attributeFilter: ['data-processed'] });
+  });
+</script>
+
 {% endblock %}
 
