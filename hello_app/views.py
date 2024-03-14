@@ -78,3 +78,14 @@ def delete_note(id = None):
 
 
     return redirect(url_for('home'))
+
+@app.route("/search")
+def search_results():
+    query = request.args.get('query')
+
+    if not query or query == "":
+        return redirect(url_for('home'))
+
+    # Søg efter noter, der matcher søgeordet
+    search_results = searchbar(query)
+    return render_template('search_results.html', results=search_results, query=query)

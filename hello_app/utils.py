@@ -1,7 +1,7 @@
 # Utility functions
 from .dbconnect import session
 from .models import Note
-from flask import flash, redirect, url_for
+from flask import flash, redirect, url_for, render_template
 from datetime import datetime
 
 def load_md_template(filename):
@@ -57,3 +57,7 @@ def edit_note_post(request, id):
 def find_note(id):
     note = next((note for note in updateList() if note.noteID == int(id)), None)
     return note
+
+def searchbar(query):
+    search_results = session.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+    return search_results
