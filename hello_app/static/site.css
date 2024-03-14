@@ -102,3 +102,18 @@ tr:hover {
 footer {
   background-color: white;
 }
+
+#theme-toggle {
+  background-color: #707070;
+  border-radius: 3px;
+  border-top: 2px solid #3b3b3b;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}

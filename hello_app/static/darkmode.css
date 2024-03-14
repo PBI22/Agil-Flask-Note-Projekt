@@ -1,7 +1,7 @@
 .dark-mode .body-content {
     padding: 0;
     margin: 0;
-    background-color: #272727;
+    background-color: #383636;
 }
 
 .dark-mode h1 {
@@ -28,7 +28,7 @@
 }
 
 .dark-mode .navbar {
-    background-color: #4b4949;
+    background-color: #504e4e;
     color: #ffffff;
     font-size: 1.4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -91,4 +91,15 @@
 
 .dark-mode footer p {
     color: #ffffff;
+}
+
+.dark-mode form {
+    background-color: #2D2D2D ;
+    padding: 20px;
+    border-radius: 5px;
+    border: 5px solid #2D2D2D;
+    box-shadow: 0 0 50px rgba(194, 193, 193, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
 }
