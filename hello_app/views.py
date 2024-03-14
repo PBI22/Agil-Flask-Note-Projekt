@@ -15,6 +15,7 @@ def home():
 
 
 # Create note
+#Login required (what if you're already logged in)
 @app.route("/create/", methods=["GET","POST"])
 def create_note():
 
@@ -26,7 +27,7 @@ def create_note():
         create_note_post(request)
 
     return redirect(url_for('home'))
-
+#Login required (what if you're already logged in)
 @app.route("/edit/<id>", methods=["GET","POST"])
 def edit(id = None):
 
