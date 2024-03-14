@@ -17,14 +17,18 @@ hr {
 }
 
 .navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     background-color: lightslategray;
-    font-size: 1em;
+    font-size: 1.4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
-    padding: 10px 8px 10px 8px;
+    padding:  20px;
 }
 
 .navbar a {
+    padding: 10px;
     text-decoration: none;
     color: inherit;
 }

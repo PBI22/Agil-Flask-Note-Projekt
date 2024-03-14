@@ -4,7 +4,7 @@ import os
 from datetime import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from . import app
-from .models import Note
+from .models import Note, Account
 from .utils import *
 
 
@@ -78,3 +78,36 @@ def delete_note(id = None):
 
 
     return redirect(url_for('home'))
+
+@app.route("/signup/", methods=["GET","POST"])
+def create_account():
+    if request.method == "POST":
+        # Create account post logik
+  
+        if not request.form['username']:
+            flash('Username is required', 'error')
+            return redirect(url_for('create_account'))
+        if not request.form['password']:
+            flash('Password is required', 'error')
+            return redirect(url_for('create_account'))
+        if not request.form['email']:
+            flash('Email is required', 'error')
+            return redirect(url_for('create_account'))
+        
+        # Check if username already exists
+        if session.query(Account).filter_by(username=request.form['username']).first() is not None:
+            flash('Username already exists', 'error')
+            return redirect(url_for('create_account'))
+        
+        try:
+            session.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
+            session.commit()
+            flash('Account created successfully!', 'success')
+            
+        except:
+            flash('Error creating account', 'error')
+            return redirect(url_for('create_account'))
+        return redirect(url_for('home'))
+        
+    else:
+        return render_template("signup.html")
