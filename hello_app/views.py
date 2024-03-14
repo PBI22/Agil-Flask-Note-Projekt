@@ -4,32 +4,6 @@ import json
 from . import app
 import os
 from .models import Note
-import markdown2
-
-
-"""
-simple funktion der lige loader en "markdown skabelon, som demonstration
-inden databasen er implementeret.
-
-"""
-def load_md_template(filename):
-    folder = "md_templates/"
-    with open(folder + filename + ".md", "r",encoding='utf-8') as file:
-        skabelon_md = file.read()
-        return skabelon_md    
-
-"""
-Midlertidig Datastorage Liste med Test notes 
-
-"""
-notes_db = [
-    Note(1, "Note 1", "This is a note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(2, "Note 2", "This is another note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(3, "Note 3", "This is yet another note", datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(4, "Note 4", load_md_template('skabelon_note'), datetime.now(), datetime.now(), "https://via.placeholder.com/150", 1),
-    Note(5, "SLA", load_md_template('sla'), datetime.now(), datetime.now(),None, 1)
-]
-
 
 
 
