@@ -7,7 +7,7 @@ from datetime import datetime
 from azure.storage.blob import BlobServiceClient
 from werkzeug.utils import secure_filename
 
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'} # Kun billede filer
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'} 
 
 
 account = 'flasknoteblobstorage'   # Azure account name
