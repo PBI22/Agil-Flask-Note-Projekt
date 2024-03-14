@@ -1,4 +1,5 @@
 # Utility functions
+import string, random
 from .dbconnect import session
 from .models import Note
 from flask import flash, redirect, url_for
@@ -14,6 +15,7 @@ container = "images" # Container name
 connection_string = "DefaultEndpointsProtocol=https;AccountName=flasknoteblobstorage;AccountKey=BnJBe5WkjWApSRwguDmueGabw3+WZmnIE3GwjfnMezNM1Td+xO8TdrHKQiDGyomo7ZBxGjGIQuiJ+AStd6P1kA==;EndpointSuffix=core.windows.net"
 
 blob_service = BlobServiceClient.from_connection_string(conn_str=connection_string)
+
 
 def load_md_template(filename):
     folder = "md_templates/"
@@ -50,7 +52,7 @@ def create_note_post(request):
                 except Exception as e:
                     flash('Exception=' + str(e))
                     pass
-                
+
         # Temp input, skal fjernes senere hen
         if note[:3] == "!S!":
             note = load_md_template('skabelon_note')
@@ -90,3 +92,5 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
            
+def id_generator(size=32, chars=string.ascii_uppercase + string.digits):
+    return ''.join(random.choice(chars) for _ in range(size))

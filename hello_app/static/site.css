@@ -21,7 +21,7 @@ hr {
     font-size: 1em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: white;
-    padding: 8px 5px 8px 5px;
+    padding: 10px 8px 10px 8px;
 }
 
 .navbar a {
@@ -48,7 +48,7 @@ hr {
 }
 
 .resources {
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
