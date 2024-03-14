@@ -58,7 +58,7 @@ def create_note_post(request):
             note = load_md_template('skabelon_note')
         created = datetime.now()
         lastEdited = datetime.now()
-        imagelink = request.form['imagelink']
+        imagelink = ref
         account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
