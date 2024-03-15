@@ -8,6 +8,10 @@ from .models import Note, Account
 from .utils import *
 
 
+
+
+
+
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
@@ -27,7 +31,8 @@ def create_note():
         create_note_post(request)
 
     return redirect(url_for('home'))
-#Login required (what if you're already logged in)
+
+#Login required (what if you're already logged in =session)
 @app.route("/edit/<id>", methods=["GET","POST"])
 def edit(id = None):
 
@@ -112,3 +117,31 @@ def create_account():
         
     else:
         return render_template("signup.html")
+
+#login route
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+
+        
+
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Query the database for the account with provided username and password
+        account = session.query(Account).filter_by(username=username, password=password).first()
+        #print(account)
+         
+        if account:   
+            #store user info in session + mark user as logged in
+            #glitching out
+            session['user'] = account.username
+            #print(session)
+            flash('Login successful!', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password', 'error')
+            return redirect(url_for('login'))
+
+    # If request method is GET, render the login template
+    return render_template('login.html')
