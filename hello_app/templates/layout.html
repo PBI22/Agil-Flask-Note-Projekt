@@ -18,9 +18,13 @@
 
   <body>
     <div class="navbar">
+      <div class="nav-left">
       <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
       <a href="{{ url_for('create_note') }}" class="navbar-item">Opret Note</a>
- 
+      </div>
+      <div class="nav-right">
+      <a href="{{ url_for('create_account') }}" class="navbar-item">Signup</a>
+      </div>
     </div>
 
     <div class="body-content">
@@ -35,7 +39,7 @@
       {% block content %} {% endblock %}
       <hr />
       <footer>
-        <p>&copy; 2018</p>
+      
       </footer>
     </div>
   </body>
