@@ -1,6 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash, session
-# Kan bruges til senere at arbejde med password hashing og check af dette
-#from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Account
 from .utils import dbsession
 from functools import wraps
@@ -25,16 +24,16 @@ def login():
         password = request.form.get('password')
 
         # Query the database for the account with provided username and password
-        account = dbsession.query(Account).filter_by(username=username, password=password).first()
-        if account:   
-
+        account = dbsession.query(Account).filter_by(username=username).first()
+        if account and check_password_hash(account.password, password):  
+            session.clear() 
             session['user'] = account.username
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
-            return redirect(url_for('login'))
+            return redirect(url_for('auth.login'))
 
     # If request method is GET, render the login template
     return render_template('login.html')
@@ -65,16 +64,22 @@ def create_account():
         # Check if username already exists
         if dbsession.query(Account).filter_by(username=request.form['username']).first() is not None:
             flash('Username already exists', 'error')
-            return redirect(url_for('create_account'))
+            return redirect(url_for('auth.create_account'))
         
         try:
-            dbsession.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
+            username = request.form['username']
+            password = request.form['password']
+            email = request.form['email']
+            hashed_password = generate_password_hash(password, method='pbkdf2', salt_length=16)
+            
+            dbsession.add(Account(username = username, password = hashed_password, email = email))
             dbsession.commit()
             flash('Account created successfully!', 'success')
             
-        except:
+        except Exception as e:
+            print("Error: ", e)
             flash('Error creating account', 'error')
-            return redirect(url_for('create_account'))
+            return redirect(url_for('auth.create_account'))
         return redirect(url_for('home'))
         
     else:
