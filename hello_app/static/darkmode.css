@@ -49,15 +49,14 @@
 
 /* Tabel CSS */
 .dark-mode table {
-    width: 100%;
+  background-color: transparent;
     border-collapse: collapse;
     table-layout: fixed;
-    background-color: #272727;
     color: #e0e0e0;
 }
 
 .dark-mode th, td {
-    border: 1px solid #444; /* Let grå kant for at skelne celler */
+    border: 1px solid #727272; /* Let grå kant for at skelne celler */
     text-align: left;
     padding: 8px;
   }
@@ -75,15 +74,12 @@
     background-color: #444343; /* Hover-effekt for rækker */
   }
 
-  .dark-mode .fa-wrench, .fa-trash-can {
-    cursor: pointer;
-    color: #afaeae;
-    margin-right: 10px;
-  }
-
-  .dark-mode .fa-wrench:hover, .fa-trash-can:hover {
-    color: #ffffff;
-  }
+.dark-mode .icons i {
+  color: rgb(200, 200, 200);
+}
+.dark-mode .icons i:hover{
+  color: white;
+}
 
 .dark-mode footer {
     background-color: #333;
@@ -95,11 +91,35 @@
 
 .dark-mode form {
     background-color: #2D2D2D ;
-    padding: 20px;
     border-radius: 5px;
     border: 5px solid #2D2D2D;
     box-shadow: 0 0 50px rgba(194, 193, 193, 0.1);
-    width: 100%;
-    max-width: 500px;
-    margin: 20px;
+}
+
+.dark-mode #search {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  display: flex;
+  justify-content: center;
+}
+.dark-mode #searchbar{
+  background-color: transparent;
+  color: white;
+}
+.dark-mode #searchbutton {
+  background-color: transparent;
+  color: white;
+}
+.dark-mode .clear {
+  color: transparent;
+}
+.dark-mode .clear:hover {
+  color: transparent;
+}
+.dark-mode #clear {
+  color: rgb(155, 155, 155);
+}
+.dark-mode .markdown-body {
+  color: white;
 }
