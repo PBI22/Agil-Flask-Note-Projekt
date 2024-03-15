@@ -57,3 +57,7 @@ def edit_note_post(request, id):
 def find_note(id):
     note = next((note for note in updateList() if note.noteID == int(id)), None)
     return note
+
+def searchbar(query):
+    search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+    return search_results
