@@ -1,64 +1,66 @@
 body {
-    padding: 0;
-    margin: 0;
+  padding: 0;
+  margin: 0;
+  background-color: white;
 }
 
+h1 {
+  color: #333;
+}
 
 hr {
-    width: 60%;
-
-    border: 1px solid black;
-    margin: 20px auto;
+  width: 60%;
+  border: 1px solid black;
+  margin: 20px auto;
 }
 
 .message {
-    font-weight: 600;
-    color: blue;
+  font-weight: 600;
+  color: blue;
 }
 
 .navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: lightslategray;
-    font-size: 1.4em;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    color: white;
-    padding:  20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: lightslategray;
+  font-size: 1.4em;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  color: white;
+  padding:  20px;
 }
 
 .navbar a {
-    padding: 10px;
-    text-decoration: none;
-    color: inherit;
+  padding: 10px;
+  text-decoration: none;
+  color: inherit;
 }
 
 .navbar-brand {
-    font-size: 1.2em;
-    font-weight: 600;
+  font-size: 1.2em;
+  font-weight: 600;
 }
 
 .navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
+  font-variant: small-caps;
+  margin-left: 30px;
 }
 
 .body-content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 5px;
-    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .resources {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    min-height: calc(100vh - 72px);
-    margin-left: 25px;
-    
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 72px);
+  margin-left: 25px;
+  
 }
 
 /* Search bar */
@@ -107,36 +109,55 @@ hr {
 
 /* Tabel CSS */
 table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed; /* Dette sikrer, at alle kolonner har samme bredde */
-  }
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed; /* Dette sikrer, at alle kolonner har samme bredde */
+}
 
-  th, td {
-    border: 1px solid #dddddd; /* Let grå kant for at skelne celler */
-    text-align: left;
-    padding: 8px;
-  }
+th, td {
+  border: 1px solid #333; /* Let grå kant for at skelne celler */
+  text-align: left;
+  padding: 8px;
+}
 
-  th {
-    background-color: #f8f8f8; /* En let grå baggrundsfarve for header */
-    color: #333; /* Mørk tekstfarve for kontrast */
-  }
+th {
+  background-color: #f8f8f8; /* En let grå baggrundsfarve for header */
+  color: #333; /* Mørk tekstfarve for kontrast */
+}
 
-  tr:nth-child(even) {
-    background-color: #f2f2f2; /* Zebra-striping for rækker */
-  }
+tr:nth-child(even) {
+  background-color: #f2f2f2; /* Zebra-striping for rækker */
+}
 
-  tr:hover {
-    background-color: #eaeaea; /* Hover-effekt for rækker */
-  }
+tr:hover {
+  background-color: #eaeaea; /* Hover-effekt for rækker */
+}
 
-  .fa-wrench, .fa-trash-can {
-    cursor: pointer;
-    color: #333;
-    margin-right: 10px;
-  }
+.fa-wrench, .fa-trash-can {
+  cursor: pointer;
+  color: #333;
+  margin-right: 10px;
+}
 
-  .fa-wrench:hover, .fa-trash-can:hover {
-    color: #555;
-  }
+.fa-wrench:hover, .fa-trash-can:hover {
+  color: #555;
+}
+
+footer {
+  background-color: white;
+}
+
+#theme-toggle {
+  background-color: #707070;
+  border-radius: 3px;
+  border-top: 2px solid #3b3b3b;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 8px;
+  transition-duration: 0.4s;
+}

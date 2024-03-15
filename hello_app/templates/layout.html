@@ -8,6 +8,12 @@
       type="text/css"
       href="{{ url_for('static', filename='site.css') }}"
     />
+
+    <!-- css link til darkmode -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='darkmode.css') }}"/>
     
     <script
       src="https://kit.fontawesome.com/f9fe3152cb.js"
@@ -21,6 +27,7 @@
       <div class="nav-left">
       <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
       <a href="{{ url_for('create_note') }}" class="navbar-item">Opret Note</a>
+      <button id="theme-toggle">Skift tema</button>
       </div>
       <div class="nav-right">
         {% if session['user'] %}
@@ -45,9 +52,14 @@
       {% endwith %}
       {% block content %} {% endblock %}
       <hr />
-      <footer>
-      
+      <footer style="text-align: center;">
+        <p>&copy; 2018</p>
       </footer>
     </div>
+    <script>
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.body.classList.toggle('dark-mode');
+      });
+    </script>
   </body>
 </html>
