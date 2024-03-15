@@ -9,4 +9,4 @@ db_path = os.path.join(BASE_DIR, "database", "db.sqlite")
 engine = create_engine(f'sqlite:///{db_path}', echo=True)
 
 Session = sessionmaker(bind=engine)
-session = Session()
+dbsession = Session()
