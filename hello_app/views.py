@@ -2,11 +2,14 @@ import markdown2
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from . import app
 from .models import Note, Account
 from .utils import *
-
+from json import JSONEncoder
+from . import app
+import sqlite3
+import requests
 
 
 
@@ -17,6 +20,17 @@ from .utils import *
 def home():
     return render_template("home.html", notes = updateList(), datetime = datetime.now())
 
+@app.route('/noteJSON')
+def display_data():
+    # Connect to the SQLite database
+    conn = sqlite3.connect('database/db.sqlite')
+    cursor = conn.cursor()
+
+    # Execute a query to fetch data from the database
+    cursor.execute('''SELECT * FROM note''')
+
+    rows = cursor.fetchall()
+    
 
 # Create note
 #Login required (what if you're already logged in)
