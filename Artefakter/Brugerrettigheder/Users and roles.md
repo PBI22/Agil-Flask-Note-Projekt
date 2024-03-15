@@ -1,14 +1,35 @@
 # Users and roles 
+
+## Vores vision indtilvidere
+	i. Antal tabeller = 3
+		- en til brugere
+		- en til roler
+		- en til noter
+	ii. Typer af roler
+		- student 
+		- teacher
+	iii. Rettigheder som student:
+		- create
+		- read egen note
+		- delete egen note
+		- update egen note 
+	iv: Rettigheder som teacher:
+		- create
+		- read alle noter
+		- delete enhver note
+		- update enhver note
+
+## Praksis
 1. Levels: 
 	- data: data man kan få adang til 
 		i. kræver tæt sammearbejde med data modellering delen af projektet. 
-			- bruger tabel
-			- 
 	- pages: funktionalitet/ sider man kan få adgang til. 
 2. SetUp: 
+	- note table
 	- user table
 	- role table 
 	- association mellem user og role tabeller
+	- association mellem user og note
 3. Forudsætninger: 
 	i. Bibliteker
 		a. slqAlchemy: database funktionalitet
@@ -16,7 +37,8 @@
 			- bruger info: Usermixin 
 			- roleMixin: role info
 			- match med user_id og role_id som fk. 
-		c. flask obviously. 
+		c. flask: 
+			- bruge session til at holde user og role 
 	ii. Adgang bestemt af dine roller. 
 		- De næste 3 linjer viser hvem der adgang til bestemte sidere og deres funktionalitet. 
 		
@@ -42,3 +64,4 @@
 
 ## UserRole ER diagram 
 ![userRole Img](img/UserRole.PNG)
+
