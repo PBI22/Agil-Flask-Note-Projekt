@@ -78,8 +78,9 @@ def delete_note(id = None):
             flash('Note not found', 'error')
             return redirect(url_for('home'))
         else:
-            session.delete(note)
-            session.commit()
+            
+            dbsession.delete(note)
+            dbsession.commit()
             flash('Note deleted successfully!', 'success')
 
 
@@ -101,13 +102,13 @@ def create_account():
             return redirect(url_for('create_account'))
         
         # Check if username already exists
-        if session.query(Account).filter_by(username=request.form['username']).first() is not None:
+        if dbsession.query(Account).filter_by(username=request.form['username']).first() is not None:
             flash('Username already exists', 'error')
             return redirect(url_for('create_account'))
         
         try:
-            session.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
-            session.commit()
+            dbsession.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
+            dbsession.commit()
             flash('Account created successfully!', 'success')
             
         except:
@@ -123,21 +124,18 @@ def create_account():
 def login():
     if request.method == "POST":
 
-        
-
         username = request.form.get('username')
         password = request.form.get('password')
 
         # Query the database for the account with provided username and password
-        account = session.query(Account).filter_by(username=username, password=password).first()
-        #print(account)
+        account = dbsession.query(Account).filter_by(username=username, password=password).first()
+
          
         if account:   
-            #store user info in session + mark user as logged in
-            #glitching out
+
             session['user'] = account.username
-            #print(session)
-            flash('Login successful!', 'success')
+
+            flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
@@ -145,3 +143,9 @@ def login():
 
     # If request method is GET, render the login template
     return render_template('login.html')
+@app.route('/logout')
+def logout():
+    user_logout = session['user']
+    session.pop('user', None) 
+    flash(f'You have been logged out, {user_logout}', 'success')
+    return redirect(url_for('home'))
