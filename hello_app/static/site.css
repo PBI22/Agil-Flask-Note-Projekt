@@ -61,6 +61,50 @@ hr {
     
 }
 
+/* Search bar */
+#search {
+  display: flex;
+  margin-bottom: 5px;
+  align-self: center;
+}
+#searchbar {
+  display: flex;
+  max-width: 50vw;
+  height: fit-content;
+  border-radius: 25px 0 0 25px;
+  font-size: large;
+  padding: 5px;
+  padding-left: 15px;
+}
+#searchbutton {
+  display: flex;
+  height: fit-content;
+  border-radius: 0 25px 25px 0;
+  font-size: large;
+  padding: 5px 10px;
+}
+#searchbutton:hover {
+  background-color: #848484;
+}
+
+#clear {
+  color: #333;
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  margin-bottom: 25px;
+}
+#clear:active {
+  color: #333;
+}
+.clear {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  margin-bottom: 25px;
+}
+
 /* Tabel CSS */
 table {
     width: 100%;

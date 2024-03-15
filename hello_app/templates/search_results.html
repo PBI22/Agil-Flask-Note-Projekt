@@ -7,14 +7,14 @@
 
 <h1 align="center">Mine Noter</h1>
 <hr>
-{% if not notes %}
-  <h2>Du har ingen noter pt! - Opret en nu</h2>
+{% if not results %}
+  <h2>Søgningen gav ingen resultater!</h2>
 {% else %}
 <form action="{{ url_for('search_results') }}" method="GET" id="search">
-  <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar">
+  <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar" value="{{ query }}">
   <button type="submit" id="searchbutton">Søg</button>
 </form>
-<a href="{{ url_for('home') }}" class="clear">Ryd søgning</a>
+<a href="{{ url_for('home') }}" id="clear">Ryd søgning</a>
 <table class="resources" style="width: 100%; border-collapse: collapse;">
 
     <tr>
@@ -26,7 +26,7 @@
       <th>Handlinger</th>
     </tr>
 
-  {% for note in notes %}
+  {% for note in results %}
     <tr>  
       <td>{{ note.noteID }}</td>
       <td>{{ note.title }}</td>
