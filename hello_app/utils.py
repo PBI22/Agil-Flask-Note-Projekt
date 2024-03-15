@@ -1,7 +1,7 @@
 # Utility functions
-from .dbconnect import session
+from .dbconnect import dbsession
 from .models import Note
-from flask import flash, redirect, url_for, render_template
+from flask import flash
 from datetime import datetime
 
 def load_md_template(filename):
@@ -13,7 +13,7 @@ def load_md_template(filename):
     
 def updateList():
     notes_db = []
-    for row in session.query(Note).order_by(Note.noteID):
+    for row in dbsession.query(Note).order_by(Note.noteID):
         notes_db.append(row)
     return notes_db
 
@@ -32,23 +32,23 @@ def create_note_post(request):
         account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
-        session.add(note)
-        session.commit()
+        dbsession.add(note)
+        dbsession.commit()
         
         flash('Note created successfully!', 'success')  # Viser en success-besked
     except Exception as e:
-        session.rollback()
+        dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
 
 def edit_note_post(request, id):
     try:
-        upd = session.query(Note).filter(Note.noteID == id).first()
+        upd = dbsession.query(Note).filter(Note.noteID == id).first()
         upd.title = request.form['title']
         upd.text = request.form['note']
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
         upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
-        session.commit()
+        dbsession.commit()
         flash('Note created successfully!', 'success')  # Viser en success-besked
     
     except Exception as e:
@@ -59,5 +59,5 @@ def find_note(id):
     return note
 
 def searchbar(query):
-    search_results = session.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+    search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
     return search_results

@@ -8,6 +8,10 @@ from .models import Note, Account
 from .utils import *
 
 
+
+
+
+
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
@@ -15,6 +19,7 @@ def home():
 
 
 # Create note
+#Login required (what if you're already logged in)
 @app.route("/create/", methods=["GET","POST"])
 def create_note():
 
@@ -27,6 +32,7 @@ def create_note():
 
     return redirect(url_for('home'))
 
+#Login required (what if you're already logged in =session)
 @app.route("/edit/<id>", methods=["GET","POST"])
 def edit(id = None):
 
@@ -72,8 +78,9 @@ def delete_note(id = None):
             flash('Note not found', 'error')
             return redirect(url_for('home'))
         else:
-            session.delete(note)
-            session.commit()
+            
+            dbsession.delete(note)
+            dbsession.commit()
             flash('Note deleted successfully!', 'success')
 
 
@@ -106,13 +113,13 @@ def create_account():
             return redirect(url_for('create_account'))
         
         # Check if username already exists
-        if session.query(Account).filter_by(username=request.form['username']).first() is not None:
+        if dbsession.query(Account).filter_by(username=request.form['username']).first() is not None:
             flash('Username already exists', 'error')
             return redirect(url_for('create_account'))
         
         try:
-            session.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
-            session.commit()
+            dbsession.add(Account(username = request.form['username'], password = request.form['password'], email = request.form['email']))
+            dbsession.commit()
             flash('Account created successfully!', 'success')
             
         except:
@@ -122,3 +129,34 @@ def create_account():
         
     else:
         return render_template("signup.html")
+
+#login route
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    if request.method == "POST":
+
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        # Query the database for the account with provided username and password
+        account = dbsession.query(Account).filter_by(username=username, password=password).first()
+
+         
+        if account:   
+
+            session['user'] = account.username
+
+            flash(f'Login successful for {account.username}', 'success')
+            return redirect(url_for('home'))
+        else:
+            flash('Invalid username or password', 'error')
+            return redirect(url_for('login'))
+
+    # If request method is GET, render the login template
+    return render_template('login.html')
+@app.route('/logout')
+def logout():
+    user_logout = session['user']
+    session.pop('user', None) 
+    flash(f'You have been logged out, {user_logout}', 'success')
+    return redirect(url_for('home'))
