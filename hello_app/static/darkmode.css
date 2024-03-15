@@ -1,0 +1,105 @@
+.dark-mode .body-content {
+    padding: 0;
+    margin: 0;
+    background-color: #383636;
+}
+
+.dark-mode h1 {
+    color: #ffffff;
+}
+
+.dark-mode hr {
+    width: 60%;
+    border: 1px solid rgb(70, 69, 69);
+    margin: 20px auto;
+}
+
+.dark-mode .message {
+    font-weight: 600;
+    color: rgb(171, 171, 173);
+}
+
+.dark-mode a {
+    color: #b0abb6;
+}
+
+.dark-mode a:hover {
+    color: #f6f5f8;
+}
+
+.dark-mode .navbar {
+    background-color: #504e4e;
+    color: #ffffff;
+    font-size: 1.4em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 20px
+}
+
+.dark-mode .navbar-brand {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #ffffff;
+  }
+  
+  .dark-mode .navbar-item {
+    font-variant: small-caps;
+    margin-left: 30px;
+    color: #ffffff;
+  }
+
+/* Tabel CSS */
+.dark-mode table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    background-color: #272727;
+    color: #e0e0e0;
+}
+
+.dark-mode th, td {
+    border: 1px solid #444; /* Let grå kant for at skelne celler */
+    text-align: left;
+    padding: 8px;
+  }
+
+  .dark-mode th {
+    background-color: #333; /* En let grå baggrundsfarve for header */
+    color: #ffffff; /* Mørk tekstfarve for kontrast */
+  }
+
+  .dark-mode tr:nth-child(even) {
+    background-color: rgb(54, 52, 52); /* Zebra-striping for rækker */
+  }
+
+  .dark-mode tr:hover {
+    background-color: #444343; /* Hover-effekt for rækker */
+  }
+
+  .dark-mode .fa-wrench, .fa-trash-can {
+    cursor: pointer;
+    color: #afaeae;
+    margin-right: 10px;
+  }
+
+  .dark-mode .fa-wrench:hover, .fa-trash-can:hover {
+    color: #ffffff;
+  }
+
+.dark-mode footer {
+    background-color: #333;
+}
+
+.dark-mode footer p {
+    color: #ffffff;
+}
+
+.dark-mode form {
+    background-color: #2D2D2D ;
+    padding: 20px;
+    border-radius: 5px;
+    border: 5px solid #2D2D2D;
+    box-shadow: 0 0 50px rgba(194, 193, 193, 0.1);
+    width: 100%;
+    max-width: 500px;
+    margin: 20px;
+}
