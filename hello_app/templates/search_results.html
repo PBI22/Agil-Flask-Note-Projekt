@@ -11,7 +11,7 @@
   <h2>Søgningen gav ingen resultater!</h2>
 {% else %}
 <form action="{{ url_for('search_results') }}" method="GET" id="search">
-  <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar">
+  <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar" value="{{ query }}">
   <button type="submit" id="searchbutton">Søg</button>
 </form>
 <a href="{{ url_for('home') }}" id="clear">Ryd søgning</a>

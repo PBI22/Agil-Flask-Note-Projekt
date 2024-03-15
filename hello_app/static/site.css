@@ -82,6 +82,7 @@ hr {
 #searchbutton:hover {
   background-color: #848484;
 }
+
 #clear {
   color: #333;
   text-decoration: none;
@@ -91,6 +92,13 @@ hr {
 }
 #clear:active {
   color: #333;
+}
+.clear {
+  color: white;
+  text-decoration: none;
+  display: flex;
+  align-self: center;
+  margin-bottom: 25px;
 }
 
 /* Tabel CSS */
