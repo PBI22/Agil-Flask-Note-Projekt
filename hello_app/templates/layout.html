@@ -27,7 +27,6 @@
       <div class="nav-left">
       <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
       <a href="{{ url_for('create_note') }}" class="navbar-item">Opret Note</a>
-      <button id="theme-toggle">Skift tema</button>
       </div>
       <div class="nav-right">
         {% if session['user'] %}
@@ -38,6 +37,7 @@
       <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
       <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
       {% endif %}
+      <button id="theme-toggle"><i class="fa-solid fa-circle-half-stroke"></i></button>
       </div>
     </div>
 

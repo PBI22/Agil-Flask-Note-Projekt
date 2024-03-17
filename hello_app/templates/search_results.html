@@ -12,13 +12,12 @@
 {% else %}
 <form action="{{ url_for('search_results') }}" method="GET" id="search">
   <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar" value="{{ query }}">
-  <button type="submit" id="searchbutton">Søg</button>
+  <button type="submit" id="searchbutton"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
 <a href="{{ url_for('home') }}" id="clear">Ryd søgning</a>
-<table class="resources" style="width: 100%; border-collapse: collapse;">
+<table class="resources" style="border-collapse: collapse;">
 
     <tr>
-      <th>ID</th>
       <th>Titel</th>
       <th>Note</th>
       <th>Oprettet</th>
@@ -28,22 +27,21 @@
 
   {% for note in results %}
     <tr>  
-      <td>{{ note.noteID }}</td>
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
       <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
       <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
-      <td>
+      <td class="icons">
         <a href="{{ url_for('view', id=note.noteID) }}" class="icon-link">
-            <i class="fa-solid fa-eye"></i>
+          <i class="fa-solid fa-eye"></i>
+        </a>
         <a href="{{ url_for('edit', id=note.noteID) }}" class="icon-link">
-            <i class="fa-solid fa-wrench"></i>
+          <i class="fa-solid fa-wrench"></i>
         </a>
         <a href="{{ url_for('delete_note', id=note.noteID) }}" class="icon-link">
-          <i class="fa-solid fa-trash-can"></i>
+          <i class="fa-solid fa-trash"></i>
         </a>
-
       </td>
     </tr>
   {% endfor %}
