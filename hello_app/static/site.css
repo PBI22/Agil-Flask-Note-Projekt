@@ -51,6 +51,7 @@ hr {
   flex-direction: column;
   justify-content: center;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: calc(100vh - 71.33px);
 }
 
 .resources {
@@ -72,20 +73,23 @@ hr {
 #searchbar {
   display: flex;
   max-width: 50vw;
-  height: fit-content;
+  height: inherit;
   border-radius: 25px 0 0 25px;
   font-size: 20px;
   padding: 5px;
   padding-left: 15px;
+  border: 2px solid #333;
 }
 #searchbutton {
   display: flex;
-  height: fit-content;
+  height: inherit;
   border-radius: 0 25px 25px 0;
-  font-size: 22.5px;
+  font-size: 20px;
   padding: 5px 10px;
   padding-right: 15px;
   cursor: pointer;
+  border: 2px solid #333;
+  border-left: none;
 }
 #searchbutton:hover {
   background-color: #848484;
@@ -164,4 +168,12 @@ footer {
 }
 #theme-toggle i {
   color: white;
+}
+
+footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 50px;
+  width: 100%;
 }

@@ -106,10 +106,13 @@
 .dark-mode #searchbar{
   background-color: transparent;
   color: white;
+  border: 2px solid rgb(170, 170, 170);
 }
 .dark-mode #searchbutton {
   background-color: transparent;
   color: white;
+  border: 2px solid rgb(170, 170, 170);
+  border-left: none;
 }
 .dark-mode .clear {
   color: transparent;
