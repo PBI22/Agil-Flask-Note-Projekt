@@ -41,10 +41,10 @@ View Note
 Redigeret: {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }}</p>
 <!-- Actions button-->
 <div align="center">
-    <a href="{{ url_for('edit', id=note.noteID) }}" class="icon-link">
+    <a href="{{ url_for('notes.edit', id=note.noteID) }}" class="icon-link">
         <i class="fa-solid fa-wrench"></i>
     </a>
-    <a href="{{ url_for('delete_note', id=note.noteID) }}" class="icon-link">
+    <a href="{{ url_for('notes.delete_note', id=note.noteID) }}" class="icon-link">
         <i class="fa-solid fa-trash-can"></i>
     </a>
 

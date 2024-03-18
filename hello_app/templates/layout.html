@@ -26,7 +26,7 @@
     <div class="navbar">
       <div class="nav-left">
       <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
-      <a href="{{ url_for('create_note') }}" class="navbar-item">Opret Note</a>
+      <a href="{{ url_for('notes.create_note') }}" class="navbar-item">Opret Note</a>
       </div>
       <div class="nav-right">
         {% if session['user'] %}
