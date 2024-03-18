@@ -2,7 +2,7 @@ import markdown2
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session, jsonify
+from flask import Blueprint, Flask, render_template, request, redirect, url_for, flash, session, jsonify
 from . import app
 from .models import Note, Account
 from .utils import *
@@ -10,7 +10,9 @@ from json import JSONEncoder
 import sqlite3
 import requests
 
-@app.route('/noteJSON')
+api = Blueprint('api', __name__)
+
+@api.route('/noteJSON')
 def display_data():
     # Connect to the SQLite database
     conn = sqlite3.connect('database/db.sqlite')
@@ -50,5 +52,13 @@ def display_data():
     # Return JSON data
     return jsonify(data_list)
 
-if __name__ == '__main__':
-    app.run(debug=True)
+
+
+"""
+CRUD på note
+eksternt applikation
+burde stå for sig selv
+se diverse dele af data med endpoint
+noter, login
+specific note
+"""

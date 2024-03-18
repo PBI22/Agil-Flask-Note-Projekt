@@ -7,8 +7,10 @@ from . import app
 from .models import Note, Account
 from .utils import *
 from .auth import auth, login_required
+from .API import api
 
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(api, url_prefix='/api')
 
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
