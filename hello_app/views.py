@@ -6,14 +6,13 @@ from .log_config import setup_app_logging
 from .notes import notes
 from .auth import auth
 
+#Blueprints
 app.register_blueprint(auth, url_prefix='/auth')
-# Registrer notes blueprint
 app.register_blueprint(notes, url_prefix='/notes')
 
 #Setup af logging til appen
 setup_app_logging(app)
 
-# Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
     app.logger.info("Home page requested")

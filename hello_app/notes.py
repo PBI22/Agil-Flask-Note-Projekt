@@ -1,8 +1,9 @@
-from flask import Flask, Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash
 from .auth import login_required
 import markdown2
 from .utils import *
 
+#Note blueprint med (url_prefix='/notes')
 
 notes = Blueprint('notes', __name__)
 
@@ -14,7 +15,7 @@ def create_note():
     else:
 
         create_note_post(request)
-        return redirect(url_for('home'))  # Ændret fra 'home' til 'notes.home'
+        return redirect(url_for('home')) 
 
 @notes.route("/edit/<id>", methods=["GET", "POST"])
 @login_required
@@ -59,5 +60,5 @@ def search_results():
     query = request.args.get('query')
     if not query:
         return redirect(url_for('home')) 
-    results = searchbar(query)  # Antager denne funktion returnerer søgeresultater
+    results = searchbar(query) 
     return render_template('search_results.html', results=results, query=query)
