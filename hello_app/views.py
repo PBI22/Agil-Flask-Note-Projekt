@@ -2,11 +2,15 @@ import markdown2
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, jsonify, render_template, request, redirect, url_for, flash, session
 from . import app
 from .models import Note
 from .utils import *
 
+# Define custom filter to parse JSON
+@app.template_filter('from_json')
+def from_json(value):
+    return json.loads(value)
 
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
@@ -27,6 +31,37 @@ def create_note():
 
     return redirect(url_for('home'))
 
+# Upload file
+@app.route("/upload", methods=["GET","POST"])
+def upload_file():
+    files_list = []  # Initialize an empty list to store file dictionaries
+    if 'file' in request.files:
+        files = request.files.getlist("file")
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                fileextension = filename.rsplit('.', 1)[1]
+                Randomfilename = id_generator()
+                filename = Randomfilename + '.' + fileextension
+                ref = 'http://' + account + '.blob.core.windows.net/' + container + '/' + filename
+                file_dump = {
+                    "Type": fileextension,
+                    "Name": filename,
+                    "Link": ref
+                }
+                try:
+                    blob_client = blob_service.get_blob_client(container=container, blob=filename)
+                    blob_client.upload_blob(file)
+                    files_list.append(file_dump)  # Append the file dictionary to the list
+                except Exception as e:
+                    flash('Exception=' + str(e))
+                    pass
+    
+    # Construct a list of file links
+    file_links = [file['Link'] for file in files_list]
+    
+    # Return a JSON response containing the file links
+    return jsonify({'file_links': file_links})
 
 @app.route("/edit/<id>", methods=["GET","POST"])
 def edit(id = None):
@@ -52,13 +87,14 @@ def edit(id = None):
 def view(id = None):
     
     note = find_note(id)
+    imagelink_data = json.loads(note.imagelink) if note.imagelink else None
 
     #Tjekker hvis det er et markdown note (som markeres med !MD i starten af teksten)
     if note.text.startswith("!MD"):
         note_markdown = markdown2.markdown(note.text.replace("!MD", ""), extras=["tables","fenced-code-blocks","code-friendly","mermaid","task_list","admonitions"])
-        return render_template("mdnote.html", note=note, note_markdown=note_markdown)
+        return render_template("mdnote.html", note=note, note_markdown=note_markdown, imagelink_data=imagelink_data)
     else:
-        return render_template("mdnote.html", note=note, note_markdown=note.text)
+        return render_template("mdnote.html", note=note, note_markdown=note.text, imagelink_data=imagelink_data)
 
 
 @app.route("/delete/<id>")

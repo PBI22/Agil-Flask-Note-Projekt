@@ -1,4 +1,5 @@
 # Utility functions
+import json
 import string, random
 from .dbconnect import session
 from .models import Note
@@ -31,44 +32,58 @@ def updateList():
     return notes_db
 
 
+from datetime import datetime
+import json
+
 def create_note_post(request):
     try:
-
         title = request.form['title']
-        note = request.form['note']
-        ref = '' # Tomt reference link når intet billede er valgt
-        
+        note_text = request.form['note']
+        files_list = []  # Initialize an empty list to store file dictionaries
+
         if 'file' in request.files:
-            file = request.files['file']
-            if file and allowed_file(file.filename):
-                filename = secure_filename(file.filename)
-                fileextension = filename.rsplit('.',1)[1]
-                Randomfilename = id_generator()
-                filename = Randomfilename + '.' + fileextension
-                ref = 'http://'+ account + '.blob.core.windows.net/' + container + '/' + filename
-                try:
-                    blob_client = blob_service.get_blob_client(container=container, blob=filename)
-                    blob_client.upload_blob(file)
-                except Exception as e:
-                    flash('Exception=' + str(e))
-                    pass
+            files = request.files.getlist("file")
+            for file in files:
+                if file and allowed_file(file.filename):
+                    filename = secure_filename(file.filename)
+                    fileextension = filename.rsplit('.', 1)[1]
+                    Randomfilename = id_generator()
+                    filename = Randomfilename + '.' + fileextension
+                    ref = 'http://' + account + '.blob.core.windows.net/' + container + '/' + filename
+                    file_dump = {
+                        "Type": fileextension,
+                        "Name": filename,
+                        "Link": ref
+                    }
+                    try:
+                        blob_client = blob_service.get_blob_client(container=container, blob=filename)
+                        blob_client.upload_blob(file)
+                        files_list.append(file_dump)  # Append the file dictionary to the list
+                    except Exception as e:
+                        flash('Exception=' + str(e))
+                        pass
 
         # Temp input, skal fjernes senere hen
-        if note[:3] == "!S!":
-            note = load_md_template('skabelon_note')
+        if note_text[:3] == "!S!":
+            note_text = load_md_template('skabelon_note')
+
         created = datetime.now()
-        lastEdited = datetime.now()
-        imagelink = ref
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
-        
-        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        last_edited = datetime.now()
+        account_ID = 1  # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+
+        # Convert the list of file dictionaries to JSON
+        files_json = json.dumps(files_list)
+
+        # Create the Note object with the list of files as JSON
+        note = Note(title=title, text=note_text, created=created, lastedited=last_edited, imagelink=files_json, author=account_ID)
         session.add(note)
         session.commit()
-        
+
         flash('Note created successfully!', 'success')  # Viser en success-besked
     except Exception as e:
         session.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
+
 
 def edit_note_post(request, id):
     try:

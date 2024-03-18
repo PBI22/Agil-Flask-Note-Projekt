@@ -19,12 +19,44 @@
 <!-- Lav input felter -->
 <form action="/create/" method="post" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="Name" /><br />
-  <textarea name="note" placeholder="Note"></textarea><br />
+  <textarea name="note" id="note" placeholder="Note"></textarea><br /> <!-- Updated ID to 'note' -->
   <!-- <input type="text" name="author" placeholder="Author" /><br> -->
   <input type="hidden" name="created" value=" {{ datetime }}" /><br />
-  <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif, .pdf" />
   <input type="submit" value="Create Note" />
 </form>
 
+<form id="uploadForm" enctype="multipart/form-data">
+  <input type="file" name="file" accept=".jpg, .jpeg, .png, .gif, .pdf" multiple />
+  <input type="button" value="Tilføj filer" onclick="uploadFile()" />
+</form>
+
+<!-- Display uploaded images -->
+<div id="imageContainer"></div>
+
 </div>
+
+<script>
+  // Function to handle drag and drop event
+  function handleDragDrop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    var imageUrl = event.dataTransfer.getData('URL');   
+    
+    // Format the image URL
+    const formattedImageUrl = `![500px-img](${imageUrl})`;
+    
+    // Append the formatted image URL to the text area
+    document.getElementById('note').value += formattedImageUrl;
+  }
+  
+  // Get the text area element
+  const noteTextArea = document.getElementById('note');
+  
+  // Add event listeners for drag and drop events
+  noteTextArea.addEventListener('dragover', (event) => event.preventDefault());
+  noteTextArea.addEventListener('drop', handleDragDrop);
+</script>
+
+
 {% endblock %}

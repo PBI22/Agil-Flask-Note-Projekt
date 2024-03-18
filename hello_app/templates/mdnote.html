@@ -34,11 +34,15 @@ head %}
     {{ note_markdown | safe }}
   </div>
 
-  {% if note.imagelink %} {% if note.imagelink.endswith('.pdf') %}
-  <a href="{{ note.imagelink }}">Download PDF</a>
-  {% else %}
-  <img class="note-img" src="{{ note.imagelink }}" alt="Note Image" />
-  {% endif %} {% endif %}
+  {% for file_dict in imagelink_data %} {% if file_dict['Type'] == 'pdf' %}
+  <a href="{{ file_dict['Link'] }}">{{ file_dict['Name'] }} PDF</a>
+  {% else %} {% print(file_dict['Link'])%}
+  <img
+    class="note-img"
+    src="{{ file_dict['Link'] }}"
+    alt="{{ file_dict['Name'] }}"
+  />
+  {% endif %} {% endfor %}
 </div>
 
 <p class="view-timestamps">

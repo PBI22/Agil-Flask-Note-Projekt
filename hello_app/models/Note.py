@@ -23,7 +23,7 @@ class Note(Base):
     text = Column(Text, nullable=False)
     created = Column(DateTime, nullable=False)
     lastedited = Column(DateTime, nullable=True)
-    imagelink = Column(VARCHAR(255), nullable=True)
+    imagelink = Column(Text, nullable=True)
     author = Column(Integer, ForeignKey("account.accountID"), nullable=False)
 
     account = relationship("Account", primaryjoin="and_(Account.accountID==Note.author)", foreign_keys=[author])
