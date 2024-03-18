@@ -6,9 +6,9 @@
 ---
 classDiagram
 
-Note : +int noteID
-Note : +string titel
-Note : +string text
+Note : int noteID
+Note : string titel
+Note : string text
 Note : datetime created
 Note : datetime lastedited
 Note : string imagelink
