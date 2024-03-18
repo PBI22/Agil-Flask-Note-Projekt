@@ -3,7 +3,7 @@
 ```mermaid
 erDiagram
     ACCOUNT ||--o{ NOTE : creates
-    ACCOUNT ||--o{ ROLE : is
+    ROLE ||--o{ ACCOUNT : is
     NOTE {
         INT noteID
         VARCHAR(255) title
@@ -24,11 +24,4 @@ erDiagram
         INT roleID
         VARCHAR(255) rolename
     }
-```
-
-```mermaid
-erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    ORDER ||--|{ LINE-ITEM : contains
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
 ```
