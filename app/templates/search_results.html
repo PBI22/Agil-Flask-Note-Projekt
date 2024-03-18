@@ -1,0 +1,53 @@
+{% extends "layout.html" %}
+{% block title %} My Notes {% endblock %}
+{% block head %} 
+
+{% endblock %}
+{% block content %}
+
+<h1 align="center">Mine Noter</h1>
+<hr>
+{% if not results %}
+  <h2>Søgningen gav ingen resultater!</h2>
+{% else %}
+<form action="{{ url_for('search_results') }}" method="GET" id="search">
+  <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar" value="{{ query }}">
+  <button type="submit" id="searchbutton"><i class="fa-solid fa-magnifying-glass"></i></button>
+</form>
+<a href="{{ url_for('home') }}" id="clear">Ryd søgning</a>
+<table class="resources" style="border-collapse: collapse;">
+
+    <tr>
+      <th>Titel</th>
+      <th>Note</th>
+      <th>Oprettet</th>
+      <th>Redigeret</th>
+      <th>Handlinger</th>
+    </tr>
+
+  {% for note in results %}
+    <tr>  
+      <td>{{ note.title }}</td>
+      <!-- Display maximum of 50 characters-->
+      <td>{{ note.text[:50] }}...</td>
+      <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
+      <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
+      <td class="icons">
+        <a href="{{ url_for('view', id=note.noteID) }}" class="icon-link">
+          <i class="fa-solid fa-eye"></i>
+        </a>
+        <a href="{{ url_for('edit', id=note.noteID) }}" class="icon-link">
+          <i class="fa-solid fa-wrench"></i>
+        </a>
+        <a href="{{ url_for('delete_note', id=note.noteID) }}" class="icon-link">
+          <i class="fa-solid fa-trash"></i>
+        </a>
+      </td>
+    </tr>
+  {% endfor %}
+
+</table>
+{% endif %}
+
+{% endblock %}
+

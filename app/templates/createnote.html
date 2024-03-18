@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+<!-- import datetime-->
+{% block title %}
+Create Note    
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
+{% endblock %}
+
+{% block content %}
+<!--
+    # name
+    # note
+    # author
+    # created (genereres automatisk)
+
+-->
+<div class="main-body">
+<h1>Opret Note</h1>
+
+<form action="/create/" method="post">
+    <input type="text" name="title" placeholder="Name" /><br>
+    <textarea name="note" placeholder="Note"></textarea><br>
+    <!-- <input type="text" name="author" placeholder="Author" /><br> -->
+    <input type="hidden" name="created" value=" {{ datetime }}"/><br>
+    <input type="text" name="imagelink" placeholder="Image Link"/><br>
+    <input type="submit" value="Create Note" />
+</form>
+
+</div>
+{% endblock %}
