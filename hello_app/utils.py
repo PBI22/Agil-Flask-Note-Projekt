@@ -4,6 +4,7 @@ from .models import Note
 from flask import flash
 from datetime import datetime
 from flask_login import current_user
+from flask_login import LoginManager
 
 
 def load_md_template(filename):
@@ -49,7 +50,7 @@ def edit_note_post(request, id):
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
         dbsession.commit()
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note updated successfully!', 'success')  # Viser en success-besked
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
