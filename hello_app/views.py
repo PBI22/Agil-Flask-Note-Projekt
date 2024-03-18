@@ -2,7 +2,7 @@ import markdown2
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from . import app
 from .models import Note, Account
 from .utils import *
@@ -95,3 +95,9 @@ def search_results():
     # Søg efter noter, der matcher søgeordet
     search_results = searchbar(query)
     return render_template('search_results.html', results=search_results, query=query)
+
+@app.route('/robots.txt')
+def robots_txt():
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    folder_path = os.path.join(root_dir, 'static')
+    return send_from_directory(app.static_folder, 'robots.txt')
