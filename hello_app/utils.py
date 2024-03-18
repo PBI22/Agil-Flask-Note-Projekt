@@ -3,6 +3,8 @@ from .dbconnect import dbsession
 from .models import Note
 from flask import flash
 from datetime import datetime
+from flask_login import current_user
+
 
 def load_md_template(filename):
     folder = "md_templates/"
@@ -29,9 +31,8 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         
-        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = current_user.id)
         dbsession.add(note)
         dbsession.commit()
         
@@ -47,7 +48,6 @@ def edit_note_post(request, id):
         upd.text = request.form['note']
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
-        upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         dbsession.commit()
         flash('Note created successfully!', 'success')  # Viser en success-besked
     
