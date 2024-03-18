@@ -7,12 +7,17 @@ from . import app
 from .models import Note, Account
 from .utils import *
 from .auth import auth, login_required
+from .log_config import setup_app_logging
 
 app.register_blueprint(auth, url_prefix='/auth')
+
+#Setup af logging til appen
+setup_app_logging(app)
 
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
+    app.logger.info("Home page requested")
     return render_template("home.html", notes = updateList(), datetime = datetime.now())
 
 
@@ -22,6 +27,7 @@ def home():
 def create_note():
 
     if request.method == "GET":
+        #app.logger.info("Create note page requested from %s", session.get('username'))
         return render_template("createnote.html")
 
     # Hvis ikke GET, så er det POST, og så kører vi denne logik
