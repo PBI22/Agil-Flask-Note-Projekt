@@ -9,4 +9,5 @@ startup.py, that just imports the app object. You can then just specify
 startup:app in the Gunicorn command.
 """
 
+# henter app
 from hello_app.webapp import app
