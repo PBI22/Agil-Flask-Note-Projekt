@@ -2,17 +2,22 @@ import markdown2
 import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session
+from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
 from . import app
 from .models import Note, Account
 from .utils import *
 from .auth import auth, login_required
+from .log_config import setup_app_logging
 
 app.register_blueprint(auth, url_prefix='/auth')
+
+#Setup af logging til appen
+setup_app_logging(app)
 
 # Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
+    app.logger.info("Home page requested")
     return render_template("home.html", notes = updateList(), datetime = datetime.now())
 
 
@@ -22,6 +27,7 @@ def home():
 def create_note():
 
     if request.method == "GET":
+        #app.logger.info("Create note page requested from %s", session.get('username'))
         return render_template("createnote.html")
 
     # Hvis ikke GET, så er det POST, og så kører vi denne logik
@@ -95,3 +101,9 @@ def search_results():
     # Søg efter noter, der matcher søgeordet
     search_results = searchbar(query)
     return render_template('search_results.html', results=search_results, query=query)
+
+@app.route('/robots.txt')
+def robots_txt():
+    root_dir = os.path.abspath(os.path.dirname(__file__))
+    folder_path = os.path.join(root_dir, 'static')
+    return send_from_directory(app.static_folder, 'robots.txt')
