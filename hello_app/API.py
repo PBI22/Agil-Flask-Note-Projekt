@@ -36,3 +36,29 @@ def create_note():
     dbsession.add(new_note)
     dbsession.commit()
     return jsonify({'message': 'Note created successfully', 'noteID': new_note.noteID}), 201
+
+@api.route('/delete/<id>')
+def delete_note(id):
+    try:
+        note = dbsession.query(Note).filter(Note.noteID == id).first()
+        if note:
+            dbsession.delete(note)
+            dbsession.commit()
+            return "Note with id: " + id + " has been deleted"
+        else:
+            return "Error deleting note", 404
+    except Exception as e:
+         dbsession.rollback()
+         return str(e), 500
+    except:
+            return "Error deleting note", 404
+
+
+"""
+def find_note(id):
+    try:
+        note = next((note for note in updateList() if note.noteID == int(id)), None)
+    except Exception as e:
+        app.logger.error(f"Failed to find note: {e} from user: {session['user']}")
+    return note
+"""
