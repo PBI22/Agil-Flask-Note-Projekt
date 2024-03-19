@@ -1,9 +1,23 @@
 # Utility functions
 from .dbconnect import dbsession
+<<<<<<< HEAD
+from .models import Note,Account
+from flask import flash,session
+from datetime import datetime
+
+
+def load_md_template(filename):
+    folder = "md_templates/"
+    with open(folder + filename + ".md", "r",encoding='utf-8') as file:
+        skabelon_md = file.read()
+        return skabelon_md    
+    
+=======
 from .models import Note
 from flask import flash, session
 from datetime import datetime
 from . import app
+>>>>>>> b4f2c461131d9ea4c6917e1921e3e676690c1d00
     
 def updateList():
     
@@ -24,9 +38,10 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        #account = dbsession.query(Account).filter_by(username=session['user']).first()
+        account_ID = session['userID']
         
-        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID  )
         dbsession.add(note)
         dbsession.commit()
         
@@ -43,9 +58,8 @@ def edit_note_post(request, id):
         upd.text = request.form['note']
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
-        upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         dbsession.commit()
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note updated successfully!', 'success')  # Viser en success-besked
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
