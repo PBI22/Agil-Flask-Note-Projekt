@@ -45,14 +45,25 @@ def create_note_post(request):
 #check id and role before allowing edit
 def edit_note_post(request, id):
     try:
+        if 'user' not in session:
+            flash('Error: You are not logged in.')
+            return redirect(url_for('login'))
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        upd.title = request.form['title']
-        upd.text = request.form['note']
-        upd.lastedited = datetime.now()
-        upd.imagelink = request.form['imagelink']
-        upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
-        dbsession.commit()
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        user = session['user']
+        if user['username'] == upd.author or user['role'] == 'Admin':
+
+        
+
+            upd = dbsession.query(Note).filter(Note.noteID == id).first()
+            upd.title = request.form['title']
+            upd.text = request.form['note']
+            upd.lastedited = datetime.now()
+            upd.imagelink = request.form['imagelink']
+            upd.author = user['username'] # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+            dbsession.commit()
+            flash('Note created successfully!', 'success')  # Viser en success-besked
+        else:
+            flash('You are not authorized to edit this note', 'error')
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
