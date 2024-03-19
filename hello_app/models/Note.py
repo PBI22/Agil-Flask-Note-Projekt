@@ -1,5 +1,6 @@
 from sqlalchemy import Column, String,ForeignKey, Integer, DateTime, Text, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship
+from flask_login import UserMixin
 """"
 I want to make a model for my note taking app, first im making the model "Note", which has the following fields:
 - id INT
@@ -28,7 +29,7 @@ class Note(Base):
 
     account = relationship("Account", primaryjoin="and_(Account.accountID==Note.author)", foreign_keys=[author])
 
-class Account(Base):
+class Account(UserMixin, Base):
     __tablename__ = "account"
 
     accountID = Column(Integer, autoincrement=True, primary_key=True)
