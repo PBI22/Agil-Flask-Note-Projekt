@@ -50,7 +50,7 @@ def edit_note_post(request, id):
             return redirect(url_for('login'))
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
         user = session['user']
-        if user['username'] == upd.author or user['role'] == 'Admin':
+        if user['username'] == upd.author or user['role'] == 'Admin':#admin skal tage fra db 
 
         
 
@@ -59,7 +59,7 @@ def edit_note_post(request, id):
             upd.text = request.form['note']
             upd.lastedited = datetime.now()
             upd.imagelink = request.form['imagelink']
-            upd.author = user['username'] # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+            upd.author = user['username']
             dbsession.commit()
             flash('Note created successfully!', 'success')  # Viser en success-besked
         else:
