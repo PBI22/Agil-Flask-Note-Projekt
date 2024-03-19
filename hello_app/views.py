@@ -3,12 +3,16 @@ from datetime import datetime
 from flask import render_template, send_from_directory
 from . import app
 from .utils import *
+from .auth import auth, login_required
+from .API import api
 from .log_config import setup_app_logging
 from .notes import notes
-from .auth import auth
 
 #Blueprints
 app.register_blueprint(auth, url_prefix='/auth')
+
+app.register_blueprint(api, url_prefix='/api')
+
 app.register_blueprint(notes, url_prefix='/notes')
 
 #Setup af logging til appen
