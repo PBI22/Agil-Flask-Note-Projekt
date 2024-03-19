@@ -28,6 +28,8 @@ def login():
         if account and check_password_hash(account.password, password):  
             session.clear() 
             session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))

@@ -1,7 +1,7 @@
 # Utility functions
 from .dbconnect import dbsession
-from .models import Note
-from flask import flash
+from .models import Note,Account
+from flask import flash,session
 from datetime import datetime
 
 def load_md_template(filename):
@@ -29,7 +29,8 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        #account = dbsession.query(Account).filter_by(username=session['user']).first()
+        account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
         dbsession.add(note)
