@@ -1,7 +1,5 @@
 from flask import Flask
 from datetime import timedelta
-from .dbconnect import dbsession
-from .models import Account
 
 app = Flask(__name__)    # Create an instance of the class for our use
 app.secret_key = 'secret_key' 
