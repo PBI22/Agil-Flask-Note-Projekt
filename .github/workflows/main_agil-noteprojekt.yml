@@ -60,7 +60,8 @@ jobs:
         run: unzip release.zip
   
       - name: Get OS Environment Variables
-        env: SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        env:
+          $SECRET_KEY : ${{ secrets.SECRET_KEY }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
