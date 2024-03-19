@@ -1,6 +1,6 @@
 # Utility functions
 from .dbconnect import dbsession
-from .models import Note
+from .models import Note, Account
 from flask import flash, session
 from datetime import datetime
 from . import app
@@ -24,9 +24,11 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        #account_ID = 1 skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        print(note) 
         dbsession.add(note)
         dbsession.commit()
         
