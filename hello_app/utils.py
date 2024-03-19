@@ -1,20 +1,18 @@
 # Utility functions
 from .dbconnect import dbsession
 from .models import Note
-from flask import flash
+from flask import flash, session
 from datetime import datetime
-
-def load_md_template(filename):
-    folder = "md_templates/"
-    with open(folder + filename + ".md", "r",encoding='utf-8') as file:
-        skabelon_md = file.read()
-        return skabelon_md    
-    
+from . import app
     
 def updateList():
-    notes_db = []
-    for row in dbsession.query(Note).order_by(Note.noteID):
-        notes_db.append(row)
+    
+    try:
+        notes_db = []
+        for row in dbsession.query(Note).order_by(Note.noteID):
+            notes_db.append(row)
+    except Exception as e:
+        app.logger.critical(f"Failed to update list: {e}")
     return notes_db
 
 
@@ -23,9 +21,6 @@ def create_note_post(request):
 
         title = request.form['title']
         note = request.form['note']
-        # Temp input, skal fjernes senere hen
-        if note[:3] == "!S!":
-            note = load_md_template('skabelon_note')
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
@@ -39,6 +34,7 @@ def create_note_post(request):
     except Exception as e:
         dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
+        app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
 
 def edit_note_post(request, id):
     try:
@@ -53,11 +49,18 @@ def edit_note_post(request, id):
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
+        app.logger.error(f"Failed to edit note: {e} from user: {session['user']}")
         
 def find_note(id):
-    note = next((note for note in updateList() if note.noteID == int(id)), None)
+    try:
+        note = next((note for note in updateList() if note.noteID == int(id)), None)
+    except Exception as e:
+        app.logger.error(f"Failed to find note: {e} from user: {session['user']}")
     return note
 
 def searchbar(query):
-    search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+    try:
+        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+    except Exception as e:
+        app.logger.error(f"Failed to search for: {query} from user: {session['user']}")
     return search_results
