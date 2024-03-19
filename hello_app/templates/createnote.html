@@ -17,7 +17,7 @@
 <h1>Create Note</h1>
 
 <!-- Lav input felter -->
-<form action="/create/" method="post" enctype="multipart/form-data">
+<form action="/create/" id="submitForm" method="post" enctype="multipart/form-data">
   <input type="text" name="title" placeholder="Name" /><br />
   <textarea name="note" id="note" placeholder="Note"></textarea><br /> <!-- Updated ID to 'note' -->
   <!-- <input type="text" name="author" placeholder="Author" /><br> -->
@@ -35,6 +35,7 @@
 
 </div>
 
+
 <script>
   // Function to handle drag and drop event
   function handleDragDrop(event) {
@@ -43,8 +44,11 @@
     
     var imageUrl = event.dataTransfer.getData('URL');   
     
-    // Format the image URL
-    const formattedImageUrl = `![500px-img](${imageUrl})`;
+    // Replace 'tempimages' with 'images' in the URL
+    var modifiedImageUrl = imageUrl.replace('tempimages', 'images');
+  
+    // Format the modified image URL
+    const formattedImageUrl = `![480px-img](${modifiedImageUrl})`;
     
     // Append the formatted image URL to the text area
     document.getElementById('note').value += formattedImageUrl;

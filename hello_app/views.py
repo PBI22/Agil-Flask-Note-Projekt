@@ -43,6 +43,38 @@ def upload_file():
                 fileextension = filename.rsplit('.', 1)[1]
                 Randomfilename = id_generator()
                 filename = Randomfilename + '.' + fileextension
+                ref = 'http://' + account + '.blob.core.windows.net/' + tempcontainer + '/' + filename
+                file_dump = {
+                    "Type": fileextension,
+                    "Name": filename,
+                    "Link": ref
+                }
+                try:
+                    blob_client = blob_service.get_blob_client(container=tempcontainer, blob=filename)
+                    blob_client.upload_blob(file)
+                    files_list.append(file_dump)  # Append the file dictionary to the list
+                except Exception as e:
+                    flash('Exception=' + str(e))
+                    pass
+    
+    # Construct a list of file links
+    file_links = [file['Link'] for file in files_list]
+    
+    # Return a JSON response containing the file links
+    return jsonify({'file_links': file_links})
+
+# Upload file
+@app.route("/uploadfiles", methods=["GET","POST"])
+def upload_files():
+    files_list = []  # Initialize an empty list to store file dictionaries
+    if 'file' in request.files:
+        files = request.files.getlist("file")
+        for file in files:
+            if file and allowed_file(file.filename):
+                filename = secure_filename(file.filename)
+                fileextension = filename.rsplit('.', 1)[1]
+                Randomfilename = id_generator()
+                filename = Randomfilename + '.' + fileextension
                 ref = 'http://' + account + '.blob.core.windows.net/' + container + '/' + filename
                 file_dump = {
                     "Type": fileextension,
@@ -62,6 +94,7 @@ def upload_file():
     
     # Return a JSON response containing the file links
     return jsonify({'file_links': file_links})
+
 
 @app.route("/edit/<id>", methods=["GET","POST"])
 def edit(id = None):
@@ -115,3 +148,4 @@ def delete_note(id = None):
 
 
     return redirect(url_for('home'))
+
