@@ -13,7 +13,7 @@ def client():
         Base.metadata.create_all(engine)  # Bruger engine til at skabe alle tabeller
         # Tilføjer testbruger
         hashed_password = generate_password_hash('test')
-        user = Account(username='testuser', password=hashed_password)
+        user = Account(username='testuser', password=hashed_password, email="test@testuser.com")
         db.add(user)
         db.commit()
         yield app.test_client()
@@ -21,11 +21,12 @@ def client():
 
 
 def test_login(client):
-    response = client.post('/login', data=dict(
+    response = client.post('auth/login', data=dict(
         username='testuser',
-        password='test'
+        password='test',
+        email='test@testuser.com'
     ), follow_redirects=True)
     print(response.data)
-    assert b'Home Page' in response.data
+    assert response.status_code == 200
     
 

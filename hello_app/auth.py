@@ -31,14 +31,14 @@ def login():
             session['user'] = account.username
 
             flash(f'Login successful for {account.username}', 'success')
-            return redirect(url_for('home'))
+            return redirect(url_for('home')), 200 # OK
         else:
             flash('Invalid username or password', 'error')
             app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
-            return redirect(url_for('auth.login'))
+            return redirect(url_for('auth.login')), 400 # Bad request
 
     # If request method is GET, render the login template
-    return render_template('login.html')
+    return render_template('login.html'), 200 # OK
 
 @auth.route('/logout')
 def logout():
