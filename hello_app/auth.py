@@ -20,22 +20,26 @@ def login_required(f):
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Query the database for the account with provided username and password
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):  
-            session.clear() 
-            session['user'] = account.username
+            session.clear()
+            #gem bruger id og  role i session.
+            session['user'] = {
+                'username': account.accountID,
+                'role': 'Admin'
+                }
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
-            app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
             return redirect(url_for('auth.login'))
+
+    # If request method is GET, render the login template
+    return render_template('login.html')
 
     # If request method is GET, render the login template
     return render_template('login.html')
