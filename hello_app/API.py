@@ -5,7 +5,7 @@ from .models import Note
 
 api = Blueprint('api', __name__)
 
-@api.route('/note', methods=['GET'])
+@api.route('/notes', methods=['GET'])
 def display_notes():
     all_notes = dbsession.query(Note).all()
     data_list = []
@@ -23,15 +23,6 @@ def display_notes():
 
     return jsonify(data_list)
 
-def display_note(id):
+def display_note(id): #Laves senere hvor den tager en note
     pass
 
-
-"""
-CRUD på note
-eksternt applikation
-burde stå for sig selv
-se diverse dele af data med endpoint
-noter, login
-specific note
-"""
