@@ -16,18 +16,22 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
+
+#H
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Query the database for the account with provided username and password
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):  
-            session.clear() 
-            session['user'] = account.username
+            session.clear()
+            #gem bruger id og  role i session.
+            session['user'] = {
+                'username': account.accountID,
+                'role': 'Admin'
+                }
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
@@ -41,7 +45,8 @@ def login():
 @auth.route('/logout')
 def logout():
     user_logout = session['user']
-    session.pop('user', None) 
+    session.pop('user', None)
+    session.pop('role', None)
     flash(f'You have been logged out, {user_logout}', 'success')
     return redirect(url_for('home'))
 

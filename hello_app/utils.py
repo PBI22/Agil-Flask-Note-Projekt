@@ -1,9 +1,9 @@
 # Utility functions
 from .dbconnect import dbsession
 from .models import Note
-from flask import flash
+from flask import flash, session, url_for, redirect
 from datetime import datetime
-
+from . import app   
 def load_md_template(filename):
     folder = "md_templates/"
     with open(folder + filename + ".md", "r",encoding='utf-8') as file:
@@ -40,6 +40,9 @@ def create_note_post(request):
         dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
 
+
+
+#check id and role before allowing edit
 def edit_note_post(request, id):
     try:
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
@@ -53,7 +56,11 @@ def edit_note_post(request, id):
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
-        
+        app.logger.error(f"Failed to edit note: {e} from user: {session['user']}")
+
+
+
+
 def find_note(id):
     note = next((note for note in updateList() if note.noteID == int(id)), None)
     return note
