@@ -52,13 +52,3 @@ def delete_note(id):
          return str(e), 500
     except:
             return "Error deleting note", 404
-
-
-"""
-def find_note(id):
-    try:
-        note = next((note for note in updateList() if note.noteID == int(id)), None)
-    except Exception as e:
-        app.logger.error(f"Failed to find note: {e} from user: {session['user']}")
-    return note
-"""
