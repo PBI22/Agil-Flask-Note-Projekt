@@ -1,26 +1,29 @@
-import markdown2
-import json
 import os
 from datetime import datetime
-from flask import Flask, render_template, request, redirect, url_for, flash, session, send_from_directory
+from flask import render_template, send_from_directory
 from . import app
-from .models import Note, Account
 from .utils import *
+
 from .auth import auth, login_required
 from .API import api
 from .log_config import setup_app_logging
+from .notes import notes
 
+#Blueprints
 app.register_blueprint(auth, url_prefix='/auth')
+
 app.register_blueprint(api, url_prefix='/api')
+
+app.register_blueprint(notes, url_prefix='/notes')
 
 #Setup af logging til appen
 setup_app_logging(app)
 
-# Vores landing Page - Der viser listen over noter
 @app.route("/")
 def home():
     app.logger.info("Home page requested")
     return render_template("home.html", notes = updateList(), datetime = datetime.now())
+
 
 # Create note
 @app.route("/create/", methods=["GET","POST"])
