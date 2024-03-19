@@ -10,7 +10,7 @@
 {% if not notes %}
   <h2>Du har ingen noter pt! - Opret en nu</h2>
 {% else %}
-<form action="{{ url_for('search_results') }}" method="GET" id="search">
+<form action="{{ url_for('notes.search_results') }}" method="GET" id="search">
   <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar">
   <button type="submit" id="searchbutton"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
@@ -33,12 +33,12 @@
       <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
       <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
       <td class="icons">
-        <a href="{{ url_for('view', id=note.noteID) }}" class="icon-link">
+        <a href="{{ url_for('notes.view', id=note.noteID) }}" class="icon-link">
             <i class="fa-solid fa-eye"></i>
-        <a href="{{ url_for('edit', id=note.noteID) }}" class="icon-link">
+        <a href="{{ url_for('notes.edit', id=note.noteID) }}" class="icon-link">
             <i class="fa-solid fa-wrench"></i>
         </a>
-        <a href="{{ url_for('delete_note', id=note.noteID) }}" class="icon-link">
+        <a href="{{ url_for('notes.delete_note', id=note.noteID) }}" class="icon-link">
           <i class="fa-solid fa-trash"></i>
         </a>
 
