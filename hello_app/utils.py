@@ -43,7 +43,7 @@ def edit_note_post(request, id):
             return redirect(url_for('login'))
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
         user = session['user']
-        if user['username'] == upd.author or user['role'] == 'Admin':#admin skal tage fra db 
+        if user['username'] == upd.author or user['role'] == 'Admin':#admin skal tages fra db 
             upd = dbsession.query(Note).filter(Note.noteID == id).first()
             upd.title = request.form['title']
             upd.text = request.form['note']
