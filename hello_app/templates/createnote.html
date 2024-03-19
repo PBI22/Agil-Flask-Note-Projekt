@@ -37,23 +37,6 @@
 
 
 <script>
-  // Function to handle drag and drop event
-  function handleDragDrop(event) {
-    event.stopPropagation();
-    event.preventDefault();
-    
-    var imageUrl = event.dataTransfer.getData('URL');   
-    
-    // Replace 'tempimages' with 'images' in the URL
-    var modifiedImageUrl = imageUrl.replace('tempimages', 'images');
-  
-    // Format the modified image URL
-    const formattedImageUrl = `![480px-img](${modifiedImageUrl})`;
-    
-    // Append the formatted image URL to the text area
-    document.getElementById('note').value += formattedImageUrl;
-  }
-  
   // Get the text area element
   const noteTextArea = document.getElementById('note');
   

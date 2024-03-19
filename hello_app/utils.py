@@ -1,23 +1,20 @@
 # Utility functions
 import json
 import string, random
-import time
 from .dbconnect import session
 from .models import Note
 from flask import flash, redirect, url_for
-from datetime import datetime, timedelta
-from azure.storage.blob import BlobServiceClient, BlobClient
+from datetime import datetime
+from azure.storage.blob import BlobServiceClient
 from werkzeug.utils import secure_filename
-from apscheduler.schedulers.background import BackgroundScheduler
+import os
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'} 
-
 
 account = 'flasknoteblobstorage'   # Azure account name
 tempcontainer = "tempimages" # Container name
 container = "images" # Container name
-connection_string = "DefaultEndpointsProtocol=https;AccountName=flasknoteblobstorage;AccountKey=BnJBe5WkjWApSRwguDmueGabw3+WZmnIE3GwjfnMezNM1Td+xO8TdrHKQiDGyomo7ZBxGjGIQuiJ+AStd6P1kA==;EndpointSuffix=core.windows.net"
-
+connection_string = os.environ.get("CONNECTION_STRING")
 blob_service = BlobServiceClient.from_connection_string(conn_str=connection_string)
 
 

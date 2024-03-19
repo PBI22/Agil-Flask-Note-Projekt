@@ -1,11 +1,19 @@
-// Function to upload files
 async function uploadFile() {
   const fileInput = document.querySelector('input[type="file"]');
   const files = fileInput.files;
+  const filenames = []; // Array to store filenames
+  
+  // Extract filenames from file input
+  for (let i = 0; i < files.length; i++) {
+    filenames.push(files[i].name);
+  }
+  
   const formData = new FormData();
   
+  // Append files and filenames to FormData
   for (let i = 0; i < files.length; i++) {
     formData.append('file', files[i]);
+    formData.append('filenames', filenames[i]); // Append filenames
   }
   
   try {
@@ -39,14 +47,24 @@ async function uploadFile() {
   }
 }
 
-// Function to upload files
+
+// Function to upload files to final container
 async function uploadFinalFile() {
   const fileInput = document.querySelector('input[type="file"]');
   const files = fileInput.files;
+  const filenames = []; // Array to store filenames
+  
+  // Extract filenames from file input
+  for (let i = 0; i < files.length; i++) {
+    filenames.push(files[i].name);
+  }
+  
   const formData = new FormData();
   
+  // Append files and filenames to FormData
   for (let i = 0; i < files.length; i++) {
     formData.append('file', files[i]);
+    formData.append('filename', filenames[i]); // Append filenames
   }
   
   try {
@@ -66,6 +84,25 @@ async function uploadFinalFile() {
     alert('An unexpected error occurred. Please try again later.');
   }
 }
+
+  // Function to handle drag and drop event
+  function handleDragDrop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+    
+    // Retrieving the image source URL
+    var imageUrl = event.dataTransfer.getData('URL');   
+    
+    // Replace 'tempimages' with 'images' in the URL
+    var modifiedImageUrl = imageUrl.replace('tempimages', 'images');
+  
+    // Format the modified image URL for markdown
+    const formattedImageUrl = `![480px-img](${modifiedImageUrl})`;
+    
+    // Append the formatted image URL to the text area
+    document.getElementById('note').value += formattedImageUrl;
+  }
+
 
 document.getElementById('submitForm').addEventListener('submit', async function(event) {
   event.preventDefault(); // Prevent the default form submission

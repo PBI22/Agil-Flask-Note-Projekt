@@ -1,12 +1,15 @@
 from datetime import datetime, timedelta, timezone
 from apscheduler.schedulers.background import BackgroundScheduler
 from azure.storage.blob import BlobServiceClient, BlobClient
+import os
 
 # Initialize Azure Blob Service Client
 account = 'flasknoteblobstorage'   # Azure account name
 tempcontainer = "tempimages" # Container name
-container = "images" # Container name
-connection_string = "DefaultEndpointsProtocol=https;AccountName=flasknoteblobstorage;AccountKey=BnJBe5WkjWApSRwguDmueGabw3+WZmnIE3GwjfnMezNM1Td+xO8TdrHKQiDGyomo7ZBxGjGIQuiJ+AStd6P1kA==;EndpointSuffix=core.windows.net"
+connection_string = os.environ.get("CONNECTION_STRING")
+
+# "DefaultEndpointsProtocol=https;AccountName=flasknoteblobstorage;AccountKey=BnJBe5WkjWApSRwguDmueGabw3+WZmnIE3GwjfnMezNM1Td+xO8TdrHKQiDGyomo7ZBxGjGIQuiJ+AStd6P1kA==;EndpointSuffix=core.windows.net"
+
 blob_service_client = BlobServiceClient.from_connection_string(connection_string)
 
 container_client = blob_service_client.get_container_client(tempcontainer)
@@ -30,7 +33,7 @@ def delete_old_images():
 
 # Create and start the scheduler
 scheduler = BackgroundScheduler()
-scheduler.add_job(delete_old_images, 'interval', hours=0.001)  # Run every hour
+scheduler.add_job(delete_old_images, 'interval', hours=1)  # Run every hour
 scheduler.start()
 
 # Keep the script running
