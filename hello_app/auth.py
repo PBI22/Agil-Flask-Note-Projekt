@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Account
 from .utils import dbsession
 from functools import wraps
+from . import app
 
 # importering af auth blueprint med prefix /auth
 auth = Blueprint('auth', __name__)
@@ -33,6 +34,7 @@ def login():
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
+            app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
             return redirect(url_for('auth.login'))
 
     # If request method is GET, render the login template
@@ -77,7 +79,7 @@ def create_account():
             flash('Account created successfully!', 'success')
             
         except Exception as e:
-            print("Error: ", e)
+            app.logger.error(f"Failed to create account: {e} from address: {request.remote_addr} with username: {username} and email: {email}")
             flash('Error creating account', 'error')
             return redirect(url_for('auth.create_account'))
         return redirect(url_for('home'))
