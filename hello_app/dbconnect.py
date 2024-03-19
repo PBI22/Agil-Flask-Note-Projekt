@@ -1,12 +1,23 @@
 import os
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
+from sqlalchemy.ext.declarative import declarative_base
 from . import app
-# Construct an absolute path to where the database file should be located.
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-db_path = os.path.join(BASE_DIR, "database", "db.sqlite")
+
+Base = declarative_base()
+
+# funktion til at hente database URI , baseret på om vi er i testmode eller ej
+def get_database_uri(testing=False):
+    if testing:
+        return "sqlite:///:memory:"  # Brug in-memory database under testing
+    else:
+        BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+        db_path = os.path.join(BASE_DIR, "database", "db.sqlite")
+        return f'sqlite:///{db_path}'
+
 try:
-    engine = create_engine(f'sqlite:///{db_path}', echo=True)
+    # Tilføj en parameter til din app's konfiguration for at angive testmode
+    engine = create_engine(get_database_uri(app.config.get('TESTING', False)), echo=True)
 
     Session = sessionmaker(bind=engine)
     dbsession = Session()
