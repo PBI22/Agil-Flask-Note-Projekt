@@ -45,7 +45,7 @@ def logout():
     user_logout = session['user']
     session.pop('user', None) 
     flash(f'You have been logged out, {user_logout}', 'success')
-    return redirect(url_for('home'))
+    return redirect(url_for('home')), 200 # OK
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
