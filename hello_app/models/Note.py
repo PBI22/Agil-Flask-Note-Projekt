@@ -48,19 +48,12 @@ class Account(Base):
     username = Column(VARCHAR(255), nullable=False)
     password = Column(VARCHAR(255), nullable=False)
     email = Column(VARCHAR(255), nullable=False)
+    roleID = Column(Integer, ForeignKey("role.roleID"), nullable=False)
+
+    role = relationship("Role", primaryjoin="and_(Role.roleID==Account.roleID)", foreign_keys=[roleID])
 
 class Role(Base):
     __tablename__ = "role"
 
     roleID = Column(Integer, primary_key=True, autoincrement=True)
     rolename = Column(VARCHAR(255), nullable=False)
-
-class AccountRole(Base):
-    __tablename__ = "accountrole"
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    accountID = Column(Integer, ForeignKey("account.accountID"), nullable=False)
-    roleID = Column(Integer, ForeignKey("role.roleID") ,nullable=False)
-
-    account = relationship("Account", foreign_keys=[accountID])
-    role = relationship("Role", foreign_keys=[roleID])

@@ -31,6 +31,7 @@ def login():
             session['user'] = account.username
             session['userID'] = account.accountID
             session['userEmail'] = account.email
+            session['roleID'] = account.roleID
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
@@ -74,9 +75,10 @@ def create_account():
             username = request.form['username']
             password = request.form['password']
             email = request.form['email']
+            roleID = 1
             hashed_password = generate_password_hash(password, method='pbkdf2', salt_length=16)
             
-            dbsession.add(Account(username = username, password = hashed_password, email = email))
+            dbsession.add(Account(username = username, password = hashed_password, email = email, roleID = roleID))
             dbsession.commit()
             flash('Account created successfully!', 'success')
             
