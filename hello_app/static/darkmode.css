@@ -137,3 +137,6 @@
 .dark-mode .view-timestamps {
   color: white;
 }
+.dark-mode #menu {
+  background-color: #504e4e;
+}
