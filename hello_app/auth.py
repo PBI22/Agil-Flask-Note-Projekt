@@ -36,6 +36,7 @@ def login():
             return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
+            app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
             return redirect(url_for('auth.login'))
 
     # If request method is GET, render the login template
