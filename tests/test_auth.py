@@ -60,13 +60,6 @@ def client(app):
     # Returner en test client for app
     with app.test_client() as client:
         yield client
-        
-def setup_module(module):
-    # Eksekver SQL-scriptet for at oprette de nødvendige tabeller
-    # Dette gøres én gang før alle tests i denne modul
-    engine = create_engine('sqlite:///:memory:', echo=True)
-    with engine.begin() as conn:
-        conn.execute(text(SQL_SCRIPT))
 
 def test_login_success(client):
     # Tilføj testbruger
