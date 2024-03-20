@@ -1,10 +1,54 @@
-from datetime import datetime
-from flask import Blueprint, jsonify, request
+from datetime import datetime, timedelta, timezone
+from flask import Blueprint, jsonify, request, make_response
+from werkzeug.security import check_password_hash
 from .utils import *
-from .models import Note
+from .models import Note, Account
 from sqlalchemy.exc import SQLAlchemyError
+from flask_jwt_extended import JWTManager, jwt_required, create_access_token, get_jwt_identity
+import jwt
+from functools import wraps
 
 api = Blueprint('api', __name__)
+app.config['SECRET_KEY'] = 'super-secret'  # Skal flyttes ud eksternt
+
+# Logger ind og giver brugeren en JWT Token
+@api.route('/login')
+def login():
+    auth = request.authorization
+    if not auth:
+        return make_response('Could not verify!', 401, {'WWW-Authenticate' : 'Basic realm="Login Required"'})
+    account = dbsession.query(Account).filter_by(username=auth.username).first()
+    if account and check_password_hash(account.password, auth.password):
+        token = jwt.encode({'user' : auth.username, 'exp' : datetime.now(timezone.utc) + timedelta(minutes=2)}, app.config['SECRET_KEY'])
+        return jsonify({'token' : token})
+
+    return make_response('Could not verify!', 401, {'WWW-Authenticate' : 'Basic realm="Login Required"'})
+
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        token = request.args.get('token')
+
+        if not token:
+            return jsonify({'message' : 'Token is missing!'}), 403
+        
+        try:
+            data = jwt.decode(token, app.config['SECRET_KEY'])
+        except:
+            return jsonify({'message' : 'Token is invalid'}), 403
+        
+        return f(*args, **kwargs)
+    
+    return decorated
+
+@api.route('/unprotected')
+def unprotected():
+    return jsonify({'message' : 'Anyone can view this!'})
+
+@api.route('/protected')
+@token_required
+def protected():
+    return jsonify({'message' : 'You can only use this with a valid token'})
 
 # Tager alle noter
 @api.route('/view', methods=['GET'])
@@ -49,6 +93,7 @@ def create_note():
 
 # Sletter en note ud fra id (muligvis skal der senere tilføjes sikkerhed, så ikke alle kan slette noter ud fra APIen)
 @api.route('/delete/<id>')
+@token_required
 def delete_note(id):
     try:
         note = dbsession.query(Note).filter(Note.noteID == id).first()
