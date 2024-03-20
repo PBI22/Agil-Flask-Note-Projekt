@@ -1,12 +1,12 @@
 # Utility functions
 from .dbconnect import dbsession
-from .models import Note, Account
-from flask import flash, session
+from .models import Note
+from flask import flash, session, redirect, url_for
+from .auth import login_required
 from datetime import datetime
 from . import app
     
 def updateList():
-    
     try:
         notes_db = []
         for row in dbsession.query(Note).order_by(Note.noteID):
@@ -30,25 +30,30 @@ def create_note_post(request):
         dbsession.add(note)
         dbsession.commit()
         
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note created successfully!', 'success') 
     except Exception as e:
         dbsession.rollback()
-        flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
+        flash(f'Failed to create note: {str(e)}', 'error') 
         app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
 
+@login_required
 def edit_note_post(request, id):
     try:
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        upd.title = request.form['title']
-        upd.text = request.form['note']
-        upd.lastedited = datetime.now()
-        upd.imagelink = request.form['imagelink']
-        upd.author = session['userID']
-        dbsession.commit()
-        flash('Note edited successfully!', 'success')  # Viser en success-besked
-    
+        userID = session['userID']
+        userRole = session['role']
+        if userID == upd.author or userRole == 'Admin':#admin skal tages fra db 
+            upd = dbsession.query(Note).filter(Note.noteID == id).first()
+            upd.title = request.form['title']
+            upd.text = request.form['note']
+            upd.lastedited = datetime.now()
+            upd.imagelink = request.form['imagelink']
+            dbsession.commit()
+            flash('Note created successfully!', 'success') 
+        else:
+            flash('You are not authorized to edit this note', 'error')
     except Exception as e:
-        flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
+        flash(f'Failed to edit note: {str(e)}', 'error')
         app.logger.error(f"Failed to edit note: {e} from user: {session['user']}")
         
 def find_note(id):

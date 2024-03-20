@@ -51,13 +51,23 @@ def view(id=None):
 @notes.route("/delete/<id>")
 @login_required
 def delete_note(id=None):
-    note = find_note(id)
-    if note is None:
-        flash('Note not found', 'error')
-    else:
-        dbsession.delete(note)
-        dbsession.commit()
-        flash('Note deleted successfully!', 'success')
+    try:
+        note = find_note(id)
+        if note is None:
+            flash('Note not found', 'error')
+        else:
+            user = session['userID']
+            if session['role'] == 'Admin' or user == note.author:
+                dbsession.delete(note)
+                dbsession.commit()
+                flash('Note deleted successfully!', 'success')
+            else:
+                flash('You are not authorized to delete this note', 'error')
+
+    except Exception as e:
+        flash(f'Failed to delete note: {str(e)}', 'error')
+        app.logger.error(f"Failed to delete note: {e} from user: {session.get('user')}")
+
     return redirect(url_for('home'))  
 
 @notes.route("/search")

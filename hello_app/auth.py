@@ -20,14 +20,13 @@ def login_required(f):
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Query the database for the account with provided username and password
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):  
             session.clear()
+            #gem bruger id og  role i session.
             session['user'] = account.username
             session['userID'] = account.accountID
             session['userEmail'] = account.email
