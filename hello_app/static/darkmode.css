@@ -62,7 +62,7 @@
     background-color: #333; 
     color: #ffffff;
 }
-.dark-mode .resources tbody tr td {
+.dark-mode .resources td {
   border: 1px solid white;
 }
 
@@ -81,11 +81,10 @@
   color: white;
 }
 
-.dark-mode .icons {
+.dark-mode .resources .icons {
   display: flex;
   justify-content: space-around;
-  border-top: hidden;
-  border-left: hidden;
+  border: hidden;
 }
 
 .dark-mode footer {
