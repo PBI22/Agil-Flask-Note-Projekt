@@ -27,10 +27,10 @@ def login():
         if account and check_password_hash(account.password, password):  
             session.clear()
             #gem bruger id og  role i session.
-            session['user'] = {
-                'username': account.accountID,
-                'role': 'Admin'
-                }
+            session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
+            session['role'] = 'Admin'
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))

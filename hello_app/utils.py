@@ -2,6 +2,7 @@
 from .dbconnect import dbsession
 from .models import Note
 from flask import flash, session, redirect, url_for
+from .auth import login_required
 from datetime import datetime
 from . import app
     
@@ -35,21 +36,19 @@ def create_note_post(request):
         dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
         app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
-
+@login_required
 def edit_note_post(request, id):
     try:
-        if 'user' not in session:
-            flash('Error: You are not logged in.')
-            return redirect(url_for('login'))
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        user = session['user']
-        if user['username'] == upd.author or user['role'] == 'Admin':#admin skal tages fra db 
+        user = session['userID']
+        userRole = session['role']
+        if user == upd.author or userRole == 'Admin':#admin skal tages fra db 
             upd = dbsession.query(Note).filter(Note.noteID == id).first()
             upd.title = request.form['title']
             upd.text = request.form['note']
             upd.lastedited = datetime.now()
             upd.imagelink = request.form['imagelink']
-            upd.author = user['username']
+            upd.author = user
             dbsession.commit()
             flash('Note created successfully!', 'success')  # Viser en success-besked
         else:
