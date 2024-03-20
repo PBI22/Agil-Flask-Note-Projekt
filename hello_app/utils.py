@@ -28,7 +28,6 @@ def create_note_post(request):
         account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
-        print(note) 
         dbsession.add(note)
         dbsession.commit()
         
