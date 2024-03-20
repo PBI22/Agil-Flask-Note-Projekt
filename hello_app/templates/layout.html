@@ -29,15 +29,34 @@
       <a href="{{ url_for('notes.create_note') }}" class="navbar-item">Opret Note</a>
       </div>
       <div class="nav-right">
+        <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
         {% if session['user'] %}
         <!-- Logged in as text -->
         <span class="navbar-item">Logged in as: <span style="color:orange;font-weight:bold;">{{ session['user'] }}</span></span>
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
         {% else %}
-      <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
-      <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
+        <div class="desktop">
+            <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
+            <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
+        </div>
+        <div class="mobile burger" id="burger">
+          <div class="line"></div>
+          <div class="line"></div>
+          <div class="line"></div>
+        </div>
+        <div class="menu" id="menu">
+          <ul>
+            <li><a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a></li>
+            <li><a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a></li>
+          </ul>
+        </div>
+        <script>
+          // Toggle menu when burger icon is clicked
+          document.getElementById('burger').addEventListener('click', function() {
+            document.getElementById('menu').classList.toggle('show');
+          });
+        </script>
       {% endif %}
-      <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
       </div>
     </div>
 
