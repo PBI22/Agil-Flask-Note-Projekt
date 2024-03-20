@@ -27,8 +27,10 @@ def login():
         # Query the database for the account with provided username and password
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):  
-            session.clear() 
+            session.clear()
             session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
@@ -43,7 +45,7 @@ def login():
 @auth.route('/logout')
 def logout():
     user_logout = session['user']
-    session.pop('user', None) 
+    session.clear() 
     flash(f'You have been logged out, {user_logout}', 'success')
     return redirect(url_for('home'))
 

@@ -47,7 +47,7 @@
           >Signup</a
         >
         {% endif %}
-        <button id="theme-toggle">
+        <button id="theme-toggle" onclick="toggleDarkmode()">
           <i class="fa-solid fa-circle-half-stroke"></i>
         </button>
       </div>
@@ -67,11 +67,23 @@
       </footer>
     </div>
     <script>
-      document
-        .getElementById("theme-toggle")
-        .addEventListener("click", function () {
+      function toggleDarkmode() {
+        if (document.body.classList.contains("dark-mode")) {
           document.body.classList.toggle("dark-mode");
-        });
+          localStorage.setItem("theme", "light");
+        } else {
+          document.body.classList.toggle("dark-mode");
+          localStorage.setItem("theme", "dark");
+        }
+      }
+      function checkInitialTheme() {
+        let themeCheck = localStorage.getItem("theme");
+        if (themeCheck == "dark") {
+          document.body.classList.toggle("dark-mode");
+          return null;
+        }
+      }
+      checkInitialTheme();
     </script>
     <script src="{{ url_for('static', filename='uploadFile.js') }}"></script>
   </body>

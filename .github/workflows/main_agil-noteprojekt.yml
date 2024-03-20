@@ -63,6 +63,7 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
+<<<<<<< HEAD
 
       - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
@@ -70,4 +71,17 @@ jobs:
         with:
           app-name: "agil-noteprojekt"
           slot-name: "Production"
+=======
+  
+      #- name: Get OS Environment Variables
+      #  env: 
+      #    SECRET_KEY : ${{ secrets.SECRET_KEY }}
+      
+      - name: 'Deploy to Azure Web App'
+        uses: azure/webapps-deploy@v2
+        id: deploy-to-webapp
+        with:
+          app-name: 'agil-noteprojekt'
+          slot-name: 'Production'
+>>>>>>> 2af698a04661bab03e3d55306845c52b48a397fc
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C2E173D2E91D4DDBABCEAFA105B370E9 }}

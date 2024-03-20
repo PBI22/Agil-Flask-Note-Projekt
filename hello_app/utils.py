@@ -3,7 +3,7 @@ import json
 import random
 import string
 from .dbconnect import dbsession
-from .models import Note
+from .models import Note, Account
 from flask import flash, session
 from datetime import datetime
 from . import app
@@ -31,34 +31,29 @@ def create_note_post(request):
         title = request.form['title']
         note = request.form['note']
         
-        files_list = []  # Initialize an empty list to store file dictionaries
-
-        if 'file' in request.files:
-            files = request.files.getlist("file")
-            for file in files:
-                if file and allowed_file(file.filename):
-                    filename = secure_filename(file.filename)
-                    fileextension = filename.rsplit('.', 1)[1]
-                    Randomfilename = id_generator()
-                    filename = Randomfilename + '.' + fileextension
-                    ref = 'http://' + ACCOUNT + '.blob.core.windows.net/' + CONTAINER + '/' + filename
-                    file_dump = {
-                        "Type": fileextension,
-                        "Name": filename,
-                        "Link": ref
-                    }
-                    try:
-                        blob_client = blob_service.get_blob_client(container=CONTAINER, blob=filename)
-                        blob_client.upload_blob(file)
-                        files_list.append(file_dump)  # Append the file dictionary to the list
-                    except Exception as e:
-                        flash('Exception=' + str(e))
-                        pass
+        persistent_files_list = []  # Initialize an empty list to store file dictionaries
+        filenames = request.form.getlist("filename")  # Get the filenames
+        
+        for file, filename in zip(request.files.getlist("file"), filenames):
+            if file and allowed_file(file.filename):
+                filename = secure_filename(filename)
+                fileextension = filename.rsplit('.', 1)[1]
+                ref = 'http://' + ACCOUNT + '.blob.core.windows.net/' + CONTAINER + '/' + filename
+                file_dump = {
+                    "Type": fileextension,
+                    "Name": filename,
+                    "Link": ref
+                }
+                try:
+                    persistent_files_list.append(file_dump)  # Append the file dictionary to the list
+                except Exception as e:
+                    flash('Exception=' + str(e))
+                    pass
                     
         created = datetime.now()
         lastEdited = datetime.now()
-        files_json = json.dumps(files_list)
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        files_json = json.dumps(persistent_files_list)
+        account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = files_json, author = account_ID)
         dbsession.add(note)
@@ -77,9 +72,9 @@ def edit_note_post(request, id):
         upd.text = request.form['note']
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
-        upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        upd.author = session['userID']
         dbsession.commit()
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note edited successfully!', 'success')  # Viser en success-besked
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
