@@ -36,6 +36,7 @@ def create_note_post(request):
         dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
         app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
+
 @login_required
 def edit_note_post(request, id):
     try:
@@ -55,7 +56,7 @@ def edit_note_post(request, id):
             flash('You are not authorized to edit this note', 'error')
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')
-        app.logger.error(f"Failed to edit note: {e} from user: {session.get('user')}")
+        app.logger.error(f"Failed to edit note: {e} from user: {session['user']}")
         
 def find_note(id):
     try:
