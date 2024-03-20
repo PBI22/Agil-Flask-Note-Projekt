@@ -1,3 +1,4 @@
 Flask
 SQLAlchemy
 markdown2[all]
+authlib
