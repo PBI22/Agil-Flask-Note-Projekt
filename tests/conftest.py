@@ -13,7 +13,7 @@ def client():
     # Sæt op in-memory database for hver test
     with flask_app.app_context():
         hashed_password = generate_password_hash('test')
-        user = Account(username='testuser', password=hashed_password, email="test@testuser.com")
+        user = Account(username='testuser', password=hashed_password, email="test@testuser.com", roleID=1)
         db.add(user)
         db.commit()
         yield flask_app.test_client()
