@@ -14,3 +14,5 @@ def reset_db():
     # Commit ændringer og luk forbindelsen
     conn.commit()
     conn.close()
+
+reset_db()
