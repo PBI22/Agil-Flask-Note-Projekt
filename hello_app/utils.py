@@ -7,7 +7,6 @@ from datetime import datetime
 from . import app
     
 def updateList():
-    
     try:
         notes_db = []
         for row in dbsession.query(Note).order_by(Note.noteID):
@@ -31,10 +30,10 @@ def create_note_post(request):
         dbsession.add(note)
         dbsession.commit()
         
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note created successfully!', 'success') 
     except Exception as e:
         dbsession.rollback()
-        flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
+        flash(f'Failed to create note: {str(e)}', 'error') 
         app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
 
 @login_required
