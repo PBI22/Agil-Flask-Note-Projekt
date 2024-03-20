@@ -41,20 +41,20 @@ def robots_txt():
 @app.route("/upload", methods=["POST"])
 def upload():
     files_list = []  # Initialize an empty list to store file dictionaries
-    filenames = request.form.getlist('filenames')  # Get the filenames
     
-    for file, filename in zip(request.files.getlist("file"), filenames):
+    for file in request.files.getlist("file"):
         if file and allowed_file(file.filename):
-            filename = secure_filename(filename)
+            filename = secure_filename(file.filename)
             fileextension = filename.rsplit('.', 1)[1]
-            ref = 'http://' + ACCOUNT + '.blob.core.windows.net/' + TEMP_CONTAINER + '/' + filename
+            random_filename = id_generator() + '.' + fileextension
+            ref = f'http://{ACCOUNT}.blob.core.windows.net/{TEMP_CONTAINER}/{random_filename}'
             file_dump = {
                 "Type": fileextension,
-                "Name": filename,
+                "Name": random_filename,
                 "Link": ref
             }
             try:
-                blob_client = blob_service.get_blob_client(container=TEMP_CONTAINER, blob=filename)
+                blob_client = blob_service.get_blob_client(container=TEMP_CONTAINER, blob=random_filename)
                 blob_client.upload_blob(file)
                 files_list.append(file_dump)  # Append the file dictionary to the list
             except Exception as e:
@@ -66,6 +66,7 @@ def upload():
     
     # Return a JSON response containing the file links
     return jsonify({'file_links': file_links})
+
 
     
 @app.route("/uploadfiles", methods=["POST"])
