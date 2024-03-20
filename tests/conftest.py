@@ -1,17 +1,12 @@
 # conftest.py
 import pytest
 import os
+os.environ['TESTING'] = 'True'
 from hello_app.webapp import app as flask_app
 from hello_app.models import Account
 from werkzeug.security import generate_password_hash
 from hello_app.dbconnect import dbsession as db
 
-@pytest.fixture(scope='session', autouse=True)
-def setup_environment():
-    os.environ["TESTING"] = "True"
-    # Her kan du indsætte yderligere setup logik, som skal køre før alle tests
-    yield
-    os.environ.pop("TESTING", None)  # Ryd op efter tests
 
 @pytest.fixture(scope='function')
 def client():
