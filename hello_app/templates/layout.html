@@ -32,7 +32,7 @@
         <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
         {% if session['user'] %}
         <!-- Logged in as text -->
-        <span class="navbar-item">Logged in as: <span style="color:orange;font-weight:bold;">{{ session['user'] }}</span></span>
+        <span class="navbar-item">Logged in as: <span style="color:orange;font-weight:bold; text-shadow: 1px 1px 2px black;">{{ session['user'] }}</span></span>
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
         {% else %}
         <div class="desktop">
