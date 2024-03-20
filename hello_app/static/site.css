@@ -68,6 +68,7 @@ hr {
   align-self: center;
   margin-top: 10px;
 }
+
 #searchbar {
   display: flex;
   max-width: 50vw;
@@ -78,6 +79,7 @@ hr {
   padding-left: 15px;
   border: 2px solid #333;
 }
+
 #searchbutton {
   display: flex;
   height: inherit;
@@ -89,6 +91,7 @@ hr {
   border: 2px solid #333;
   border-left: none;
 }
+
 #searchbutton:hover {
   background-color: #848484;
 
@@ -181,4 +184,14 @@ footer {
   margin-top: auto;
   height: 50px;
   width: 100%;
+}
+
+.flash-success {
+  padding-top: 5px;
+  color: rgb(0, 0, 0)000; /* CSS til flash-success besked i darkmode*/
+}
+
+.flash-error {
+  padding-top: 5px;
+  color: #000000; /* CSS til flash-error besked i darkmode*/
 }
