@@ -153,3 +153,7 @@
 .dark-mode h1 {
   color: white;
 }
+
+.dark-mode #menu {
+  background-color: #504e4e;
+}
