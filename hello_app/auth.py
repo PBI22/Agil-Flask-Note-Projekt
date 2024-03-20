@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Account
 from .utils import dbsession
@@ -31,21 +31,21 @@ def login():
             session['user'] = account.username
 
             flash(f'Login successful for {account.username}', 'success')
-            return redirect(url_for('home')), 200 # OK
+            return redirect(url_for('home'))
         else:
             flash('Invalid username or password', 'error')
             app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
-            return redirect(url_for('auth.login')), 401 # Unauthorized
+            return redirect(url_for('auth.login'))
 
     # If request method is GET, render the login template
-    return render_template('login.html'), 200 # OK
+    return render_template('login.html')
 
 @auth.route('/logout')
 def logout():
     user_logout = session['user']
     session.pop('user', None) 
     flash(f'You have been logged out, {user_logout}', 'success')
-    return redirect(url_for('home')), 200 # OK
+    return redirect(url_for('home'))
 
 
 @auth.route('/signup', methods=['GET', 'POST'])
@@ -55,18 +55,18 @@ def create_account():
   
         if not request.form['username']:
             flash('Username is required', 'error')
-            return redirect(url_for('create_account')), 400
+            return redirect(url_for('create_account'))
         if not request.form['password']:
             flash('Password is required', 'error')
-            return redirect(url_for('create_account')), 400
+            return redirect(url_for('create_account'))
         if not request.form['email']:
             flash('Email is required', 'error')
-            return redirect(url_for('create_account')), 400
+            return redirect(url_for('create_account'))
         
         # Check if username already exists
         if dbsession.query(Account).filter_by(username=request.form['username']).first() is not None:
             flash('Username already exists', 'error')
-            return redirect(url_for('auth.create_account')), 409 # Conflict
+            return redirect(url_for('auth.create_account'))
         
         try:
             username = request.form['username']
@@ -77,12 +77,12 @@ def create_account():
             dbsession.add(Account(username = username, password = hashed_password, email = email))
             dbsession.commit()
             flash('Account created successfully!', 'success')
-            return redirect(url_for('home')), 201
+            return redirect(url_for('home'))
             
         except Exception as e:
             app.logger.error(f"Failed to create account: {e} from address: {request.remote_addr} with username: {username} and email: {email}")
             flash('Error creating account', 'error')
-            return redirect(url_for('auth.create_account')), 400
+            return redirect(url_for('auth.create_account'))
         
         
     else:
