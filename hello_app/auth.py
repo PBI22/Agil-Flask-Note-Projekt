@@ -32,6 +32,8 @@ def login():
             session['userEmail'] = account.email
             session['roleID'] = account.roleID
 
+            print(session)
+
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
         else:

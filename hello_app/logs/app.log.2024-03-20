@@ -1,0 +1,79 @@
+2024-03-20 09:14:13,781 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:14:25,277 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-20 09:14:31,631 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-20 09:14:41,275 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: txt3
+2024-03-20 09:14:48,476 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: txt3
+2024-03-20 09:14:54,819 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: txt3
+2024-03-20 09:27:49,781 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:28:00,060 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:28:27,262 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:28:51,322 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:28:53,750 - ERROR - hello_app: Failed to delete note: string indices must be integers, not 'str' from user: txt3
+2024-03-20 09:28:53,809 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:28:57,282 - ERROR - hello_app: Failed to delete note: string indices must be integers, not 'str' from user: txt3
+2024-03-20 09:28:57,299 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:30:28,337 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:30:32,408 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:30:36,996 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:30:54,915 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:44:37,894 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:44:43,761 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:44:51,797 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:48:46,727 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:48:55,461 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:12,293 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:22,731 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:25,355 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:27,667 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:31,806 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:40,234 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:44,011 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:57:28,799 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:57:36,682 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:57:42,060 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:19:31,882 - INFO - hello_app: Home page requested
+2024-03-20 10:20:19,542 - INFO - hello_app: Home page requested
+2024-03-20 10:22:01,558 - INFO - hello_app: Home page requested
+2024-03-20 10:31:07,070 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:36:05,871 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:36:13,205 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: txt3
+2024-03-20 10:36:19,489 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-20 10:36:29,521 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: one 
+2024-03-20 10:37:08,970 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:37:20,006 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:37:37,016 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:43:39,276 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:37:05,220 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:37:21,466 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: txt3
+2024-03-20 23:37:54,472 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:06,173 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:16,293 - ERROR - hello_app: Failed to edit note: 'roleID' from user: testxx
+2024-03-20 23:38:16,304 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:18,490 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:18,505 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:21,177 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:21,192 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:23,029 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:23,045 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:24,178 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:24,192 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:25,355 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:25,370 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:28,300 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:30,471 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:30,481 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:38:37,735 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:38:37,745 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:44:30,242 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:44:35,030 - ERROR - hello_app: Failed to delete note: 'role' from user: testxx
+2024-03-20 23:44:35,040 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:46:25,323 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:46:28,250 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:46:28,265 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:53:19,845 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:53:19,860 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:53:21,085 - ERROR - hello_app: Failed to delete note: 'roleID' from user: testxx
+2024-03-20 23:53:21,100 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:54:25,326 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:54:27,942 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:57:51,825 - INFO - hello_app: Home page requested from: 127.0.0.1

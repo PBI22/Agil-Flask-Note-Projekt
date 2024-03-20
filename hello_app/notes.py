@@ -57,7 +57,8 @@ def delete_note(id=None):
             flash('Note not found', 'error')
         else:
             user = session['userID']
-            if session['roleID'] == 2 or user == note.author:
+            role = session['roleID']
+            if  role == 2 or user == note.author:
                 dbsession.delete(note)
                 dbsession.commit()
                 flash('Note deleted successfully!', 'success')
