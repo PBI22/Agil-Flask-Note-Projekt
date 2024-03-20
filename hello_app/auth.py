@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Account
 from .utils import dbsession
@@ -79,12 +79,19 @@ def create_account():
             dbsession.add(Account(username = username, password = hashed_password, email = email))
             dbsession.commit()
             flash('Account created successfully!', 'success')
+            # Logger automatisk brugeren ind efter oprettelse
+            session.clear()
+            account = dbsession.query(Account).filter_by(username=username).first()
+            session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
+            return redirect(url_for('home'))
             
         except Exception as e:
             app.logger.error(f"Failed to create account: {e} from address: {request.remote_addr} with username: {username} and email: {email}")
             flash('Error creating account', 'error')
             return redirect(url_for('auth.create_account'))
-        return redirect(url_for('home'))
+        
         
     else:
         return render_template("signup.html")

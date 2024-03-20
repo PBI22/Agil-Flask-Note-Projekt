@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import render_template, send_from_directory, request
 from . import app
 from .utils import *
-from .auth import auth, login_required
+from .auth import auth
 from .API import api
 from .log_config import setup_app_logging
 from .notes import notes
