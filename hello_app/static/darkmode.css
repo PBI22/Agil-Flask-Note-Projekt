@@ -10,7 +10,7 @@
 
 .dark-mode hr {
     width: 60%;
-    border: 1px solid rgb(70, 69, 69);
+    border: 1px solid rgb(83, 82, 82);
     margin: 20px auto;
 }
 
@@ -50,9 +50,9 @@
 /* Tabel CSS */
 .dark-mode .resources table {
   background-color: transparent;
-    border-collapse: collapse;
-    table-layout: fixed;
-    color: #e0e0e0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #e0e0e0;
 }
 
 .dark-mode .resources tbody th, .dark-mode .resources tbody tr {
@@ -60,9 +60,9 @@
     text-align: left;
     padding: 8px;
     background-color: #333; 
-    color: #ffffff; 
+    color: #ffffff;
 }
-.dark-mode .resources tbody tr td {
+.dark-mode .resources td {
   border: 1px solid white;
 }
 
@@ -79,6 +79,12 @@
 }
 .dark-mode .icons i:hover{
   color: white;
+}
+
+.dark-mode .resources .icons {
+  display: flex;
+  justify-content: space-around;
+  border: hidden;
 }
 
 .dark-mode footer {
@@ -103,6 +109,7 @@
   display: flex;
   justify-content: center;
 }
+
 .dark-mode #searchbar{
   background-color: transparent;
   color: white;
