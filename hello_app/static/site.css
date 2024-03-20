@@ -52,15 +52,13 @@ hr {
   justify-content: center;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   min-height: calc(100vh - 71.33px);
+  justify-content: start;
 }
 
 .resources {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 72px);
-  margin-left: 25px;
-  
 }
 
 /* Search bar */
@@ -141,17 +139,26 @@ tr:nth-child(even) {
 tr:hover {
   background-color: #eaeaea; /* Hover-effekt for rækker */
 }
+
 .icons {
   display: flex;
   justify-content: space-around;
-  cursor: pointer;
+  border-top: hidden;
+  border-left: hidden;
 }
+
 .icons i {
   color: black;
   text-decoration: none;
+  cursor: pointer;
 }
+
 .icons i:active {
   color: initial;
+}
+#shownoteicons {
+  justify-content: center;
+  gap: 15px;
 }
 
 footer {
@@ -171,9 +178,7 @@ footer {
 }
 
 footer {
-  position: absolute;
-  bottom: 0;
-  left: 0;
+  margin-top: auto;
   height: 50px;
   width: 100%;
 }

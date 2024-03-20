@@ -4,13 +4,13 @@
     background-color: #383636;
 }
 
-.dark-mode h1 {
+.dark-mode #frontpageh1 {
     color: #ffffff;
 }
 
 .dark-mode hr {
     width: 60%;
-    border: 1px solid rgb(70, 69, 69);
+    border: 1px solid rgb(83, 82, 82);
     margin: 20px auto;
 }
 
@@ -48,37 +48,43 @@
   }
 
 /* Tabel CSS */
-.dark-mode table {
+.dark-mode .resources table {
   background-color: transparent;
-    border-collapse: collapse;
-    table-layout: fixed;
-    color: #e0e0e0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #e0e0e0;
 }
 
-.dark-mode th, td {
-    border: 1px solid #727272; /* Let grå kant for at skelne celler */
+.dark-mode .resources tbody th, .dark-mode .resources tbody tr {
+    border: 1px solid #ffffff;
     text-align: left;
     padding: 8px;
-  }
+    background-color: #333; 
+    color: #ffffff;
+}
+.dark-mode .resources td {
+  border: 1px solid white;
+}
 
-  .dark-mode th {
-    background-color: #333; /* En let grå baggrundsfarve for header */
-    color: #ffffff; /* Mørk tekstfarve for kontrast */
-  }
+.dark-mode .resources tbody tr:nth-child(even) {
+    background-color: rgb(64, 64, 64);
+}
 
-  .dark-mode tr:nth-child(even) {
-    background-color: rgb(54, 52, 52); /* Zebra-striping for rækker */
-  }
-
-  .dark-mode tr:hover {
-    background-color: #444343; /* Hover-effekt for rækker */
-  }
+.dark-mode .resources tbody tr:hover {
+    background-color: #575757;
+}
 
 .dark-mode .icons i {
   color: rgb(200, 200, 200);
 }
 .dark-mode .icons i:hover{
   color: white;
+}
+
+.dark-mode .resources .icons {
+  display: flex;
+  justify-content: space-around;
+  border: hidden;
 }
 
 .dark-mode footer {
@@ -103,6 +109,7 @@
   display: flex;
   justify-content: center;
 }
+
 .dark-mode #searchbar{
   background-color: transparent;
   color: white;
@@ -124,5 +131,9 @@
   color: rgb(155, 155, 155);
 }
 .dark-mode .markdown-body {
+  background-color: white;
+  color: black;
+}
+.dark-mode .view-timestamps {
   color: white;
 }
