@@ -41,9 +41,6 @@ def login():
     # If request method is GET, render the login template
     return render_template('login.html')
 
-    # If request method is GET, render the login template
-    return render_template('login.html')
-
 @auth.route('/logout')
 def logout():
     user_logout = session['user']
