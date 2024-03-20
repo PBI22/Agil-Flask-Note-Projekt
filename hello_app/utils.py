@@ -24,7 +24,6 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        #account_ID = 1 skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
         account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
@@ -44,9 +43,9 @@ def edit_note_post(request, id):
         upd.text = request.form['note']
         upd.lastedited = datetime.now()
         upd.imagelink = request.form['imagelink']
-        upd.author = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        upd.author = session['userID']
         dbsession.commit()
-        flash('Note created successfully!', 'success')  # Viser en success-besked
+        flash('Note edited successfully!', 'success')  # Viser en success-besked
     
     except Exception as e:
         flash(f'Failed to edit note: {str(e)}', 'error')  # Viser en failure-besked
