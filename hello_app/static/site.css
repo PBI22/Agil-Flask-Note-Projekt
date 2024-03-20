@@ -30,6 +30,11 @@ hr {
   padding:  20px;
 }
 
+.nav-right {
+  display: flex;
+
+}
+
 .navbar a {
   padding: 10px;
   text-decoration: none;
@@ -164,9 +169,8 @@ footer {
   background-color: transparent;
   border: none;
   font-size: 20px;
-  margin-left: 10px;
-  padding-left: 20px;
-  border-left: 2px solid rgb(90, 103, 117);
+  padding-right: 20px;
+  border-right: 2px solid rgb(90, 103, 117);
 }
 #theme-toggle i {
   color: white;
@@ -176,4 +180,63 @@ footer {
   margin-top: auto;
   height: 50px;
   width: 100%;
+}
+
+@media only screen and (min-width: 600px) {
+  div.mobile {
+    display: none;
+  }
+}
+@media only screen and (max-width: 600px) {
+  div.desktop {
+    display: none;
+  }
+}
+
+/* Burger menu */
+.burger {
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  padding-left: 20px;
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #fff;
+  margin: 3px;
+}
+.menu {
+  display: none;
+}
+.show {
+  list-style-type: none;
+  display: flex;
+  position: absolute;
+  top: 71.33px;
+  right: 0px;
+  background-color: lightslategray;
+  padding: 0;
+  animation-name: dropdown;
+  animation-duration: 0.5s;
+}
+
+.menu li {
+  margin-right: 40px;
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: 5px;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #fff;
+}
+
+
+@keyframes dropdown {
+  0% {top: -100px; z-index: -1;}
+  50% {top: 70px;}
+  100% {top: 71.33px; z-index: 1;}
 }
