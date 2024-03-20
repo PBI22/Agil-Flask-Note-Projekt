@@ -41,7 +41,7 @@ def create_note_post(request):
 def edit_note_post(request, id):
     try:
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        user = session['userID']
+        userID = session['userID']
         userRole = session['role']
         if user == upd.author or userRole == 'Admin':#admin skal tages fra db 
             upd = dbsession.query(Note).filter(Note.noteID == id).first()
