@@ -24,7 +24,7 @@ def create_note_post(request):
         created = datetime.now()
         lastEdited = datetime.now()
         imagelink = request.form['imagelink']
-        account_ID = 1 # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+        account_ID = session['userID']
         
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
         dbsession.add(note)
@@ -42,7 +42,7 @@ def edit_note_post(request, id):
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
         userID = session['userID']
         userRole = session['role']
-        if user == upd.author or userRole == 'Admin':#admin skal tages fra db 
+        if userID == upd.author or userRole == 'Admin':#admin skal tages fra db 
             upd = dbsession.query(Note).filter(Note.noteID == id).first()
             upd.title = request.form['title']
             upd.text = request.form['note']

@@ -45,7 +45,7 @@ def login():
 @auth.route('/logout')
 def logout():
     user_logout = session['user']
-    session.pop('user', None) 
+    session.clear() 
     flash(f'You have been logged out, {user_logout}', 'success')
     return redirect(url_for('home'))
 
