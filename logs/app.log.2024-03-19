@@ -1,0 +1,102 @@
+2024-03-19 13:00:41,223 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:01:49,375 - ERROR - hello_app: Exception on /auth/login [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 36, in login
+    flash('Invalid username or password', 'error')
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/helpers.py", line 325, in flash
+    session["_flashes"] = flashes
+    ~~~~~~~^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/sessions.py", line 97, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+2024-03-19 13:03:38,040 - ERROR - hello_app: Exception on /auth/login [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 36, in login
+    flash('Invalid username or password', 'error')
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/helpers.py", line 325, in flash
+    session["_flashes"] = flashes
+    ~~~~~~~^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/sessions.py", line 97, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+2024-03-19 13:06:04,085 - ERROR - hello_app: Exception on /auth/login [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 36, in login
+    flash('Invalid username or password', 'error')
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/helpers.py", line 325, in flash
+    session["_flashes"] = flashes
+    ~~~~~~~^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/sessions.py", line 97, in _fail
+    raise RuntimeError(
+RuntimeError: The session is unavailable because no secret key was set.  Set the secret_key on the application to something unique and secret.
+2024-03-19 13:12:49,842 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-19 13:12:56,637 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-19 13:13:09,387 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testx
+2024-03-19 13:13:45,586 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:13:52,824 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:24:00,443 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:24:08,368 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:36:49,759 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:36:56,294 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:41:15,269 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:41:16,048 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:41:25,227 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:41:54,650 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:44:02,358 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:44:04,803 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 13:44:15,390 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 99, in upload
+    return jsonify({'file_links': file_links})
+           ^^^^^^^
+NameError: name 'jsonify' is not defined
+2024-03-19 14:13:07,914 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-19 14:15:53,225 - INFO - hello_app: Home page requested from: 127.0.0.1
