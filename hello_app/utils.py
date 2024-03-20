@@ -50,7 +50,7 @@ def edit_note_post(request, id):
             upd.lastedited = datetime.now()
             upd.imagelink = request.form['imagelink']
             dbsession.commit()
-            flash('Note created successfully!', 'success')  # Viser en success-besked
+            flash('Note created successfully!', 'success') 
         else:
             flash('You are not authorized to edit this note', 'error')
     except Exception as e:
