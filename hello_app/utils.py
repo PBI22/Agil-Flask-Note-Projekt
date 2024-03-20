@@ -49,7 +49,6 @@ def edit_note_post(request, id):
             upd.text = request.form['note']
             upd.lastedited = datetime.now()
             upd.imagelink = request.form['imagelink']
-            upd.author = user
             dbsession.commit()
             flash('Note created successfully!', 'success')  # Viser en success-besked
         else:
