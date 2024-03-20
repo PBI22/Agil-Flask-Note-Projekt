@@ -37,7 +37,7 @@
       <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
       <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
       {% endif %}
-      <button id="theme-toggle"><i class="fa-solid fa-circle-half-stroke"></i></button>
+      <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
       </div>
     </div>
 
@@ -57,9 +57,23 @@
     </footer>
     </div>
     <script>
-      document.getElementById('theme-toggle').addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-      });
+      function toggleDarkmode() {
+        if (document.body.classList.contains("dark-mode")) {
+          document.body.classList.toggle('dark-mode');
+          localStorage.setItem('theme', 'light')
+        } else {
+          document.body.classList.toggle('dark-mode');
+          localStorage.setItem('theme', 'dark')
+        }
+      }
+      function checkInitialTheme() {
+        let themeCheck = localStorage.getItem('theme')
+        if (themeCheck == 'dark') {
+          document.body.classList.toggle('dark-mode');
+        return null
+        }
+      }
+      checkInitialTheme()
     </script>
   </body>
 </html>
