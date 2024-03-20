@@ -8,17 +8,6 @@ from .models import Base
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 db_path = os.path.join(BASE_DIR, "database", "db.sqlite")
 
-# Funktion til at printe tabelstrukturen
-def print_table_structure(engine):
-    inspector = inspect(engine)
-    print("Database Tables and Their Columns:")
-    for table_name in inspector.get_table_names():
-        print(f"\nTable: {table_name}")
-        for column in inspector.get_columns(table_name):
-            print(f"  Column: {column['name']} Type: {column['type']}")
-
-
-
 def get_engine():
     
     if os.getenv("TESTING"):
@@ -26,7 +15,6 @@ def get_engine():
         test_db_path = os.path.join(BASE_DIR,"database", "test.db")
         engine = create_engine(f'sqlite:///{test_db_path}', echo=True)
         Base.metadata.create_all(engine)  # Opretter databasestrukturen baseret på dine modeller
-        print_table_structure(engine)  # Printer tabelstrukturen umiddelbart efter oprettelsen
     else:
         try:
             engine = create_engine(f'sqlite:///{db_path}', echo=True)

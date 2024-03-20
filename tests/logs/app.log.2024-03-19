@@ -1,0 +1,67 @@
+2024-03-19 13:12:34,887 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testuser
+2024-03-19 13:12:35,771 - ERROR - hello_app: Exception on /auth/logout [GET]
+Traceback (most recent call last):
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\hello_app\auth.py", line 45, in logout
+    user_logout = session['user']
+                  ~~~~~~~^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'user'
+2024-03-19 13:13:43,564 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testuser
+2024-03-19 13:13:44,273 - ERROR - hello_app: Exception on /auth/logout [GET]
+Traceback (most recent call last):
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\hello_app\auth.py", line 45, in logout
+    user_logout = session['user']
+                  ~~~~~~~^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'user'
+2024-03-19 13:16:38,534 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testuser
+2024-03-19 13:16:38,879 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: testuser
+2024-03-19 13:16:40,519 - ERROR - hello_app: Exception on /auth/logout [GET]
+Traceback (most recent call last):
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 1463, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 872, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 870, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\app.py", line 855, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\hello_app\auth.py", line 45, in logout
+    user_logout = session['user']
+                  ~~~~~~~^^^^^^^^
+  File "C:\Users\Steffan\Documents\GitHub\Agil-Flask-Note-Projekt\venv\Lib\site-packages\flask\sessions.py", line 84, in __getitem__
+    return super().__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+KeyError: 'user'

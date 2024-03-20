@@ -1,49 +1,67 @@
-import pytest
-import os
-from flask import Flask
-from hello_app.webapp import app
-from werkzeug.security import generate_password_hash
-from hello_app.models import Account
-from hello_app.dbconnect import dbsession as db
+# test_auth.py
+from .conftest import Account
 
 """
-fix liste:
-Tjek logs når der tests
-opret resterende tests
-husk clean up + clean up db
-
+Testing af auth endpoints - Burde reelt opdeles i mindre tests senere hen.
 """
-
-@pytest.fixture
-def client():
-    os.environ["TESTING"] = "True"
-    # Opsæt in-memory database for hver test
-    with app.app_context():
-        hashed_password = generate_password_hash('test')
-        user = Account(username='testuser', password=hashed_password)
-        user = Account(username='testuser', password=hashed_password, email="test@testuser.com")
-        db.add(user)
-        db.commit()
-        yield app.test_client()
-        os.environ.pop("TESTING")  # Ryd op efter testen
-        
 
 def test_login_success(client):
-    response = client.post('auth/login', data=dict(
+    response = client.post('/auth/login', data=dict(
         username='testuser',
         password='test'
     ), follow_redirects=True)
     assert response.status_code == 200
-    #tjek at siden er blevet redirected til home
     assert b'Hjem' in response.data
     assert 'Logged in as:' in response.data.decode('utf-8')
     assert 'Logout' in response.data.decode('utf-8')
     assert 'Invalid username or password' not in response.data.decode('utf-8')
-    
+
 def test_login_fail(client):
-    response = client.post('auth/login', data=dict(
+    response = client.post('/auth/login', data=dict(
         username='testuser',
         password='wrongpassword'
     ), follow_redirects=True)
     assert response.status_code == 200
-    assert 'Invalid username or password'in response.data.decode('utf-8')
+    assert 'Invalid username or password' in response.data.decode('utf-8')
+
+def test_login_wrong_pass(client):
+    response = client.post('/auth/login', data=dict(
+        username='testuser',
+        password='wrongpassword'
+    ), follow_redirects=True)
+    assert response.status_code == 200
+    assert 'Invalid username or password' in response.data.decode('utf-8')
+
+def test_signup(client,dbsession):
+    response = client.post('/auth/signup', data=dict(
+        username='testsignupuser',
+        password='test',
+        email="testsignup@test.dk"
+    ), follow_redirects=True)
+    # Tjek brugeren er i databasen
+    user = dbsession.query(Account).filter_by(username='testsignupuser').first()
+    assert user is not None
+    assert user.username == 'testsignupuser'
+    assert user.password != 'test' # fordi password er hashed
+    assert response.status_code == 200
+    assert b'Hjem' in response.data
+    assert 'Logged in as:' in response.data.decode('utf-8')
+    assert 'Logout' in response.data.decode('utf-8')
+    assert 'Invalid username or password' not in response.data.decode('utf-8')
+
+def test_logout(client):
+    # Log ind først
+    response = client.post('/auth/login', data=dict(
+        username='testuser',
+        password='test'
+    ), follow_redirects=True)
+    assert response.status_code == 200
+    assert b'Hjem' in response.data
+    assert 'Logged in as:' in response.data.decode('utf-8')
+    assert 'Logout' in response.data.decode('utf-8')
+    # Log ud
+    response = client.get('/auth/logout', follow_redirects=True)
+    assert response.status_code == 200
+    assert 'You have been logged out' in response.data.decode('utf-8')
+    assert 'Logged in as:' not in response.data.decode('utf-8')
+    

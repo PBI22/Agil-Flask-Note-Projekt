@@ -77,6 +77,12 @@ def create_account():
             dbsession.add(Account(username = username, password = hashed_password, email = email))
             dbsession.commit()
             flash('Account created successfully!', 'success')
+            # Logger automatisk brugeren ind efter oprettelse
+            session.clear()
+            account = dbsession.query(Account).filter_by(username=username).first()
+            session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
             return redirect(url_for('home'))
             
         except Exception as e:
