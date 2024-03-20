@@ -37,7 +37,7 @@ class Note(Base):
             'title': self.title,
             'text': self.text,
             'created': self.created.isoformat(),
-            'lastedited': self.lastedited.isoformat() if self.lastedited else None,
+            'lastedited': self.lastedited.isoformat(),
             'imagelink': self.imagelink,
             'author': self.author
         }
