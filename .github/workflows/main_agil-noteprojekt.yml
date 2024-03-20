@@ -26,6 +26,10 @@ jobs:
         run: |
           python -m venv venv
           source venv/bin/activate
+
+      - name: Set OS Environment Variables
+        run: |
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> "$GITHUB_ENV"
       
       - name: Install dependencies
         run: pip install -r requirements.txt
@@ -59,8 +63,10 @@ jobs:
       - name: Unzip artifact for deployment
         run: unzip release.zip
   
-      - name: Get OS Environment Variables
-        env: SECRET_KEY: ${{ secrets.SECRET_KEY }}
+      - name: Set OS Environment Variables
+        env:
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        run: echo "SECRET_KEY" >> $GITHUB_ENV
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
