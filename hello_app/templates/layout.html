@@ -29,7 +29,7 @@
       <a href="{{ url_for('notes.create_note') }}" class="navbar-item">Opret Note</a>
       </div>
       <div class="nav-right">
-        <button id="theme-toggle"><i class="fa-solid fa-circle-half-stroke"></i></button>
+        <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
         {% if session['user'] %}
         <!-- Logged in as text -->
         <span class="navbar-item">Logged in as: <span style="color:orange;font-weight:bold;">{{ session['user'] }}</span></span>
