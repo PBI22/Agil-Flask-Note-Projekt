@@ -1,5 +1,3 @@
-# SQL statements for init af databasen
-```
 PRAGMA foreign_keys=OFF;
 
 BEGIN TRANSACTION;
@@ -7,14 +5,12 @@ BEGIN TRANSACTION;
 DROP TABLE role;
 Drop table note;
 drop table account;
-drop table accountrole;
 
 CREATE TABLE role (
 roleID int primary key not null,
 rolename varchar(255) not null);
-insesert into role
-values (1, "User")
-values (2, "Admin");
+insert into role (roleID, rolename)
+values (1, "User"), (2, "Admin");
 
 CREATE TABLE note (
 noteID integer primary key autoincrement not null,
@@ -36,6 +32,5 @@ CREATE TABLE account (
         foreign key(roleID) references role(roleID)
 );
 INSERT into account (username, password, email, roleID)
-values ("admin", "admin", "admin@root", 2)
+values ("admin", "pbkdf2:sha256:600000$1beh7uKXcX5l47Gm$4b89fe13ee30c2d813a91fc6153e3b0c3f2237750af652015916293da4b4283d", "admin@root", 2);
 COMMIT;
-```
