@@ -4,5 +4,14 @@ import os
 ACCOUNT = 'flasknoteblobstorage'   # Azure account name
 TEMP_CONTAINER = "tempimages" # Container name
 CONTAINER = "images" # Container name
-CONNECTION_STRING = os.environ.get('CONNECTION_STRING')
-blob_service = BlobServiceClient.from_connection_string(conn_str=CONNECTION_STRING)
+import os
+from azure.storage.blob import BlobServiceClient
+
+conn_str = os.environ.get('BLOB_CONNECTION_STRING')
+if conn_str:
+    blob_service = BlobServiceClient.from_connection_string(conn_str=conn_str)
+else:
+    # Handle the case where the environment variable is not set
+    print("BLOB_CONNECTION_STRING environment variable is not set.")
+
+blob_service = BlobServiceClient.from_connection_string(conn_str=conn_str)
