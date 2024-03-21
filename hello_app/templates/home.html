@@ -8,7 +8,7 @@
 <h1 id="frontpageh1" align="center">Mine Noter</h1>
 <hr>
 {% if not notes %}
-  <h2>Du har ingen noter pt! - Opret en nu</h2>
+  <h2 id="nonotes">Du har ingen noter pt! - Opret en nu</h2>
 {% else %}
 <form action="{{ url_for('notes.search_results') }}" method="GET" id="search">
   <input type="text" name="query" placeholder="Indtast søgeord" id="searchbar">
