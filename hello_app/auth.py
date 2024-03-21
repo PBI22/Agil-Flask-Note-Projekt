@@ -5,6 +5,7 @@ from .utils import dbsession
 from functools import wraps
 from . import app
 
+
 # importering af auth blueprint med prefix /auth
 auth = Blueprint('auth', __name__)
 

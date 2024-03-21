@@ -47,7 +47,7 @@ class Account(Base):
     accountID = Column(Integer, autoincrement=True, primary_key=True)
     username = Column(VARCHAR(255), nullable=False)
     password = Column(VARCHAR(255), nullable=False)
-    email = Column(VARCHAR(255), nullable=False)
+    email = Column(VARCHAR(255), nullable=True)
     roleID = Column(Integer, ForeignKey("role.roleID"), nullable=False)
 
     role = relationship("Role", primaryjoin="and_(Role.roleID==Account.roleID)", foreign_keys=[roleID])
