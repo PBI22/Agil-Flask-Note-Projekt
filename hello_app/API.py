@@ -104,7 +104,7 @@ def delete_note(id):
         if note:
             dbsession.delete(note)
             dbsession.commit()
-            return "Note with id: " + id + " has been deleted"
+            return "Note with id: %s has been deleted" % id
         else:
             return "Error deleting note", 404
     except Exception as e:
