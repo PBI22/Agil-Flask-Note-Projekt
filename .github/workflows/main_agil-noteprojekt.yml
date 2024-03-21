@@ -18,22 +18,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      TESTSECRET: ${{ secrets.TEST_SECRET }}
-      ENVTEST: 'testenv'
-      
+      TEST_SECRET: ${{ secrets.TEST_SECRET }}
+      GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+      GH_SECRET_ID: ${{ secrets.GH_SECRET_ID }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
           python-version: '3.9'
-
-      - name: Echo secret value
-        run: |
-          echo $TESTSECRET
-          echo $ENVTEST
-
-
         
       - name: Create and start virtual environment
         run: |
