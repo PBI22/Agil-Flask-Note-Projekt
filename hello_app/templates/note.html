@@ -33,11 +33,11 @@ View Note
 <p class="view-timestamps">Oprettet: {{ note.created.strftime("%Y-%m-%d %H:%M") }} / 
 Redigeret: {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }}</p>
 <!-- Actions button-->
-<div align="center">
+<div class="icons" align="center">
     <a href="{{ url_for('notes.edit', id=note.noteID) }}" class="icon-link">
         <i class="fa-solid fa-wrench"></i>
     </a>
     <a href="{{ url_for('notes.delete_note', id=note.noteID) }}" class="icon-link">
-        <i class="fa-solid fa-trash-can"></i>
+        <i class="fa-solid fa-trash"></i>
     </a>
 {% endblock %}

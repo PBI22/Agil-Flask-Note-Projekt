@@ -28,6 +28,19 @@ class Note(Base):
 
     account = relationship("Account", primaryjoin="and_(Account.accountID==Note.author)", foreign_keys=[author])
 
+
+    #Konvertere note til iso format vha. Ny funktion
+    #Dette bliver gjort fordi JSON skal bruge iso format. Bruges hermed til api
+    def to_isoformat(self):
+        return {
+            'noteID': self.noteID,
+            'title': self.title,
+            'text': self.text,
+            'created': self.created.isoformat(),
+            'lastedited': self.lastedited.isoformat(),
+            'imagelink': self.imagelink,
+            'author': self.author
+        }
 class Account(Base):
     __tablename__ = "account"
 

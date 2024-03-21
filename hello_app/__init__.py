@@ -8,4 +8,4 @@ app.secret_key = os.environ.get('SECRET_KEY')
 # session cookie settings 
 app.config['SESSION_COOKIE_HTTPONLY'] = True
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10) 
+app.config['PERMANENT_SESSION_LIFETIME'] = timedelta(minutes=10)
