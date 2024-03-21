@@ -36,13 +36,11 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Test env vars for python
-        run: python -c 'import os;print(os.environ)'
+        run: python -c 'import os;print(os.environ.get("TEST_SECRET"))'
         env:
           TEST_SECRET: ${{ secrets.TEST_SECRET }}
           GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
 
-
-        
       - name: Run tests
         run: |
           source venv/bin/activate
