@@ -47,7 +47,6 @@ def log_in_test_user(client):
 #test create note uden at være logget ind:
 def test_create_note_get_not_logged_in(client):
     response = client.get('/notes/create/', follow_redirects=True)
-    print(response.data)
     assert 'You need to be logged in to view this page.' in response.data.decode('utf-8')
     assert 'Login' in response.data.decode('utf-8')
     assert response.status_code == 200
