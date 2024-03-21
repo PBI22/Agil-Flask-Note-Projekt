@@ -37,6 +37,7 @@ jobs:
       - name: Set OS Environment Variables
         run: |
           echo "BLOB_CONNECTION_STRING=${{ secrets.BLOB_CONNECTION_STRING }}" >> $GITHUB_ENV
+          echo "SECRET_KEY=${{ secrets.SECRET_KEY }}" >> $GITHUB_ENV
 
       - name: Run tests
         run: |
