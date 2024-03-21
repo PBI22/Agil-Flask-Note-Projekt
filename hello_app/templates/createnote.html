@@ -1,14 +1,12 @@
 {% extends "layout.html" %}
 <!-- import datetime-->
-{% block title %}
-Create Note    
-{% endblock %}
-
-{% block head %}
-<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
-{% endblock %}
-
-{% block content %}
+{% block title %} Create Note {% endblock %} {% block head %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{{ url_for('static', filename='note.css') }}"
+/>
+{% endblock %} {% block content %}
 <!--
     # name
     # note
@@ -17,16 +15,61 @@ Create Note
 
 -->
 <div class="main-body">
-<h1>Opret Note</h1>
+  <h1>Opret Note</h1>
 
-<form action="/notes/create/" method="post">
-    <input type="text" name="title" placeholder="Name" /><br>
-    <textarea name="note" placeholder="Note"></textarea><br>
+  <form
+    action="/notes/create/"
+    id="submitForm"
+    method="post"
+    enctype="multipart/form-data"
+  >
+    <input type="text" name="title" placeholder="Name" /><br />
+    <textarea name="note" id="note" placeholder="Note"></textarea><br />
+    <!-- Updated ID to 'note' -->
     <!-- <input type="text" name="author" placeholder="Author" /><br> -->
-    <input type="hidden" name="created" value=" {{ datetime }}"/><br>
-    <input type="text" name="imagelink" placeholder="Image Link"/><br>
+    <input type="hidden" name="created" value=" {{ datetime }}" /><br />
     <input type="submit" value="Create Note" />
-</form>
+  </form>
 
+  <form id="uploadForm" enctype="multipart/form-data">
+    <input
+      type="file"
+      name="file"
+      accept=".jpg, .jpeg, .png, .gif, .pdf"
+      multiple
+    />
+    <input type="button" value="Tilføj filer" onclick="uploadFile()" />
+  </form>
+
+  <!-- Display uploaded images -->
+  <div id="imageContainer"></div>
 </div>
+
+<script>
+  // Function to handle drag and drop event
+  function handleDragDrop(event) {
+    event.stopPropagation();
+    event.preventDefault();
+
+    // Retrieving the image source URL
+    var imageUrl = event.dataTransfer.getData("URL");
+
+    // Replace 'tempimages' with 'images' in the URL
+    var modifiedImageUrl = imageUrl.replace("tempimages", "images");
+
+    // Format the modified image URL for markdown
+    const formattedImageUrl = `![480px-img](${modifiedImageUrl})`;
+
+    // Append the formatted image URL to the text area
+    document.getElementById("note").value += formattedImageUrl;
+  }
+
+  // Get the text area element
+  const noteTextArea = document.getElementById("note");
+
+  // Add event listeners for drag and drop events
+  noteTextArea.addEventListener("dragover", (event) => event.preventDefault());
+  noteTextArea.addEventListener("drop", handleDragDrop);
+</script>
+
 {% endblock %}
