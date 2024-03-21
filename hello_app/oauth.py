@@ -42,7 +42,7 @@ def authorize():
     user = dbsession.query(Account).filter_by(username=profile['login']).first()
 
     if user is None:
-        user = Account(username=profile['login'], password=secrets.token_urlsafe(32), email=profile.get('email',"No Mail"), roleID=1)
+        user = Account(username=profile['login'], password=secrets.token_urlsafe(32), email=profile['email'] or "No Mail", roleID=1)
         dbsession.add(user)
         dbsession.commit()
     session['userID'] = user.accountID
