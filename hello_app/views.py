@@ -8,18 +8,20 @@ from .API import api
 from .log_config import setup_app_logging
 from .notes import notes
 from .dam import dam
+from .oauth import oauth, oauth_bp
 
-#Blueprints
+# inits til vores app
+oauth.init_app(app) 
+app.register_blueprint(oauth_bp, url_prefix='/oauth')  
 app.register_blueprint(auth, url_prefix='/auth')
-
 app.register_blueprint(api, url_prefix='/api')
-
 app.register_blueprint(notes, url_prefix='/notes')
 
 app.register_blueprint(dam, url_prefix='/dam')
 
 #Setup af logging til appen
 setup_app_logging(app)
+
 
 @app.route("/")
 def home():

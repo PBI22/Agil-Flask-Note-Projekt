@@ -37,24 +37,18 @@
         </button>
         {% if session['user'] %}
         <!-- Logged in as text -->
-        <span class="navbar-item"
-          >Logged in as:
-          <span
-            style="
-              color: orange;
-              font-weight: bold;
-              text-shadow: 1px 1px 2px black;
-            "
-            >{{ session['user'] }}</span
-          ></span
-        >
+        <span class="navbar-item" style="display:flex;align-items:center">Logged in as: <span style="color:orange;font-weight:bold; text-shadow: 1px 1px 2px black;">{{ session['user'] }}</span></span>
+        {% if session['oauth_token'] %}
+        <a href="{{ url_for('oauth.logout') }}" class="navbar-item">Logout</a>
+        {% else %}
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
+        {% endif %}
         {% else %}
         <div class="desktop">
-          <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
-          <a href="{{ url_for('auth.create_account') }}" class="navbar-item"
-            >Signup</a
-          >
+            <!--Login with github oauth-->
+            <a href="{{ url_for('oauth.register') }}" class="navbar-item">Github Login(OAuth)</a>
+            <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
+            <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
         </div>
         <div class="mobile burger" id="burger">
           <div class="line"></div>
@@ -89,16 +83,17 @@
 
     <div class="body-content">
       <!-- Undlad og slette min flash message kode denne gang -_- -->
-      {% with messages = get_flashed_messages(with_categories=true) %} {% if
-      messages %} {% for category, message in messages %}
-      <div class="flash-{{ category }}" style="text-align: center">
-        {{ message }}
-      </div>
-      {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
-      <hr />
-      <footer style="text-align: center">
-        <p>&copy; 2018</p>
-      </footer>
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+              {% for category, message in messages %}
+                  <div class="flash-{{ category }}" style="text-align: center">{{ message }}</div>
+              {% endfor %}
+          {% endif %}
+      {% endwith %}
+      {% block content %} {% endblock %}
+    <footer style="text-align: center;">
+      <p>&copy; 2018</p>
+    </footer>
     </div>
     <script>
       function toggleDarkmode() {
