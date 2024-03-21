@@ -2,5 +2,5 @@ Flask
 SQLAlchemy
 markdown2[all]
 pytest
-azure
+azure-storage-blob
 apscheduler
