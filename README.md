@@ -21,6 +21,8 @@ En flask web application til deling af noter.
 
 #### 4. Vent på feedback eller godkendelse.
 
+#### 5. Vi acceptere også maal. 
+
 ## Licens
 
 ## Dette projekt er licenseret under MIT-licensen. Se LICENSE på github.com for flere detaljer.
