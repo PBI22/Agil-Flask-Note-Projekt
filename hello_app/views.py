@@ -33,10 +33,3 @@ def robots_txt():
     except Exception as e:
         app.logger.error(f"Failed to serve robots.txt: {e}")
         raise
-    
-@app.route('/testing')
-def testing():
-    test_secret = os.environ.get("TEST_SECRET")
-    gh_client_id  =os.environ.get("GH_CLIENT_ID","Not found")
-    gh_secret_id = os.environ.get("GH_SECRET_ID","Not found")
-    return jsonify(test_secret=test_secret, gh_client_id=gh_client_id, gh_secret_id=gh_secret_id)
