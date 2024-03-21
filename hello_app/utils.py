@@ -1,6 +1,6 @@
 # Utility functions
 from .dbconnect import dbsession
-from .models import Note
+from .models import Note, Account
 from flask import flash, session, redirect, url_for
 from .auth import login_required
 from datetime import datetime
@@ -9,7 +9,7 @@ from . import app
 def updateList():
     try:
         notes_db = []
-        for row in dbsession.query(Note).order_by(Note.noteID):
+        for row in dbsession.query(Note).join(Account).order_by(Note.noteID):
             notes_db.append(row)
     except Exception as e:
         app.logger.critical(f"Failed to update list: {e}")
@@ -39,9 +39,7 @@ def create_note_post(request):
 def edit_note_post(request, id):
     try:
         upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        userID = session['userID']
-        userRole = session['roleID']
-        if userID == upd.author or userRole == 2:#admin skal tages fra db 
+        if session['userID'] == upd.author or session['roleID'] == 2:
             upd = dbsession.query(Note).filter(Note.noteID == id).first()
             upd.title = request.form['title']
             upd.text = request.form['note']
@@ -64,7 +62,7 @@ def find_note(id):
 
 def searchbar(query):
     try:
-        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query) | Account.username.contains(query)).all()
     except Exception as e:
         app.logger.error(f"Failed to search for: {query} from user: {session['user']}")
     return search_results
