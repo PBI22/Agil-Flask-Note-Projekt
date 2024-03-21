@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash, session
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session, Response
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import Account
 from .utils import dbsession
@@ -20,17 +20,17 @@ def login_required(f):
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == "POST":
-
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Query the database for the account with provided username and password
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):  
             session.clear()
+            #gem bruger id og  role i session.
             session['user'] = account.username
             session['userID'] = account.accountID
             session['userEmail'] = account.email
+            session['roleID'] = account.roleID
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
@@ -74,17 +74,25 @@ def create_account():
             username = request.form['username']
             password = request.form['password']
             email = request.form['email']
+            roleID = 1
             hashed_password = generate_password_hash(password, method='pbkdf2', salt_length=16)
             
-            dbsession.add(Account(username = username, password = hashed_password, email = email))
+            dbsession.add(Account(username = username, password = hashed_password, email = email, roleID = roleID))
             dbsession.commit()
             flash('Account created successfully!', 'success')
+            # Logger automatisk brugeren ind efter oprettelse
+            session.clear()
+            account = dbsession.query(Account).filter_by(username=username).first()
+            session['user'] = account.username
+            session['userID'] = account.accountID
+            session['userEmail'] = account.email
+            return redirect(url_for('home'))
             
         except Exception as e:
             app.logger.error(f"Failed to create account: {e} from address: {request.remote_addr} with username: {username} and email: {email}")
             flash('Error creating account', 'error')
             return redirect(url_for('auth.create_account'))
-        return redirect(url_for('home'))
+        
         
     else:
         return render_template("signup.html")

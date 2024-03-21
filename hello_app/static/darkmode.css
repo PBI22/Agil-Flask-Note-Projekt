@@ -10,7 +10,7 @@
 
 .dark-mode hr {
     width: 60%;
-    border: 1px solid rgb(70, 69, 69);
+    border: 1px solid rgb(136, 134, 134);
     margin: 20px auto;
 }
 
@@ -50,9 +50,9 @@
 /* Tabel CSS */
 .dark-mode .resources table {
   background-color: transparent;
-    border-collapse: collapse;
-    table-layout: fixed;
-    color: #e0e0e0;
+  border-collapse: collapse;
+  table-layout: fixed;
+  color: #e0e0e0;
 }
 
 .dark-mode .resources tbody th, .dark-mode .resources tbody tr {
@@ -60,9 +60,9 @@
     text-align: left;
     padding: 8px;
     background-color: #333; 
-    color: #ffffff; 
+    color: #ffffff;
 }
-.dark-mode .resources tbody tr td {
+.dark-mode .resources td {
   border: 1px solid white;
 }
 
@@ -81,6 +81,12 @@
   color: white;
 }
 
+.dark-mode .resources .icons {
+  display: flex;
+  justify-content: space-around;
+  border: hidden;
+}
+
 .dark-mode footer {
     background-color: #333;
 }
@@ -92,7 +98,6 @@
 .dark-mode form {
     background-color: #2D2D2D ;
     border-radius: 5px;
-    border: 5px solid #2D2D2D;
     box-shadow: 0 0 50px rgba(194, 193, 193, 0.1);
 }
 
@@ -103,7 +108,8 @@
   display: flex;
   justify-content: center;
 }
-.dark-mode #searchbar{
+
+.dark-mode #searchbar {
   background-color: transparent;
   color: white;
   border: 2px solid rgb(170, 170, 170);
@@ -114,6 +120,11 @@
   border: 2px solid rgb(170, 170, 170);
   border-left: none;
 }
+
+.dark-mode #searchbar::-webkit-input-placeholder { /* Ændring af placeholder farve i darkmode */
+  color: #fdfcff;
+}
+
 .dark-mode .clear {
   color: transparent;
 }
@@ -129,4 +140,20 @@
 }
 .dark-mode .view-timestamps {
   color: white;
+}
+
+.dark-mode .flash-success {
+  color: #fff; /* CSS til flash-success besked i darkmode*/
+}
+
+.dark-mode .flash-error {
+  color: #fff; /* CSS til flash-error besked i darkmode*/
+}
+
+.dark-mode h1 {
+  color: white;
+}
+
+.dark-mode #menu {
+  background-color: #504e4e;
 }
