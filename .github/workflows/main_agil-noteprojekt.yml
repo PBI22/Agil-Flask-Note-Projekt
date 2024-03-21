@@ -9,7 +9,7 @@ on:
     branches:
       - main
   pull_request: # This line is added to trigger the workflow on pull requests
-    branches: 
+    branches:
       - main
       - testmain
   workflow_dispatch:
@@ -24,16 +24,16 @@ jobs:
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
-          python-version: '3.9'
+          python-version: "3.9"
 
       - name: Create and start virtual environment
         run: |
           python -m venv venv
           source venv/bin/activate
-      
+
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
+
       - name: Run tests
         run: |
           source venv/bin/activate
@@ -51,15 +51,19 @@ jobs:
             release.zip
             !venv/
 
+      - name: Set OS Environment Variables
+        run: |
+          echo "BLOB_CONNECTION_STRING=${{ secrets.BLOB_CONNECTION_STRING }}" >> $GITHUB_ENV
+
   deploy:
     runs-on: ubuntu-latest
     needs: build
     # Only deploy on push events to main
     if: github.event_name == 'push'
     environment:
-      name: 'Production'
+      name: "Production"
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
@@ -68,11 +72,11 @@ jobs:
 
       - name: Unzip artifact for deployment
         run: unzip release.zip
-  
-      - name: 'Deploy to Azure Web App'
+
+      - name: "Deploy to Azure Web App"
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'agil-noteprojekt'
-          slot-name: 'Production'
+          app-name: "agil-noteprojekt"
+          slot-name: "Production"
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C2E173D2E91D4DDBABCEAFA105B370E9 }}
