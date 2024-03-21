@@ -20,7 +20,6 @@
     <tr>
       <th>Titel</th>
       <th>Note</th>
-      <th>Skaber</th>
       <th>Oprettet</th>
       <th>Redigeret</th>
       <th>Handlinger</th>
@@ -31,7 +30,6 @@
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
-      <td>{{ note.account.username }}</td>
       <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
       <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
       <td class="icons">
