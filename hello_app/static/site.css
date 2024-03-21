@@ -50,13 +50,16 @@ hr {
   font-variant: small-caps;
   margin-left: 30px;
 }
+.navbar-item span {
+  display: flex;
+}
 
 .body-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: calc(100vh - 71.33px);
+  min-height: calc(100vh - 92px);
   justify-content: start;
 }
 
@@ -153,6 +156,8 @@ tr:hover {
   justify-content: space-around;
   border-top: hidden;
   border-left: hidden;
+  padding-top: auto;
+  padding-bottom: auto;
 }
 
 .icons i {

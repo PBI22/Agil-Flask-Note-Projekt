@@ -4,7 +4,7 @@
     background-color: #383636;
 }
 
-.dark-mode #frontpageh1 {
+.dark-mode #frontpageh1, .dark-mode #nonotes {
     color: #ffffff;
 }
 
@@ -138,6 +138,10 @@
   background-color: white;
   color: black;
 }
+.dark-mode .markdown-body h1 {
+  color: black;
+}
+
 .dark-mode .view-timestamps {
   color: white;
 }
