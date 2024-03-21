@@ -13,7 +13,7 @@ def get_engine(Testing = False):
     if Testing:
         # Ændrer stien til en specifik test database
         test_db_path = os.path.join(BASE_DIR,"database", "test.db")
-        engine = create_engine(f'sqlite:///{test_db_path}', echo=True)
+        engine = create_engine(f'sqlite:///{test_db_path}', echo=False)
         Base.metadata.create_all(engine)  # Opretter databasestrukturen baseret på dine modeller
     else:
         try:
