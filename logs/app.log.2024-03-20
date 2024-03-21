@@ -1,0 +1,1535 @@
+2024-03-20 09:42:53,770 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:45:44,357 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:46:12,187 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:46:17,918 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:47:14,080 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:47:15,696 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:07,596 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:49:09,055 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 09:50:51,043 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:10:29,138 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:10:39,423 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 48, in upload
+    ref = 'http://' + account + '.blob.core.windows.net/' + tempcontainer + '/' + filename
+                      ^^^^^^^
+NameError: name 'account' is not defined
+2024-03-20 10:44:17,361 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:44:54,028 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:44:54,509 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:44:56,039 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:50:23,786 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:50:30,230 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: kevintester
+2024-03-20 10:50:51,819 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:50:57,235 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:51:00,972 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:51:02,720 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:51:23,547 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:51:28,580 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:54:04,246 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:54:04,289 - ERROR - hello_app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 27, in home
+    return render_template("home.html", notes = updateList(), datetime = datetime.now())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/templates/home.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/templates/layout.html", line 57, in template
+    {% endif %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'.
+2024-03-20 10:54:05,273 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:54:05,276 - ERROR - hello_app: Exception on / [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 27, in home
+    return render_template("home.html", notes = updateList(), datetime = datetime.now())
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/templating.py", line 152, in render_template
+    return _render(app, template, context)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/templating.py", line 133, in _render
+    rv = template.render(context)
+         ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 1301, in render
+    self.environment.handle_exception()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/templates/home.html", line 1, in top-level template code
+    {% extends "layout.html" %}
+    ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/jinja2/environment.py", line 936, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/templates/layout.html", line 57, in template
+    {% endif %}
+jinja2.exceptions.TemplateSyntaxError: Encountered unknown tag 'endif'.
+2024-03-20 10:55:22,219 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 10:55:25,341 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:01:45,615 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:01:52,065 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:06:50,912 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:06:52,479 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:07:06,717 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 66, in upload
+    return jsonify({'file_links': file_links})
+           ^^^^^^^
+NameError: name 'jsonify' is not defined
+2024-03-20 11:14:14,985 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:14:16,586 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:14:22,452 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 95, in uploadfiles
+    return jsonify({'file_links': file_links})
+           ^^^^^^^
+NameError: name 'jsonify' is not defined
+2024-03-20 11:14:23,094 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:14:23,106 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:14:31,864 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 45, in upload
+    if file and allowed_file(file.filename):
+                ^^^^^^^^^^^^
+NameError: name 'allowed_file' is not defined
+2024-03-20 11:16:37,681 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:16:41,259 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:16:41,300 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:16:52,307 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 45, in upload
+    filename = secure_filename(file.filename)
+               ^^^^^^^^^^^^^^^
+NameError: name 'secure_filename' is not defined
+2024-03-20 11:17:29,193 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:17:29,209 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:17:57,454 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:17:57,466 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:18:00,818 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:19:24,518 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:19:29,859 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:19:29,871 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:19:49,591 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:19:49,611 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:20:09,178 - ERROR - hello_app: Failed to create note: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand. from user: kevintester
+2024-03-20 11:20:09,193 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:07,134 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:08,960 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:24:08,960 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 89, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:24:10,706 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:11,914 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:38,277 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:40,534 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:24:40,534 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 89, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:24:40,698 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:24:40,698 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 89, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:24:42,836 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:24:44,423 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:25:09,850 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:25:11,781 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:25:11,784 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 89, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:25:13,902 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:31:27,373 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:31:55,955 - ERROR - hello_app: Failed to create note: name 'persistent_files_list' is not defined from user: kevintester
+2024-03-20 11:31:55,970 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:32:00,604 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:33:38,702 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:33:41,546 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:33:41,547 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 92, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:33:41,671 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:33:41,671 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 92, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:40:53,631 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:42:39,638 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:43:06,792 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:44:07,537 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:44:07,553 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:45:21,766 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:45:40,101 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:45:42,242 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:45:42,243 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:45:42,354 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:45:42,355 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:48:27,969 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 78, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:48:28,846 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:48:31,045 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:48:31,045 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:48:31,162 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:48:31,162 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:49:01,708 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 78, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:49:03,363 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:52:31,153 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 78, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:52:32,193 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:52:34,790 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:52:34,791 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:52:34,881 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:52:34,881 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:53:50,760 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 78, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:53:51,710 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:55:40,099 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 79, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:55:40,896 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:57:10,474 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 79, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:57:11,469 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:57:13,929 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:57:13,929 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:58:18,888 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 83, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 11:58:19,679 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:04,880 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:07,084 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:09,552 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:10,356 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:11,272 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:12,077 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:12,424 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:12,943 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:13,352 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:13,685 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:14,036 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:14,741 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:15,157 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:25,532 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 11:59:27,500 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:59:27,501 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 11:59:27,601 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 11:59:27,601 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:02:44,904 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:02:46,915 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:02:46,915 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:05:29,107 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:05:31,027 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:05:31,028 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:05:31,092 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:05:31,092 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:05:32,106 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:05:32,108 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:05:32,159 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:05:32,159 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:08:25,092 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:08:27,715 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:08:27,715 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 93, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:12:08,525 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:13:23,426 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:13:26,207 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:13:26,214 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 90, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:20:13,768 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:20:40,012 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:22:25,446 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:25:05,964 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:25:08,069 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:25:08,069 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 88, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:25:34,932 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:28:00,117 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:28:03,495 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:28:03,495 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 91, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:28:03,834 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:28:03,834 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 91, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:28:06,158 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:28:16,553 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:28:19,091 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:28:19,100 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 91, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:28:19,238 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:28:19,238 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 91, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:35:45,468 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:35:47,335 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:35:47,336 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 85, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:37:37,198 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:37:55,828 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:37:58,871 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:37:58,878 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 85, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:39:29,511 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:39:31,961 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 12:39:31,961 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 85, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 12:39:36,619 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:45:31,433 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:47:05,935 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:47:19,598 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 12:53:57,425 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 78, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 13:17:41,471 - WARNING - hello_app: Failed login attempt from: 127.0.0.1 with username: kevintester
+2024-03-20 13:17:48,478 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:17:49,210 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:18:01,034 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:18:06,416 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:18:10,024 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:18:59,115 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:19:04,173 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:19:21,626 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:19:24,664 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 13:19:24,665 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 13:24:12,657 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:25:40,925 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 13:25:40,925 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 13:25:41,165 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 13:25:41,165 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 13:39:39,956 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 42, in upload
+    filenames = json.loads(request.form['filenames'])  # Get the filenames
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/json/decoder.py", line 355, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+2024-03-20 13:46:43,810 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:47:20,031 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:47:21,817 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 13:47:21,819 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 13:47:24,930 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:52:39,820 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:53:46,533 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 13:56:05,642 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:13:30,140 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:13:37,253 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:14:00,279 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:14:03,325 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 14:14:03,326 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 14:15:12,450 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 14:15:12,452 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 14:15:12,849 - ERROR - hello_app: Failed to find note: invalid literal for int() with base 10: '[]' from user: kevintester
+2024-03-20 14:15:12,850 - ERROR - hello_app: Exception on /notes/view/[] [GET]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 36, in view
+    note = find_note(id)
+           ^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 87, in find_note
+    return note
+           ^^^^
+UnboundLocalError: cannot access local variable 'note' where it is not associated with a value
+2024-03-20 14:15:23,641 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:15:56,034 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:17:04,120 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:17:38,471 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:18:03,921 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:19:19,738 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:20:03,645 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:20:22,945 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:21:45,263 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:21:56,711 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:24:23,502 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:24:34,734 - ERROR - hello_app: Exception on /notes/create/ [POST]
+Traceback (most recent call last):
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 54, in create_note_post
+    files_json = json.dumps(files_list)
+                            ^^^^^^^^^^
+NameError: name 'files_list' is not defined
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 17, in create_note
+    create_note_post(request)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 63, in create_note_post
+    session.rollback()
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'SecureCookieSession' object has no attribute 'rollback'
+2024-03-20 14:25:27,941 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:27:34,010 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:27:43,430 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:31:24,954 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:31:32,783 - ERROR - hello_app: Exception on /uploadfiles [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 86, in uploadfiles
+    fileextension = filename.rsplit('.', 1)[1]
+                    ~~~~~~~~~~~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+2024-03-20 14:38:30,658 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 14:39:20,998 - ERROR - hello_app: Exception on /upload [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/views.py", line 72, in upload
+    file_links = [file['Link'] for file in files_list]
+                                           ^^^^^^^^^^
+NameError: name 'files_list' is not defined
+2024-03-20 14:45:14,936 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:24:09,174 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:26:05,771 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:27:18,327 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:29:06,851 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:29:26,759 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:37:22,154 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 15:38:01,817 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 20:29:24,239 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 20:29:51,398 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 20:31:14,050 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 20:32:00,756 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:29:01,436 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:29:41,304 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:30:20,575 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:31:05,549 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:35:33,348 - ERROR - hello_app: Exception on /notes/create/ [POST]
+Traceback (most recent call last):
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 60, in create_note_post
+    dbsession.commit()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1972, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1275, in commit
+    self._parent.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 121, in _go
+    raise sa_exc.IllegalStateChangeError(
+sqlalchemy.exc.IllegalStateChangeError: Method 'commit()' can't be called here; method '_prepare_impl()' is already in progress and this would cause an unexpected state change to <SessionTransactionState.CLOSED: 5> (Background on this error at: https://sqlalche.me/e/20/isce)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 17, in create_note
+    create_note_post(request)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 64, in create_note_post
+    session.rollback()
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'SecureCookieSession' object has no attribute 'rollback'
+2024-03-20 23:35:33,352 - ERROR - hello_app: Exception on /notes/create/ [POST]
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4392, in _flush
+    flush_context.execute()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/unitofwork.py", line 679, in execute
+    util.preloaded.orm_persistence.delete_obj(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 176, in delete_obj
+    states_to_delete = list(
+                       ^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 311, in _organize_states_for_delete
+    for state, dict_, mapper, connection in _connections_for_states(
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/persistence.py", line 1753, in _connections_for_states
+    connection = uowtransaction.transaction.connection(base_mapper)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<string>", line 2, in connection
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 103, in _go
+    self._raise_for_prerequisite_state(fn.__name__, current_state)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 943, in _raise_for_prerequisite_state
+    raise sa_exc.ResourceClosedError("This transaction is closed")
+sqlalchemy.exc.ResourceClosedError: This transaction is closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 60, in create_note_post
+    dbsession.commit()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1972, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1257, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 139, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 1232, in _prepare_impl
+    self.session.flush()
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4296, in flush
+    self._flush(objects)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4431, in _flush
+    with util.safe_reraise():
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/util/langhelpers.py", line 150, in __exit__
+    raise value.with_traceback(traceback)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 4432, in _flush
+    transaction.rollback(_capture_exception=True)
+  File "<string>", line 2, in rollback
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/state_changes.py", line 103, in _go
+    self._raise_for_prerequisite_state(fn.__name__, current_state)
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 943, in _raise_for_prerequisite_state
+    raise sa_exc.ResourceClosedError("This transaction is closed")
+sqlalchemy.exc.ResourceClosedError: This transaction is closed
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 1455, in wsgi_app
+    response = self.full_dispatch_request()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 869, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 867, in full_dispatch_request
+    rv = self.dispatch_request()
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Library/Frameworks/Python.framework/Versions/3.11/lib/python3.11/site-packages/flask/app.py", line 852, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/auth.py", line 17, in decorated_function
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/notes.py", line 17, in create_note
+    create_note_post(request)
+  File "/Users/kevinhougesen/Agil-Flask-Note-Projekt/hello_app/utils.py", line 64, in create_note_post
+    session.rollback()
+    ^^^^^^^^^^^^^^^^
+AttributeError: 'SecureCookieSession' object has no attribute 'rollback'
+2024-03-20 23:39:06,347 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:42,844 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:44,291 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:45,467 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:45,988 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:46,438 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:47,059 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:47,699 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:48,073 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:48,464 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:48,827 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:49,325 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:49,859 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:50,168 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:50,702 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:51,350 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:52,117 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:52,659 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:53,106 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-03-20 23:40:53,640 - INFO - hello_app: Home page requested from: 127.0.0.1

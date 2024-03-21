@@ -1,12 +1,13 @@
 import os
 from datetime import datetime
-from flask import render_template, send_from_directory, request
+from flask import jsonify, render_template, send_from_directory, request
 from . import app
 from .utils import *
 from .auth import auth, login_required
 from .API import api
 from .log_config import setup_app_logging
 from .notes import notes
+from .dam import dam
 
 #Blueprints
 app.register_blueprint(auth, url_prefix='/auth')
@@ -14,6 +15,8 @@ app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(api, url_prefix='/api')
 
 app.register_blueprint(notes, url_prefix='/notes')
+
+app.register_blueprint(dam, url_prefix='/dam')
 
 #Setup af logging til appen
 setup_app_logging(app)

@@ -1,9 +1,16 @@
 # Utility functions
+import json
+import uuid
 from .dbconnect import dbsession
 from .models import Note, Account
 from flask import flash, session
 from datetime import datetime
+from werkzeug.utils import secure_filename
+from .blobton import ACCOUNT, CONTAINER
 from . import app
+    
+    
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'pdf'} 
     
 def updateList():
     
@@ -18,23 +25,43 @@ def updateList():
 
 def create_note_post(request):
     try:
-
+        files_list = []  
         title = request.form['title']
-        note = request.form['note']
+        note_text = request.form['note']
+        filenames = request.form.getlist('filenames')  # Get the filenames
+        for file, filename in zip(request.files.getlist("file"), filenames):
+            if file and allowed_file(file.filename):
+                filename = secure_filename(filename)
+                fileextension = filename.rsplit('.', 1)[1]
+                ref = 'http://' + ACCOUNT + '.blob.core.windows.net/' + CONTAINER + '/' + filename
+                file_dump = {
+                    "Type": fileextension,
+                    "Name": filename,
+                    "Link": ref
+                }
+                try:
+                    files_list.append(file_dump)  # Append the file dictionary to the list
+                except Exception as e:
+                    flash('Exception=' + str(e))
+                    pass
+
         created = datetime.now()
-        lastEdited = datetime.now()
-        imagelink = request.form['imagelink']
-        account_ID = session['userID']
-        
-        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        last_edited = datetime.now()
+        account_ID = 1  # skal ændres senere når vi implementere brugerlogin - 1 er Guest pt
+
+        # Convert the list of file dictionaries to JSON
+        files_json = json.dumps(files_list)
+
+        # Create the Note object with the list of files as JSON
+        note = Note(title=title, text=note_text, created=created, lastedited=last_edited, imagelink=files_json, author=account_ID)
         dbsession.add(note)
         dbsession.commit()
-        
+
         flash('Note created successfully!', 'success')  # Viser en success-besked
     except Exception as e:
         dbsession.rollback()
         flash(f'Failed to create note: {str(e)}', 'error')  # Viser en failure-besked
-        app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
+
 
 def edit_note_post(request, id):
     try:
@@ -64,3 +91,11 @@ def searchbar(query):
     except Exception as e:
         app.logger.error(f"Failed to search for: {query} from user: {session['user']}")
     return search_results
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+  
+
+def id_generator():
+    return str(uuid.uuid4())
