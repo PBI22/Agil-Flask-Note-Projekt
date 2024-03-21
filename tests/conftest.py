@@ -3,7 +3,7 @@ import pytest
 import os
 os.environ['TESTING'] = 'True'
 from hello_app.webapp import app as flask_app
-from hello_app.models import Account
+from hello_app.models import Account, Note
 from werkzeug.security import generate_password_hash
 from hello_app.dbconnect import dbsession as db
 
@@ -19,6 +19,7 @@ def client():
         yield flask_app.test_client()
         # Ryd op i databasen efter hver test
         db.query(Account).delete()
+        db.query(Note).delete()
         db.commit()
         
 # gør så vi kan bruge dbsession som et argument i vores tests

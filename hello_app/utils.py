@@ -23,9 +23,8 @@ def create_note_post(request):
         note = request.form['note']
         created = datetime.now()
         lastEdited = datetime.now()
-        imagelink = request.form['imagelink']
-        account_ID = session['userID']
-        
+        imagelink = request.form.get('imagelink',None) # None hvis der ikke er noget
+        account_ID = session['userID']     
         note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
         dbsession.add(note)
         dbsession.commit()
@@ -47,7 +46,7 @@ def edit_note_post(request, id):
             upd.title = request.form['title']
             upd.text = request.form['note']
             upd.lastedited = datetime.now()
-            upd.imagelink = request.form['imagelink']
+            upd.imagelink = request.form.get('imagelink',None)
             dbsession.commit()
             flash('Note created successfully!', 'success') 
         else:
