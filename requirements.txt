@@ -4,5 +4,6 @@ markdown2[all]
 pytest
 azure-storage-blob
 apscheduler
+flask-jwt-extended
 authlib
 requests
