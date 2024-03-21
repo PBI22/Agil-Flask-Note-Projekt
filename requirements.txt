@@ -3,3 +3,5 @@ SQLAlchemy
 markdown2[all]
 pytest
 flask-jwt-extended
+authlib
+requests
