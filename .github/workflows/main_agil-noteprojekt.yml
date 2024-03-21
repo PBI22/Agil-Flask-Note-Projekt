@@ -34,6 +34,10 @@ jobs:
       - name: Install dependencies
         run: pip install -r requirements.txt
 
+      - name: Set OS Environment Variables
+        run: |
+          echo "BLOB_CONNECTION_STRING=${{ secrets.BLOB_CONNECTION_STRING }}" >> $GITHUB_ENV
+
       - name: Run tests
         run: |
           source venv/bin/activate
@@ -50,10 +54,6 @@ jobs:
           path: |
             release.zip
             !venv/
-
-      - name: Set OS Environment Variables
-        run: |
-          echo "BLOB_CONNECTION_STRING=${{ secrets.BLOB_CONNECTION_STRING }}" >> $GITHUB_ENV
 
   deploy:
     runs-on: ubuntu-latest
