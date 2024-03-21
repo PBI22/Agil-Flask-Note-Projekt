@@ -19,6 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TESTSECRET: ${{ secrets.TEST_SECRET }}
+      ENVTEST: 'testenv'
       
     steps:
       - uses: actions/checkout@v4
@@ -28,7 +29,11 @@ jobs:
           python-version: '3.9'
 
       - name: Echo secret value
-        run: echo $TESTSECRET
+        run: |
+          echo $TESTSECRET
+          echo $ENVTEST
+
+
         
       - name: Create and start virtual environment
         run: |
