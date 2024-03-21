@@ -27,6 +27,9 @@ jobs:
           python-version: '3.9'
 
       - name: Create and start virtual environment
+        env:
+          GH_CLIENT_ID: ${{ secrets.GH_CLIENT_ID }}
+          GH_SECRET_ID: ${{ secrets.GH_CLIENT_SECRET }}
         run: |
           python -m venv venv
           source venv/bin/activate
@@ -59,7 +62,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+   
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3

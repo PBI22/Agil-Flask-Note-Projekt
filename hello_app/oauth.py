@@ -10,6 +10,7 @@ import secrets
 oauth_bp = Blueprint('oauth', __name__)
 
 oauth = OAuth()
+# registrering af github oauth klienten
 github = oauth.register(
     name='github',
     client_id=os.environ.get("GH_CLIENT_ID"),
@@ -60,7 +61,7 @@ def logout():
     return redirect('/')
 
 def revoke_github_token(access_token, client_id, client_secret):
-    # Implementation for token revocation as previously described
+
     url = f'https://api.github.com/applications/{client_id}/token'
     response = requests.delete(
         url,
