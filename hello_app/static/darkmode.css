@@ -161,3 +161,10 @@
 .dark-mode #menu {
   background-color: #504e4e;
 }
+
+.dark-mode .title {
+  color: white;
+}
+.dark-mode #loginform {
+  background-color: white;
+}

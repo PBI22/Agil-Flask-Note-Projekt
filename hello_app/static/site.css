@@ -28,11 +28,11 @@ hr {
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
   padding:  20px;
+  min-height: 52px;
 }
 
 .nav-right {
   display: flex;
-
 }
 
 .navbar a {
@@ -49,9 +49,7 @@ hr {
 .navbar-item {
   font-variant: small-caps;
   margin-left: 30px;
-}
-.navbar-item span {
-  display: flex;
+  justify-self: center;
 }
 
 .body-content {
@@ -194,6 +192,10 @@ footer {
   height: 50px;
   width: 100%;
 }
+footer p {
+  margin-top: 10px;
+}
+
 
 .flash-success {
   padding-top: 5px;
@@ -257,6 +259,13 @@ footer {
   color: #fff;
 }
 
+#loginbox{
+  margin-top: 20%
+}
+
+#nonotes {
+  text-align: center;
+}
 
 @keyframes dropdown {
   0% {top: -100px; z-index: -1;}
