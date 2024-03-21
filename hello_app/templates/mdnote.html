@@ -36,7 +36,7 @@ View Note
 {% endif %}
 
 </div>
-<p class="view-timestamps">Oprettet af: <a href="{{ url_for('notes.search_results', query=note.account.username) }}">{{ note.account.username }}</a></p>
+ 
 <p class="view-timestamps">Oprettet: {{ note.created.strftime("%Y-%m-%d %H:%M") }} / 
 Redigeret: {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }}</p>
 <!-- Actions button-->
