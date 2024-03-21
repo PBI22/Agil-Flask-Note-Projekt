@@ -1,7 +1,7 @@
 from azure.storage.blob import BlobServiceClient
 import os
 
-ACCOUNT = 'flasknoteblobstorage'   # Azure account name
+ACCOUNT = 'flasknoteblobstorage' # Azure account name
 TEMP_CONTAINER = "tempimages" # Container name
 CONTAINER = "images" # Container name
 import os
