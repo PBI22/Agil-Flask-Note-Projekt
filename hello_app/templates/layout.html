@@ -32,10 +32,16 @@
         <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
         {% if session['user'] %}
         <!-- Logged in as text -->
-        <span class="navbar-item">Logged in as: <span style="color:orange;font-weight:bold; text-shadow: 1px 1px 2px black;">{{ session['user'] }}</span></span>
+        <span class="navbar-item" style="display:flex;align-items:center">Logged in as: <span style="color:orange;font-weight:bold; text-shadow: 1px 1px 2px black;">{{ session['user'] }}</span></span>
+        {% if session['oauth_token'] %}
+        <a href="{{ url_for('oauth.logout') }}" class="navbar-item">Logout</a>
+        {% else %}
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
+        {% endif %}
         {% else %}
         <div class="desktop">
+            <!--Login with github oauth-->
+            <a href="{{ url_for('oauth.register') }}" class="navbar-item">Github Login(OAuth)</a>
             <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
             <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
         </div>

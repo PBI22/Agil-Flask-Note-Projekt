@@ -2,3 +2,5 @@ Flask
 SQLAlchemy
 markdown2[all]
 pytest
+authlib
+requests
