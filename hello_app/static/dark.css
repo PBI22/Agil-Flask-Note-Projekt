@@ -52,3 +52,30 @@ body {
 .button:hover {
     background-color: #666;
 }
+
+textarea {
+    background-color: #383636;
+    color: #ddd;
+    border: 1px solid #444;
+    width: 90%;
+}
+
+input[type="submit"] {
+    background-color: #555;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #666;
+}
+input[type="text"] {
+    background-color: #383636;
+    color: #ddd;
+    border: 1px solid #444;
+    padding: 10px;
+}   
+input[type="text"]::placeholder {
+    color: #d5d4d4;
+}
