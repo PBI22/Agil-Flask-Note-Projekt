@@ -1,6 +1,6 @@
 # Utility functions
 from .dbconnect import dbsession
-from .models import Note
+from .models import Note, Account
 from flask import flash, session, redirect, url_for
 from .auth import login_required
 from datetime import datetime
@@ -64,7 +64,7 @@ def find_note(id):
 
 def searchbar(query):
     try:
-        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query)).all()
+        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query) | Account.username.contains(query)).all()
     except Exception as e:
         app.logger.error(f"Failed to search for: {query} from user: {session['user']}")
     return search_results
