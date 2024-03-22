@@ -1,7 +1,9 @@
+
 body {
   padding: 0;
   margin: 0;
   background-color: white;
+  max-height: 100vh;
 }
 
 h1 {
@@ -19,12 +21,12 @@ hr {
   color: blue;
 }
 
-.navbar {
+#navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: lightslategray;
-  font-size: 1.4em;
+  font-size: 1.4em!important;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
   color: white;
   padding:  20px;
@@ -35,7 +37,12 @@ hr {
   display: flex;
 }
 
-.navbar a {
+.nav-left {
+  display: flex;
+
+}
+
+#navbar a {
   padding: 10px;
   text-decoration: none;
   color: inherit;
@@ -57,7 +64,7 @@ hr {
   flex-direction: column;
   justify-content: center;
   font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  min-height: calc(100vh - 92px);
+  min-height: calc(100vh - 100px);
   justify-content: start;
 }
 
@@ -259,10 +266,6 @@ footer p {
   color: #fff;
 }
 
-#loginbox{
-  margin-top: 20%
-}
-
 #nonotes {
   text-align: center;
 }
@@ -272,3 +275,4 @@ footer p {
   50% {top: 70px;}
   100% {top: 71.33px; z-index: 1;}
 }
+

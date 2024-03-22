@@ -1,0 +1,54 @@
+/* Dark Mode Styles for Login Element */
+body {
+    background-color: #383636;
+}
+
+#navbar a:hover {
+    color: #dedede;
+    background-color: #504e4e;
+
+}
+
+#login-form {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+
+}
+
+.field {
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid #444;
+
+}
+.box {
+    background-color: #333;
+    color: #fff;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.input {
+    background-color: #222;
+    color: #ddd;
+    border: 1px solid #444;
+
+}
+
+.input::placeholder {
+    color: #aaa;
+}
+
+.button {
+    background-color: #555;
+    color: #fff;
+    border: none;
+}
+
+.button:hover {
+    background-color: #666;
+}

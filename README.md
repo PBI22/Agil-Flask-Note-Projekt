@@ -1,37 +1,58 @@
-# Agil-Flask-Note-Projekt
-En flask web application til deling af noter. 
+  <div align="center">
+  
+  --- 
+  
+  <h1>Agil Note Projekt - PBI</h1>
+  
+  <p>
+    Agil udviklings projekt med udgangspunkt i en Noteapp.
+  </p>
+
+  <h4>
+    <a href="#om-projektet">Introduktion</a>
+  <span> · </span>
+    <a href="#resultat">Vores Produkt</a>
+  <span> · </span>
+      <a href="#installation">Installation</a>
+  </h4>
+
+  </div>
+
+<!-- OM PROJEKTET -->
+## 🗒️ Projekt Introduktion
+<div id="om-projektet">
+XXX
+<br><br>
+
+</div>
+---
+
+<!-- OM PRODUKTET -->
+## 🎯 Vores Produkt
+<div id="resultat">
+Produktet bla bla
+<br><br>
+
+---
 
 
-## Brug
-### 1. Åbn din foretrukne webbrowser og gå til for at få adgang til applikationen.
 
-### 2. Interager med applikationen for at oprette, læse, opdatere og slette noter.
+<!-- Getting Started -->
+## 	:toolbox: Installation
 
-### 3. Agile group forbeholder sig retten til at slette en hver note når som helst
+<div id="installation">
 
-## Bidrag
+Clone af projektet
 
-### Bidrag er velkomne! Hvis du ønsker at bidrage til projektet, skal du følge disse trin:
-
-#### 1. Lav en forgrening af dette repository.
-
-#### 2. Foretag ændringer i din forgrening.
-
-#### 3. Opret en pull-anmodning til hovedrepositoryet.
-
-#### 4. Vent på feedback eller godkendelse.
-
-#### 5. Vi acceptere også maal. 
-
-## Licens
-
-## Dette projekt er licenseret under MIT-licensen. Se LICENSE på github.com for flere detaljer.
-
-## Kontakt
-
-### Har du spørgsmål eller feedback? Kontakt os på mail@email.com.
+```bash
+  git clone xxxx
+```
 
 
+Kør af Applikcation
+```bash
+ cd hello_app
+ flask --app webapp run
+ ```
 
-
-
+</div>
