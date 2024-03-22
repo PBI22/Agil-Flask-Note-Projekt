@@ -8,6 +8,8 @@ on:
   push:
     branches:
       - main
+      - testmain
+      
   pull_request: # This line is added to trigger the workflow on pull requests
     branches: 
       - main
@@ -20,7 +22,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-
       - name: Set up Python version
         uses: actions/setup-python@v1
         with:
@@ -33,7 +34,7 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
-        
+
       - name: Run tests
         run: |
           source venv/bin/activate
@@ -59,7 +60,7 @@ jobs:
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    
+   
     steps:
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
