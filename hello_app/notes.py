@@ -35,11 +35,10 @@ def edit(id=None):
 def view(id=None):
     note = find_note(id)
     try:
-        if note and note.text.startswith("!MD"):
-            note_markdown = markdown2.markdown(note.text.replace("!MD", ""), extras=["tables","fenced-code-blocks","code-friendly","mermaid","task_list","admonitions"])
+        if note:
+            note_markdown = markdown2.markdown(note.text, extras=["tables","fenced-code-blocks","code-friendly","mermaid","task_list","admonitions"])
             return render_template("mdnote.html", note=note, note_markdown=note_markdown)
-        elif note:
-            return render_template("mdnote.html", note=note, note_markdown=note.text)
+
         else:
             flash("Note not found", "error")
             app.logger.error(f"Failed to view note: {e} from user: {session['user']}")

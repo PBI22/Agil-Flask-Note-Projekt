@@ -57,6 +57,7 @@ hr {
   font-variant: small-caps;
   margin-left: 30px;
   justify-self: center;
+  align-self: center;
 }
 
 .body-content {

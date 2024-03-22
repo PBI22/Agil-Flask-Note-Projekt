@@ -6,6 +6,7 @@ Create Note
 
 {% block head %}
 <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='note.css') }}"  />
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='createnote.css') }}"  />
 {% endblock %}
 
 {% block content %}
@@ -21,10 +22,10 @@ Create Note
 
 <form action="/notes/create/" method="post">
     <input type="text" name="title" placeholder="Name" /><br>
-    <textarea name="note" placeholder="Note"></textarea><br>
+    <textarea name="note"></textarea><br>
     <!-- <input type="text" name="author" placeholder="Author" /><br> -->
     <input type="hidden" name="created" value=" {{ datetime }}"/><br>
-    <input type="text" name="imagelink" placeholder="Image Link"/><br>
+    <input type="hidden" name="imagelink" placeholder="Image Link"/><br>
     <input type="submit" value="Create Note" />
 </form>
 

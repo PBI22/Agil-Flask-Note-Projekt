@@ -31,7 +31,7 @@ View Note
 {{ note_markdown | safe }}
 </div>
 
-{% if note.imagelink %}
+{% if note.imagelink != "" %}
 <img class="note-img" src="{{ note.imagelink }}" alt="Note Image">
 {% endif %}
 
