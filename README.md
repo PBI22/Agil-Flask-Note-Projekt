@@ -12,7 +12,7 @@
   <h4>
     <a href="#om-projektet">Introduction</a>
   <span> · </span>
-    <a href="#resultat">Vores Product</a>
+    <a href="#resultat">The Product</a>
   <span> · </span>
       <a href="#installation">Installation</a>
   </h4>
@@ -44,7 +44,7 @@ Produktet bla bla
 
 <div id="installation">
 
-Cloning the project to your workstation
+Cloning the project to your workstation:
 
 ```
   git clone https://github.com/PBI22/Agil-Flask-Note-Projekt.git
@@ -56,8 +56,8 @@ To run the application
  cd hello_app
  pip install -r requirements.txt
  flask --app webapp run
-
-You can now access the application homepage in your browser at http://localhost:5000
- ```
+```
+You should now be able to access the application homepage in your browser at http://localhost:5000
+ 
 
 </div>
