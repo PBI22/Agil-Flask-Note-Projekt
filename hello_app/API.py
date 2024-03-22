@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta
 from html import escape
 from logging import log
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request, make_response
 from werkzeug.security import check_password_hash
 from .utils import *
 from .models import Note, Account
@@ -104,7 +104,7 @@ def delete_note(id):
         if note:
             dbsession.delete(note)
             dbsession.commit()
-            return "Note with id: " + id + " has been deleted"
+            return make_response("Note with id:" + escape(id) + " has been deleted", 200)
         else:
             return "Error deleting note", 404
     except Exception as e:

@@ -1,6 +1,6 @@
 import os
 from datetime import datetime
-from flask import render_template, send_from_directory, request
+from flask import render_template, send_from_directory, request, jsonify
 from . import app
 from .utils import *
 from .auth import auth
