@@ -142,10 +142,13 @@ th, td {
   text-align: left;
   padding: 8px;
 }
-
+tr {
+  cursor: pointer;
+}
 th {
   background-color: #f8f8f8; /* En let grå baggrundsfarve for header */
   color: #333; /* Mørk tekstfarve for kontrast */
+  cursor: default;
 }
 
 tr:nth-child(even) {
@@ -214,12 +217,12 @@ footer p {
   color: #000000; /* CSS til flash-error besked i darkmode*/
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 850px) {
   div.mobile {
     display: none;
   }
 }
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 850px) {
   div.desktop {
     display: none;
   }

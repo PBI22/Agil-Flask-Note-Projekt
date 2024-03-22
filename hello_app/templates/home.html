@@ -20,23 +20,19 @@
     <tr>
       <th>Titel</th>
       <th>Note</th>
-      <th>Skaber</th>
-      <th>Oprettet</th>
-      <th>Redigeret</th>
+      <th>Forfatter</th>
+      <th>Sidst ændret</th>
       <th>Handlinger</th>
     </tr>
 
   {% for note in notes %}
-    <tr>  
+    <tr onclick="redirectToPage('{{ note.noteID}}')"> 
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
       <td>{{ note.account.username }}</td>
-      <td>{{ note.created.strftime("%Y-%m-%d %H:%M") }}</td>
       <td> {{ note.lastedited.strftime("%Y-%m-%d %H:%M") }} </td>
       <td class="icons">
-        <a href="{{ url_for('notes.view', id=note.noteID) }}" class="icon-link">
-            <i class="fa-solid fa-eye"></i>
         <a href="{{ url_for('notes.edit', id=note.noteID) }}" class="icon-link">
             <i class="fa-solid fa-wrench"></i>
         </a>
@@ -49,6 +45,12 @@
   {% endfor %}
 
 </table>
+<script>
+  function redirectToPage(id) {
+           // Redirect to detail page with the specified ID
+           window.location.href = '/notes/view/' + id;
+       }
+</script>
 {% endif %}
 
 {% endblock %}
