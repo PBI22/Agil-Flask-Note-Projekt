@@ -2,16 +2,17 @@
   
   --- 
   
-  <h1>Agil Note Projekt - PBI</h1>
+  <h1>Agil Note Project - PBI22</h1>
   
   <p>
-    Agil udviklings projekt med udgangspunkt i en Noteapp.
+    Agile development project build on https://learn.microsoft.com/en-us/azure/developer/python/python-web-app-github-actions-app-service?tabs=azure-cli
+    Afterwards modified by PBI22.
   </p>
 
   <h4>
-    <a href="#om-projektet">Introduktion</a>
+    <a href="#om-projektet">Introduction</a>
   <span> · </span>
-    <a href="#resultat">Vores Produkt</a>
+    <a href="#resultat">Vores Product</a>
   <span> · </span>
       <a href="#installation">Installation</a>
   </h4>
@@ -19,16 +20,17 @@
   </div>
 
 <!-- OM PROJEKTET -->
-## 🗒️ Projekt Introduktion
+## 🗒️ Introduction of the Project
 <div id="om-projektet">
-XXX
+The idea behind the project is to take an existing webapp and modify it to our requirements.
+At the same time teaching the group how to work as a software development team using an Agile Development Process.
 <br><br>
 
 </div>
 ---
 
 <!-- OM PRODUKTET -->
-## 🎯 Vores Produkt
+## 🎯 The Product
 <div id="resultat">
 Produktet bla bla
 <br><br>
@@ -42,17 +44,20 @@ Produktet bla bla
 
 <div id="installation">
 
-Clone af projektet
+Cloning the project to your workstation
 
-```bash
-  git clone xxxx
+```
+  git clone https://github.com/PBI22/Agil-Flask-Note-Projekt.git
 ```
 
 
-Kør af Applikcation
-```bash
+To run the application
+```Open your favourite ZSH terminal app
  cd hello_app
+ pip install -r requirements.txt
  flask --app webapp run
+
+You can now access the application homepage in your browser at http://localhost:5000
  ```
 
 </div>
