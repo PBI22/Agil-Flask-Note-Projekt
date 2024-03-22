@@ -6,10 +6,12 @@ import requests
 from .dbconnect import dbsession
 from .models import Account
 import secrets
+from . import app
 
 oauth_bp = Blueprint('oauth', __name__)
 
 oauth = OAuth()
+# registrering af github oauth klienten
 github = oauth.register(
     name='github',
     client_id=os.environ.get("GH_CLIENT_ID"),
@@ -26,6 +28,8 @@ github = oauth.register(
 def register():
    github = oauth.create_client('github')
    redirect_uri = url_for('oauth.authorize', _external=True)
+   app.logger.info(f"Redirecting to: {redirect_uri}")
+   print(f"Redirecting to: {redirect_uri}")
    return github.authorize_redirect(redirect_uri)
 
 @oauth_bp.route('/authorize')
@@ -38,7 +42,7 @@ def authorize():
     user = dbsession.query(Account).filter_by(username=profile['login']).first()
 
     if user is None:
-        user = Account(username=profile['login'], password=secrets.token_urlsafe(32), email=profile.get('email',profile['login']), roleID=1)
+        user = Account(username=profile['login'], password=secrets.token_urlsafe(32), email=profile['email'] or "No Mail", roleID=1)
         dbsession.add(user)
         dbsession.commit()
     session['userID'] = user.accountID
@@ -60,7 +64,7 @@ def logout():
     return redirect('/')
 
 def revoke_github_token(access_token, client_id, client_secret):
-    # Implementation for token revocation as previously described
+
     url = f'https://api.github.com/applications/{client_id}/token'
     response = requests.delete(
         url,
