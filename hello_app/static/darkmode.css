@@ -27,12 +27,14 @@
     color: #f6f5f8;
 }
 
-.dark-mode .navbar {
+.dark-mode #navbar {
+  
     background-color: #504e4e;
     color: #ffffff;
     font-size: 1.4em;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     padding: 20px
+    
 }
 
 .dark-mode .navbar-brand {
@@ -41,11 +43,11 @@
     color: #ffffff;
   }
   
-  .dark-mode .navbar-item {
-    font-variant: small-caps;
-    margin-left: 30px;
-    color: #ffffff;
-  }
+.dark-mode .navbar-item {
+  font-variant: small-caps;
+  margin-left: 30px;
+  color: #ffffff;
+}
 
 /* Tabel CSS */
 .dark-mode .resources table {
@@ -165,6 +167,4 @@
 .dark-mode .title {
   color: white;
 }
-.dark-mode #loginform {
-  background-color: white;
-}
+
