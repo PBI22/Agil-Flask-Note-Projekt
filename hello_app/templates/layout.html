@@ -14,6 +14,7 @@
       rel="stylesheet"
       type="text/css"
       href="{{ url_for('static', filename='darkmode.css') }}"/>
+      
     
     <script
       src="https://kit.fontawesome.com/f9fe3152cb.js"
@@ -23,7 +24,7 @@
   </head>
 
   <body>
-    <div class="navbar">
+    <div id="navbar">
       <div class="nav-left">
       <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
       <a href="{{ url_for('notes.create_note') }}" class="navbar-item">Opret Note</a>
@@ -39,12 +40,10 @@
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
         {% endif %}
         {% else %}
-        <div class="desktop">
             <!--Login with github oauth-->
-            <a href="{{ url_for('oauth.register') }}" class="navbar-item">Github Login(OAuth)</a>
-            <a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a>
-            <a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a>
-        </div>
+            <a href="{{ url_for('oauth.register') }}" class="navbar-item desktop">Github Login(OAuth)</a>
+            <a href="{{ url_for('auth.login') }}" class="navbar-item desktop">Login</a>
+            <a href="{{ url_for('auth.create_account') }}" class="navbar-item desktop">Signup</a>
         <div class="mobile burger" id="burger">
           <div class="line"></div>
           <div class="line"></div>
@@ -82,11 +81,16 @@
     </div>
     <script>
       function toggleDarkmode() {
+        
+
         if (document.body.classList.contains("dark-mode")) {
           document.body.classList.toggle('dark-mode');
+          var link = document.querySelector("link[href='{{ url_for('static', filename='dark.css')}}']");
+          link.parentNode.removeChild(link);
           localStorage.setItem('theme', 'light')
         } else {
           document.body.classList.toggle('dark-mode');
+          loadDarkModeCSS();
           localStorage.setItem('theme', 'dark')
         }
       }
@@ -99,5 +103,26 @@
       }
       checkInitialTheme()
     </script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        if (localStorage.getItem('theme') === 'dark') {
+          loadDarkModeCSS();
+        }
+        // else remove css file
+        else {
+          var link = document.querySelector("link[href='{{ url_for('static', filename='dark.css')}}']");
+          link.parentNode.removeChild(link);
+        }
+      });
+
+
+    function loadDarkModeCSS() {
+      var link = document.createElement("link");
+      link.href = "{{ url_for('static', filename='dark.css')}}"; 
+      link.type = "text/css";
+      link.rel = "stylesheet";
+      document.head.appendChild(link);
+      }
+</script>
   </body>
 </html>
