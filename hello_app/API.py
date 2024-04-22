@@ -3,7 +3,7 @@ from html import escape
 from logging import log
 from flask import Blueprint, jsonify, request, make_response
 from werkzeug.security import check_password_hash
-from .utils import *
+from .utils import app, dbsession
 from .models import Note, Account
 from flask_jwt_extended import JWTManager, get_jwt_identity, jwt_required, create_access_token
 import traceback
