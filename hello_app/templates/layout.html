@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-Z8360ZV467"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+
+      gtag("config", "G-Z8360ZV467");
+    </script>
     <meta charset="utf-8" />
     <title>{% block title %} {% endblock %}</title>
     <link
@@ -13,9 +27,9 @@
     <link
       rel="stylesheet"
       type="text/css"
-      href="{{ url_for('static', filename='darkmode.css') }}"/>
-      
-    
+      href="{{ url_for('static', filename='darkmode.css') }}"
+    />
+
     <script
       src="https://kit.fontawesome.com/f9fe3152cb.js"
       crossorigin="anonymous"
@@ -26,24 +40,45 @@
   <body>
     <div id="navbar">
       <div class="nav-left">
-      <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
-      <a href="{{ url_for('notes.create_note') }}" class="navbar-item">Opret Note</a>
+        <a href="{{ url_for('home') }}" class="navbar-brand">Hjem</a>
+        <a href="{{ url_for('notes.create_note') }}" class="navbar-item"
+          >Opret Note</a
+        >
       </div>
       <div class="nav-right">
-        <button id="theme-toggle" onclick="toggleDarkmode()"><i class="fa-solid fa-circle-half-stroke"></i></button>
+        <button id="theme-toggle" onclick="toggleDarkmode()">
+          <i class="fa-solid fa-circle-half-stroke"></i>
+        </button>
         {% if session['user'] %}
         <!-- Logged in as text -->
-        <span class="navbar-item" style="display:flex;align-items:center">Logged in as: <span style="color:orange;font-weight:bold; text-shadow: 1px 1px 2px black;">{{ session['user'] }}</span></span>
+        <span class="navbar-item" style="display: flex; align-items: center"
+          >Logged in as:
+          <span
+            style="
+              color: orange;
+              font-weight: bold;
+              text-shadow: 1px 1px 2px black;
+            "
+            >{{ session['user'] }}</span
+          ></span
+        >
         {% if session['oauth_token'] %}
         <a href="{{ url_for('oauth.logout') }}" class="navbar-item">Logout</a>
         {% else %}
         <a href="{{ url_for('auth.logout') }}" class="navbar-item">Logout</a>
-        {% endif %}
-        {% else %}
-            <!--Login with github oauth-->
-            <a href="{{ url_for('oauth.register') }}" class="navbar-item desktop">Github Login(OAuth)</a>
-            <a href="{{ url_for('auth.login') }}" class="navbar-item desktop">Login</a>
-            <a href="{{ url_for('auth.create_account') }}" class="navbar-item desktop">Signup</a>
+        {% endif %} {% else %}
+        <!--Login with github oauth-->
+        <a href="{{ url_for('oauth.register') }}" class="navbar-item desktop"
+          >Github Login(OAuth)</a
+        >
+        <a href="{{ url_for('auth.login') }}" class="navbar-item desktop"
+          >Login</a
+        >
+        <a
+          href="{{ url_for('auth.create_account') }}"
+          class="navbar-item desktop"
+          >Signup</a
+        >
         <div class="mobile burger" id="burger">
           <div class="line"></div>
           <div class="line"></div>
@@ -51,78 +86,87 @@
         </div>
         <div class="menu" id="menu">
           <ul>
-            <li><a href="{{ url_for('auth.login') }}" class="navbar-item">Login</a></li>
-            <li><a href="{{ url_for('auth.create_account') }}" class="navbar-item">Signup</a></li>
+            <li>
+              <a href="{{ url_for('auth.login') }}" class="navbar-item"
+                >Login</a
+              >
+            </li>
+            <li>
+              <a href="{{ url_for('auth.create_account') }}" class="navbar-item"
+                >Signup</a
+              >
+            </li>
           </ul>
         </div>
         <script>
           // Toggle menu when burger icon is clicked
-          document.getElementById('burger').addEventListener('click', function() {
-            document.getElementById('menu').classList.toggle('show');
-          });
+          document
+            .getElementById("burger")
+            .addEventListener("click", function () {
+              document.getElementById("menu").classList.toggle("show");
+            });
         </script>
-      {% endif %}
+        {% endif %}
       </div>
     </div>
 
     <div class="body-content">
       <!-- Undlad og slette min flash message kode denne gang -_- -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-              {% for category, message in messages %}
-                  <div class="flash-{{ category }}" style="text-align: center">{{ message }}</div>
-              {% endfor %}
-          {% endif %}
-      {% endwith %}
-      {% block content %} {% endblock %}
-    <footer style="text-align: center;">
-      <p>&copy; 2018</p>
-    </footer>
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div class="flash-{{ category }}" style="text-align: center">
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %} {% block content %} {% endblock %}
+      <footer style="text-align: center">
+        <p>&copy; 2018</p>
+      </footer>
     </div>
     <script>
       function toggleDarkmode() {
-        
-
         if (document.body.classList.contains("dark-mode")) {
-          document.body.classList.toggle('dark-mode');
-          var link = document.querySelector("link[href='{{ url_for('static', filename='dark.css')}}']");
+          document.body.classList.toggle("dark-mode");
+          var link = document.querySelector(
+            "link[href='{{ url_for('static', filename='dark.css')}}']"
+          );
           link.parentNode.removeChild(link);
-          localStorage.setItem('theme', 'light')
+          localStorage.setItem("theme", "light");
         } else {
-          document.body.classList.toggle('dark-mode');
+          document.body.classList.toggle("dark-mode");
           loadDarkModeCSS();
-          localStorage.setItem('theme', 'dark')
+          localStorage.setItem("theme", "dark");
         }
       }
       function checkInitialTheme() {
-        let themeCheck = localStorage.getItem('theme')
-        if (themeCheck == 'dark') {
-          document.body.classList.toggle('dark-mode');
-        return null
+        let themeCheck = localStorage.getItem("theme");
+        if (themeCheck == "dark") {
+          document.body.classList.toggle("dark-mode");
+          return null;
         }
       }
-      checkInitialTheme()
+      checkInitialTheme();
     </script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        if (localStorage.getItem('theme') === 'dark') {
+      document.addEventListener("DOMContentLoaded", function () {
+        if (localStorage.getItem("theme") === "dark") {
           loadDarkModeCSS();
         }
         // else remove css file
         else {
-          var link = document.querySelector("link[href='{{ url_for('static', filename='dark.css')}}']");
+          var link = document.querySelector(
+            "link[href='{{ url_for('static', filename='dark.css')}}']"
+          );
           link.parentNode.removeChild(link);
         }
       });
 
-
-    function loadDarkModeCSS() {
-      var link = document.createElement("link");
-      link.href = "{{ url_for('static', filename='dark.css')}}"; 
-      link.type = "text/css";
-      link.rel = "stylesheet";
-      document.head.appendChild(link);
+      function loadDarkModeCSS() {
+        var link = document.createElement("link");
+        link.href = "{{ url_for('static', filename='dark.css')}}";
+        link.type = "text/css";
+        link.rel = "stylesheet";
+        document.head.appendChild(link);
       }
-</script>
+    </script>
   </body>
 </html>
