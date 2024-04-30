@@ -1,5 +1,28 @@
 # E/R Diagram over databasen
-
+## Mangler rhombus der beskriver forholdet fordi mermaid mangler det (eller kunne ikke finde ud af det). Brugt også mindmap graphing. 
+```mermaid
+mindmap
+  [Account]
+    ((accountID))
+    ((username))
+    ((password))
+    ((email))
+    ((roleID))
+    
+    [Role]
+      ((roleID))
+      ((rolename))
+    
+    [Note]
+        ((noteID))
+        ((title))
+        ((text))
+        ((created))
+        ((lastedited))
+        ((imagelink))
+        ((author))
+```
+# Physical data model
 ```mermaid
 erDiagram
     ACCOUNT ||--o{ NOTE : creates
