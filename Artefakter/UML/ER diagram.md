@@ -1,8 +1,8 @@
 # E/R Diagram over databasen
 ## Mangler rhombus der beskriver forholdet fordi mermaid mangler det (eller kunne måske ikke finde ud af det). Det samme gælder attributerne (ovalformen kunne ikke findes) Brugt også mindmap graphing. Beskrivelsen af forholdene følger.
-- Role og Account: En role kan tilhøre 0 eller flere konti.
-- Account og Note: En konto kan have 0 eller flere noter. 
-- Den fysisk data modelen viser det tyde
+- Role og Account: En role kan tilhøre 0 eller flere konti men en konto behøver ikke nogen role. 
+- Account og Note: En konto kan have 0 eller flere noter. Men en note skal tilhøre en konto.  
+- Den fysisk data modelen viser det tydeligt. 
 ```mermaid
 mindmap
   [Account]
@@ -10,7 +10,7 @@ mindmap
     ((username))
     ((password))
     ((email))
-    ((roleID))
+    ((rolename))
     
     [Role]
       ((roleID))
@@ -58,7 +58,7 @@ erDiagram
         VARCHAR(255) username
         VARCHAR(255) password
         VARCHAR(255) email
-        INT role
+        VARCHAR(255) rolename
     }
     ROLE {
         INT roleID(PK)
