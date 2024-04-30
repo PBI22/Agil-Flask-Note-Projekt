@@ -25,6 +25,19 @@ mindmap
         ((imagelink))
         ((author))
 ```
+## Mulighed 2 er en ER diagram uden attributer. Attributerne kan ses i den fysiske model samt deres egenskaber. 
+```mermaid
+erDiagram
+  ACCOUNT {
+  }
+  NOTE {}
+  ROLE {}
+
+  
+  ACCOUNT ||--o{ NOTE : kan_have
+  ROLE ||--o{ ACCOUNT : kan_tilhoer
+```
+
 # Physical data model
 
 ```mermaid
