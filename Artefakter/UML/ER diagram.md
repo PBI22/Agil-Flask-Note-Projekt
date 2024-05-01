@@ -62,6 +62,6 @@ erDiagram
     }
     ROLE {
         INT roleID(PK not null)
-        VARCHAR(255) rolename(not null)
+        VARCHAR(255) rolename
     }
 ```
