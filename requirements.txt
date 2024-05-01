@@ -5,3 +5,5 @@ pytest
 flask-jwt-extended
 authlib
 requests
+flask-swagger-ui
+flasgger

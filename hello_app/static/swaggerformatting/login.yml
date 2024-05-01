@@ -1,0 +1,32 @@
+---
+summary: Login endpoint
+parameters:
+  - name: body
+    description: Login credentials
+    in: body
+    schema:
+      type: object
+      properties:
+        username:
+          type: string
+          description: Username for login
+        password:
+          type: string
+          format: password
+          description: Password for login
+      required:
+        - username
+        - password
+responses:
+  200:
+    description: Successful login
+    schema:
+      type: object
+      properties:
+        access_token:
+          type: string
+          description: JWT access token
+  400:
+    description: Missing username or password
+  401:
+    description: Invalid credentials

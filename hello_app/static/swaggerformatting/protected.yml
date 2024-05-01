@@ -1,0 +1,11 @@
+summary: Protected endpoint (Test)
+parameters:
+  - name: Authorization
+    in: header
+    type: string
+    required: true
+    default: "Bearer <JWT>"
+    description: Your JWT token.
+responses:
+  200:
+    description: Successful response from protected endpoint

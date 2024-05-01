@@ -8,6 +8,7 @@ from .API import api
 from .log_config import setup_app_logging
 from .notes import notes
 from .oauth import oauth, oauth_bp
+from flask_swagger_ui import get_swaggerui_blueprint
 
 # inits til vores app
 oauth.init_app(app) 
@@ -17,6 +18,18 @@ app.register_blueprint(api, url_prefix='/api')
 app.register_blueprint(notes, url_prefix='/notes')
 setup_app_logging(app)
 
+SWAGGER_URL = '/swagger'
+API_URL = '/static/swagger.json'
+
+swagger_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Note API"
+    }
+)
+
+app.register_blueprint(swagger_blueprint, url_prefix=SWAGGER_URL)
 
 @app.route("/")
 def home():

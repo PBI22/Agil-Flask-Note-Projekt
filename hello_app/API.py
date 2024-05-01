@@ -1,14 +1,18 @@
 from datetime import datetime, timedelta
+from functools import wraps
 from html import escape
 from logging import log
 from flask import Blueprint, jsonify, request, make_response
 from werkzeug.security import check_password_hash
 from .utils import app, dbsession
 from .models import Note, Account
-from flask_jwt_extended import JWTManager, get_jwt_identity, jwt_required, create_access_token
+from flask_jwt_extended import JWTManager, get_jwt_identity, create_access_token, verify_jwt_in_request
 import traceback
+from flasgger import Swagger
+from flasgger import swag_from
 
 api = Blueprint('api', __name__)
+swagger = Swagger(app)
 
 # Laver en JWTManager
 jwt = JWTManager()
@@ -19,8 +23,23 @@ app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=120)
 # Initialize JWTManager
 jwt.init_app(app)
 
+# allows swagger to start up before getting asked for a jwt, will still require a jwt when sending requests
+def jwt_or_swagger_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        # Check if the request is from Swagger (potential safety concern, but would take more time to fetch jwt with e.g. javascript)
+        if 'swagger' in request.url.lower():
+            # If from Swagger UI
+            return f(*args, **kwargs)
+        else:
+            # If not from Swagger UI, verify jwt
+            verify_jwt_in_request()
+            return f(*args, **kwargs)
+    return decorated_function
+
 # Logger ind og giver brugeren en JWT Token
 @api.route('/login', methods=['POST'])
+@swag_from('static/swaggerformatting/login.yml')
 def login():
     data = request.json
     username = escape(data.get('username'))
@@ -38,20 +57,21 @@ def login():
 
 # Test route: Alle kan få adgang hertil
 @api.route('/unprotected')
+@swag_from('static/swaggerformatting/unprotected.yml')
 def unprotected():
     return jsonify({'message': 'Anyone can view this!'})
 
 # Test route: Kun folk med en valid token kan få adgang
-@api.route('/protected')
-@jwt_required()
+@api.route('/protected', methods=['GET'])
+@jwt_or_swagger_required
+@swag_from('static/swaggerformatting/protected.yml')
 def protected():
+    # Your endpoint logic here
     current_user = get_jwt_identity()
-    username = current_user['username']
-    author = current_user['author']
-    return jsonify({'message': f'Hello, {escape(username)}, your Author id is: {author}! You can only use this with a valid token'}), 200
-
+    return jsonify(logged_in_as=current_user), 200
 # Tager alle noter
 @api.route('/view', methods=['GET'])
+@swag_from('static/swaggerformatting/view.yml')
 def display_notes():
     try:
         all_notes = dbsession.query(Note).all()
@@ -63,6 +83,7 @@ def display_notes():
 
 # Tager en note fra id
 @api.route('/view/<id>', methods=['GET'])
+@swag_from('static/swaggerformatting/viewid.yml')
 def display_note(id):
     try:
         note_from_id = dbsession.query(Note).filter(Note.noteID == id).all()
@@ -73,7 +94,8 @@ def display_note(id):
         return "An internal error has occurred!"
 # Tager title, text og imagelink til at lave en post request(curl kan eksempelvis bruges. Check "curl requests.md" i Artefakter/API)
 @api.route('/create', methods=['POST'])
-@jwt_required()
+@jwt_or_swagger_required
+@swag_from('static/swaggerformatting/create.yml')
 def create_note():
     current_user = get_jwt_identity()
     try:
@@ -95,18 +117,22 @@ def create_note():
         log(traceback.format_exc())
         return "An internal error has occurred!"
 
-# Sletter en note ud fra id (muligvis skal der senere tilføjes sikkerhed, så ikke alle kan slette noter ud fra APIen)
+# Sletter en note ud fra id
 @api.route('/delete/<id>', methods=['DELETE'])
-@jwt_required()
+@jwt_or_swagger_required
+@swag_from('static/swaggerformatting/delete.yml')
 def delete_note(id):
-    try:
+    current_user = get_jwt_identity() # takes author id from jwt
+    print(current_user)
+    try: #if session['roleID'] == 2 or session['userID'] == note.author:
         note = dbsession.query(Note).filter(Note.noteID == id).first()
-        if note:
+        print(note.author)
+        if note.author == current_user['author']: # checks note author against jwt author
             dbsession.delete(note)
             dbsession.commit()
             return make_response("Note with id:" + escape(id) + " has been deleted", 200)
         else:
-            return "Error deleting note", 404
+            return "Error deleting note, not authorized to delete this, contact the author instead", 404
     except Exception as e:
         dbsession.rollback()
         log(traceback.format_exc())
@@ -114,9 +140,10 @@ def delete_note(id):
     except:
             return "Error deleting note", 404
 
-# Redigere en eksisterende note ud fra id og input(Kan testes med cURL request i "curl requests.md" fundet i mappen Artefakter/API)
+# Redigere en eksisterende note ud fra id og input
 @api.route('/edit/<id>', methods=['PUT'])
-@jwt_required()
+@jwt_or_swagger_required
+@swag_from('static/swaggerformatting/editid.yml')
 def edit_note(id):
     try:
         edit_query = dbsession.query(Note).filter(Note.noteID == id).first()
