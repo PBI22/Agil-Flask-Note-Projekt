@@ -4,7 +4,7 @@ from flask import render_template, send_from_directory, request, jsonify
 from . import app
 from .utils import *
 from .auth import auth
-from .API import api
+from .api import api
 from .log_config import setup_app_logging
 from .notes import notes
 from .oauth import oauth, oauth_bp

@@ -69,7 +69,7 @@ def protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 # Tager alle noter
-@api.route('/view', methods=['GET'])
+@api.route('/notes', methods=['GET'])
 @swag_from('static/swaggerformatting/view.yml')
 def display_notes():
     try:
@@ -81,7 +81,7 @@ def display_notes():
         return "An internal error has occurred!"
 
 # Tager en note fra id
-@api.route('/view/<id>', methods=['GET'])
+@api.route('/notes/<id>', methods=['GET'])
 @swag_from('static/swaggerformatting/viewid.yml')
 def display_note(id):
     try:
@@ -92,7 +92,7 @@ def display_note(id):
         log(traceback.format_exc())
         return "An internal error has occurred!"
 # Tager title, text og imagelink til at lave en post request(curl kan eksempelvis bruges. Check "curl requests.md" i Artefakter/API)
-@api.route('/create', methods=['POST'])
+@api.route('/notes/create', methods=['POST'])
 @jwt_or_swagger_required
 @swag_from('static/swaggerformatting/create.yml')
 def create_note():
@@ -117,15 +117,13 @@ def create_note():
         return "An internal error has occurred!"
 
 # Sletter en note ud fra id
-@api.route('/delete/<id>', methods=['DELETE'])
+@api.route('/notes/<id>', methods=['DELETE'])
 @jwt_or_swagger_required
 @swag_from('static/swaggerformatting/delete.yml')
 def delete_note(id):
     current_user = get_jwt_identity() # takes author id from jwt
-    print(current_user)
     try: #if session['roleID'] == 2 or session['userID'] == note.author:
         note = dbsession.query(Note).filter(Note.noteID == id).first()
-        print(note.author)
         if note.author == current_user['author']: # checks note author against jwt author
             dbsession.delete(note)
             dbsession.commit()
@@ -140,7 +138,7 @@ def delete_note(id):
             return "Error deleting note", 404
 
 # Redigere en eksisterende note ud fra id og input
-@api.route('/edit/<id>', methods=['PUT'])
+@api.route('/notes/<id>', methods=['PUT'])
 @jwt_or_swagger_required
 @swag_from('static/swaggerformatting/editid.yml')
 def edit_note(id):
