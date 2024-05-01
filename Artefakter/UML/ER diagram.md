@@ -58,10 +58,11 @@ erDiagram
         VARCHAR(255) username(not null)
         VARCHAR(255) password(not null)
         VARCHAR(255) email(not null)
-        VARCHAR(255) rolename
+        INT roleID(FK)
     }
     ROLE {
         INT roleID(PK not null)
-        VARCHAR(255) rolename
+        VARCHAR(255) rolename(not null)
     }
+
 ```
