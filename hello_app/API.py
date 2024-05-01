@@ -66,7 +66,6 @@ def unprotected():
 @jwt_or_swagger_required
 @swag_from('static/swaggerformatting/protected.yml')
 def protected():
-    # Your endpoint logic here
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 # Tager alle noter
