@@ -1,0 +1,32 @@
+summary: Create a new note
+parameters:
+  - name: body
+    in: body
+    schema:
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of the note
+        text:
+          type: string
+          description: Text of the note
+        imagelink:
+          type: string
+          description: Link to an image associated with the note
+    required:
+      - title
+      - text
+  - name: Authorization
+    in: header
+    type: string
+    required: true
+    default: "Bearer <JWT>"
+    description: Your JWT token.
+responses:
+  201:
+    description: Note created successfully
+  400:
+    description: Bad request
+  500:
+    description: An internal error has occurred!

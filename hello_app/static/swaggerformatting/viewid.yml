@@ -1,0 +1,12 @@
+summary: View note by ID
+parameters:
+  - name: id
+    in: path
+    type: string
+    required: true
+    description: The ID of the note to retrieve
+responses:
+  200:
+    description: Note details
+  500:
+    description: An internal error has occurred!
