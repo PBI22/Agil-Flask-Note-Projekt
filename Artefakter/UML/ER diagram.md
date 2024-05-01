@@ -45,13 +45,13 @@ erDiagram
     ACCOUNT ||--o{ NOTE : creates
     ROLE ||--o{ ACCOUNT : is
     NOTE {
-        INT noteID(PK, not null)
+        INT noteID(PK not null)
         VARCHAR(255) title(not null)
         TEXT text
         DATETIME created(not null)
         DATETIME lastedited
         VARCHAR(255) imagelink
-        INT author(FK, not null)
+        INT author(FK not null)
     }
     ACCOUNT {
         INT accountID(PK, not null)
@@ -61,7 +61,7 @@ erDiagram
         VARCHAR(255) rolename
     }
     ROLE {
-        INT roleID(PK, not null)
+        INT roleID(PK not null)
         VARCHAR(255) rolename(not null)
     }
 ```
