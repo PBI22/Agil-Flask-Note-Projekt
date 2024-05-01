@@ -54,7 +54,7 @@ erDiagram
         INT author(FK not null)
     }
     ACCOUNT {
-        INT accountID(PK, not null)
+        INT accountID(PK not null)
         VARCHAR(255) username(not null)
         VARCHAR(255) password(not null)
         VARCHAR(255) email(not null)
