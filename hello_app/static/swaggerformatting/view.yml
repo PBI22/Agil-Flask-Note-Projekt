@@ -1,0 +1,6 @@
+summary: View all notes
+responses:
+  200:
+    description: List of all notes
+  500:
+    description: An internal error has occurred!

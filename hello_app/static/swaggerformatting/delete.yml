@@ -1,0 +1,20 @@
+summary: Delete a note by ID
+parameters:
+  - name: id
+    in: path
+    type: string
+    required: true
+    description: The ID of the note to delete
+  - name: Authorization
+    in: header
+    type: string
+    required: true
+    default: "Bearer <JWT>"
+    description: Your JWT token.
+responses:
+  200:
+    description: Note deleted successfully
+  404:
+    description: Note not found
+  500:
+    description: An internal error has occurred!

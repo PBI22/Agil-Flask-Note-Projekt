@@ -1,0 +1,11 @@
+summary: Get unprotected message
+responses:
+  200:
+    description: Successful response
+    schema:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Message that anyone can view this
+          example: Anyone can view this!
