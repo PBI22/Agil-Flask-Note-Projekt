@@ -1,0 +1,42 @@
+name: pylint
+
+on:
+  push:
+    branches:
+      - 96-32-test-coverage-overblik--sonarcloud
+
+  pull_request:
+    types: [opened, synchronize, reopened]
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        fetch-depth: 100
+
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Running pytest
+      run: |
+        pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html
+        pylint hello_app > pylint_report.txt
+
+    - name: Analysing the code with pylint
+      continue-on-error: true
+      run: |
+        pylint src/git_graph_automation
+    - name: SonarCloud Scan
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

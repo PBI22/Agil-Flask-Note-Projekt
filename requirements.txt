@@ -7,3 +7,5 @@ authlib
 requests
 flask-swagger-ui
 flasgger
+pylint
+pytest-cov
