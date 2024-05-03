@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - 96-32-test-coverage-overblik--sonarcloud
+      - main
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:
