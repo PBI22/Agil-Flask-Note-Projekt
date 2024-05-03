@@ -2,8 +2,10 @@ name: Deploy Python app to Azure
 
 on:
   workflow_run:
-    workflows: ["Build and Test Python app"]
-    branches: [main, 96-32-test-coverage-overblik--sonarcloud]
+    workflows: [BuildTest]
+    branches:
+      - main
+      - 96-32-test-coverage-overblik--sonarcloud
     types:
       - completed
 

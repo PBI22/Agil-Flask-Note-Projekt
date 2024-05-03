@@ -1,4 +1,4 @@
-name: Build and Test Python app
+name: BuildTest
 on:
   push:
     branches:
