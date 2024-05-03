@@ -13,9 +13,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
-        fetch-depth: 100
+        fetch-depth: 0
 
     - name: Set up Python 3.9
       uses: actions/setup-python@v2
@@ -28,15 +28,23 @@ jobs:
 
     - name: Running pytest
       run: |
-        pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html
-        pylint hello_app > pylint_report.txt
+        pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
 
     - name: Analysing the code with pylint
       continue-on-error: true
       run: |
-        pylint src/git_graph_automation
+       pylint hello_app > pylint_report.txt
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        args: >
+          -Dsonar.projectKey=PBI22_Agil-Flask-Note-Projekt
+          -Dsonar.organization=pbi22
+          -Dsonar.sources=.
+          -Dsonar.host.url=https://sonarcloud.io
+          -Dsonar.python.coverage.reportPaths=coverage.xml
+          -Dsonar.python.pylint.reportPaths=pylint_report.txt
