@@ -48,5 +48,5 @@ jobs:
           -Dsonar.organization=pbi22
           -Dsonar.sources=.
           -Dsonar.host.url=https://sonarcloud.io
-          -Dsonar.python.coverage.reportPaths=coverage.xml
-          -Dsonar.python.pylint.reportPaths=pylint_report.txt
+          -Dsonar.python.coverage.reportPaths=/github/workspace/coverage.xml
+          -Dsonar.python.pylint.reportPaths=/github/workspace/pylint_report.txt
