@@ -1,4 +1,4 @@
-name: pylint
+name: TestCoverage
 
 on:
   push:
@@ -35,12 +35,14 @@ jobs:
       run: |
        pylint hello_app > pylint_report.txt
 
+
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
+        projectBaseDir: hello_app
         args: >
           -Dsonar.projectKey=PBI22_Agil-Flask-Note-Projekt
           -Dsonar.organization=pbi22
