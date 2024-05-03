@@ -1,4 +1,4 @@
-name: Build
+name: SonarCloud
 on:
   push:
     branches:
@@ -26,6 +26,11 @@ jobs:
     - name: Running pytest
       run: |
         pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
+    
+    - name: Analysing the code with pylint
+      continue-on-error: true
+      run: |
+       pylint hello_app > pylint_report.txt
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master
