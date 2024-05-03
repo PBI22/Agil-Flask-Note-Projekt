@@ -1,4 +1,4 @@
-name: SonarCloud
+name: Build and Test Python app
 on:
   push:
     branches:
