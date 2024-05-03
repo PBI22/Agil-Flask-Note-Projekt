@@ -1,6 +1,9 @@
 # fjern logs 
 
 logs/**/*
+coverage.xml
+pylint_report.txt
+
 
 # databasen
 db.sqlite
