@@ -42,30 +42,34 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
       - name: Zip artifact for deployment
-        run: zip -r python-app.zip ./*
+        run: zip release.zip ./* -r
 
-      - name: Upload artifact for deployment
+      - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: python-app.zip
+          path: |
+            release.zip
+            !venv/
 
   deploy:
-    needs: build
     runs-on: ubuntu-latest
+    needs: build
+    # Only deploy on push events to main
     if: github.event_name == 'push'
-
+    environment:
+      name: 'Production'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+   
     steps:
-      - uses: actions/checkout@v3
-
       - name: Download artifact from build job
         uses: actions/download-artifact@v3
         with:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip python-app.zip
-
+        run: unzip release.zip
+  
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
