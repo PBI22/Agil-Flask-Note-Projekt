@@ -1,70 +1,137 @@
-# Utility functions
+"""
+This module contains utility functions for the application. 
+
+It includes functions for updating the list of notes from the database, 
+and other helper functions used across the application.
+"""
+
+from datetime import datetime
+from flask import flash, session
 from .dbconnect import dbsession
 from .models import Note, Account
-from flask import flash, session, redirect, url_for
 from .auth import login_required
-from datetime import datetime
 from . import app
-    
-def updateList():
+
+
+def update_list():
+    """
+    Update the list of notes from the database.
+
+    Returns:
+        list: A list of Note objects representing the notes in the database.
+
+    Raises:
+        Exception: If there is an error while updating the list.
+
+    """
+
     try:
         notes_db = []
         for row in dbsession.query(Note).order_by(Note.noteID):
             notes_db.append(row)
     except Exception as e:
-        app.logger.critical(f"Failed to update list: {e}")
+        app.logger.critical("Failed to update list: %s", e)
     return notes_db
 
 
 def create_note_post(request):
+    """
+    Create a new note and save it to the database.
+
+    Parameters:
+    - request (object): The Flask request object containing the form data.
+
+    Returns:
+    None
+
+    Raises:
+    - Exception: If there is an error creating the note.
+
+    """
     try:
 
-        title = request.form['title']
-        note = request.form['note']
+        title = request.form["title"]
+        note = request.form["note"]
         created = datetime.now()
-        lastEdited = datetime.now()
-        imagelink = request.form.get('imagelink',None) # None hvis der ikke er noget
-        account_ID = session['userID']     
-        note = Note(title = title, text = note, created = created, lastedited = lastEdited, imagelink = imagelink, author = account_ID)
+        lastedited = datetime.now()
+        imagelink = request.form.get("imagelink", None)  # None hvis der ikke er noget
+        account_id = session["userID"]
+        note = Note(
+            title=title,
+            text=note,
+            created=created,
+            lastedited=lastedited,
+            imagelink=imagelink,
+            author=account_id,
+        )
         dbsession.add(note)
         dbsession.commit()
-        
-        flash('Note created successfully!', 'success') 
+        flash("Note created successfully!", "success")
     except Exception as e:
         dbsession.rollback()
-        flash(f'Failed to create note: {str(e)}', 'error') 
-        app.logger.error(f"Failed to create note: {e} from user: {session['user']}")
+        flash(f"Failed to create note: {str(e)}", "error")
+        app.logger.error("Failed to create note: %s from user: %s", e, session["user"])
+
 
 @login_required
-def edit_note_post(request, id):
+def edit_note_post(request, note_id):
     try:
-        upd = dbsession.query(Note).filter(Note.noteID == id).first()
-        userID = session['userID']
-        userRole = session['roleID']
-        if userID == upd.author or userRole == 2:#admin skal tages fra db 
-            upd = dbsession.query(Note).filter(Note.noteID == id).first()
-            upd.title = request.form['title']
-            upd.text = request.form['note']
+        upd = dbsession.query(Note).filter(Note.noteID == note_id).first()
+        user_id = session["userID"]
+        user_role = session["roleID"]
+        if user_id == upd.author or user_role == 2:  # admin skal tages fra db
+            upd = dbsession.query(Note).filter(Note.noteID == note_id).first()
+            upd.title = request.form["title"]
+            upd.text = request.form["note"]
             upd.lastedited = datetime.now()
-            upd.imagelink = request.form.get('imagelink',None)
+            upd.imagelink = request.form.get("imagelink", None)
             dbsession.commit()
-            flash('Note created successfully!', 'success') 
+            flash("Note created successfully!", "success")
         else:
-            flash('You are not authorized to edit this note', 'error')
+            flash("You are not authorized to edit this note", "error")
     except Exception as e:
-        flash(f'Failed to edit note: {str(e)}', 'error')
-        app.logger.error(f"Failed to edit note: {e} from user: {session['user']}")
-        
-def find_note(id):
+        flash(f"Failed to edit note: {str(e)}", "error")
+        app.logger.error("Failed to edit note: %s  from user: %s", e, session["user"])
+
+
+def find_note(note_id):
+    """
+    Find a note by its ID.
+
+    Args:
+        note_id (int): The ID of the note to find.
+
+    Returns:
+        Note or None: The Note object with the specified ID, or None if no note is found.
+
+    Raises:
+        Exception: If there is an error while finding the note.
+
+    """
     try:
-        note = next((note for note in updateList() if note.noteID == int(id)), None)
+        note = next(
+            (note for note in update_list() if note.noteID == int(note_id)), None
+        )
     except Exception as e:
-        app.logger.error(f"Failed to find note: {e} from user: {session['user']}")
+        app.logger.error("Failed to find note: %s from user: %s", e, session["user"])
     return note
 
 def searchbar(query):
     try:
-        search_results = dbsession.query(Note).filter(Note.title.contains(query) | Note.text.contains(query) | Account.username.contains(query)).all()
+        search_results = (
+            dbsession.query(Note)
+            .filter(
+                Note.title.contains(query)
+                | Note.text.contains(query)
+                | Account.username.contains(query)
+            )
+            .all()
+        )
     except Exception as e:
-        app.logger.error(f"Failed to search for: {query} from user: {session['user']}")
+        app.logger.error(
+            "Failed to search for: %s  from user: %s  with error: %s",
+            query,
+            session["user"],
+            e,
+        )
     return search_results
