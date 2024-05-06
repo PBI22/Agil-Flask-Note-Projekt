@@ -1,8 +1,8 @@
 # fjern logs 
 
 logs/**/*
-coverage.xml
-pylint_report.txt
+#coverage.xml
+#pylint_report.txt
 
 
 # databasen

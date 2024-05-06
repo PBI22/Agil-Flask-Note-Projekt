@@ -34,7 +34,7 @@ app.register_blueprint(swagger_blueprint, url_prefix=SWAGGER_URL)
 @app.route("/")
 def home():
     app.logger.info("Home page requested from: %s", request.remote_addr)
-    return render_template("home.html", notes = updateList(), datetime = datetime.now())
+    return render_template("home.html", notes = update_list(), datetime = datetime.now())
 
 @app.route('/robots.txt')
 def robots_txt():
