@@ -6,7 +6,7 @@ on:
       branch:
         description: 'Branch to run on'
         required: true
-        default: 'main'  # Sæt en standard branch eller fjern denne linje for at kræve, at en branch vælges manuelt
+        default: 'main'  # Default branch
 
 jobs:
   build:
@@ -33,9 +33,9 @@ jobs:
           pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
       
       - name: Analysing the code with pylint
-        continue-on-error: true
+        continue-on-error: true # Her forsætter vi bestemt selvom der kommer et fail(under 5.0)
         run: |
-         pylint hello_app > pylint_report.txt
+         pylint hello_app tests --fail-under=5.0 | tee tests/pylint_report.txt
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -55,7 +55,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name == 'workflow_dispatch'  # Tillader deployment uanset hvilken branch der er valgt
+    if: github.event_name == 'workflow_dispatch' 
 
     steps:
       - uses: actions/checkout@v3
@@ -75,5 +75,5 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'agil-noteprojekt'
-          slot-name: 'Production'  # Bruger altid 'Production' slot
+          slot-name: 'Production'  # Bruger altid 'Production' slot, da vi kun har ét slot i standard plan
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C2E173D2E91D4DDBABCEAFA105B370E9 }}
