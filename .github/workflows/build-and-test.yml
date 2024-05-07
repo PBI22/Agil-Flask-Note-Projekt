@@ -3,6 +3,7 @@ on:
   push:
     branches:
       - main
+      - 128-321-fix-af-deploy-artifact-issue-fra-buildtest-workflow
   pull_request:
     types: [opened, synchronize, reopened]
 jobs:

@@ -5,6 +5,7 @@ on:
     workflows: [BuildTest]
     branches:
       - main
+      - 128-321-fix-af-deploy-artifact-issue-fra-buildtest-workflow
     types:
       - completed
 
@@ -19,7 +20,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: python-app
-
+          run-id: ${{ github.event.workflow_run.id }}
+          github-token: ${{ secrets.GIT_TOKEN }} # Needed to download the artifact, cause else its scoped
+          
       - name: Unzip artifact for deployment
         run: unzip -o release.zip
 
