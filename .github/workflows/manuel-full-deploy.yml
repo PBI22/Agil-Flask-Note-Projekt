@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.inputs.branch }}
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -35,7 +35,7 @@ jobs:
       - name: Analysing the code with pylint 
         continue-on-error: true
         run: |
-          pylint hello_app tests > tests/pylint_report.txt
+          pylint --max-line-length=128 hello_app tests > tests/pylint_report.txt
 
       - name: Grab Pylint score # grabbing but no threshold check here
         run: |
@@ -53,7 +53,7 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
           path: |
@@ -66,12 +66,12 @@ jobs:
     if: github.event_name == 'workflow_dispatch' 
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch }}
 
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: python-app
 
