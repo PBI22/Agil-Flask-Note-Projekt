@@ -31,7 +31,7 @@ jobs:
     - name: Analysing the code with pylint 
       continue-on-error: true
       run: |
-       pylint hello_app tests > tests/pylint_report.txt
+       pylint --max-line-length=128 hello_app tests > tests/pylint_report.txt
 
     - name: Check Pylint score
       run: |
