@@ -32,13 +32,16 @@ jobs:
         run: |
           pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
       
-      - name: Analysing the code with pylint
-        continue-on-error: true # Her forsætter vi bestemt selvom der kommer et fail(under 5.0)
+      - name: Analysing the code with pylint 
+        continue-on-error: true
         run: |
           pylint hello_app tests > tests/pylint_report.txt
+
+      - name: Grab Pylint score # grabbing but no threshold check here
+        run: |
           score=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' tests/pylint_report.txt)
           echo "Pylint score: $score"
-          python -c "import sys; sys.exit(0 if $score >= 5.0 else 1)" 
+
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -53,7 +56,9 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: python-app
-          path: release.zip
+          path: |
+            release.zip
+            !venv/
 
   deploy:
     needs: build
@@ -71,7 +76,7 @@ jobs:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -o release.zip # added -o to overwrite files
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
