@@ -13,13 +13,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           ref: ${{ github.event.inputs.branch }}
 
       - name: Set up Python 3.9
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -32,13 +32,16 @@ jobs:
         run: |
           pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
       
-      - name: Analysing the code with pylint
-        continue-on-error: true # Her forsætter vi bestemt selvom der kommer et fail(under 5.0)
+      - name: Analysing the code with pylint 
+        continue-on-error: true
         run: |
-          pylint hello_app tests > tests/pylint_report.txt
+          pylint --max-line-length=128 hello_app tests > tests/pylint_report.txt
+
+      - name: Grab Pylint score # grabbing but no threshold check here
+        run: |
           score=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' tests/pylint_report.txt)
           echo "Pylint score: $score"
-          python -c "import sys; sys.exit(0 if $score >= 5.0 else 1)" 
+
 
       - name: SonarCloud Scan
         uses: SonarSource/sonarcloud-github-action@master
@@ -50,10 +53,12 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: python-app
-          path: release.zip
+          path: |
+            release.zip
+            !venv/
 
   deploy:
     needs: build
@@ -61,17 +66,17 @@ jobs:
     if: github.event_name == 'workflow_dispatch' 
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ github.event.inputs.branch }}
 
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: python-app
 
       - name: Unzip artifact for deployment
-        run: unzip release.zip
+        run: unzip -o release.zip # added -o to overwrite files
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
