@@ -75,6 +75,28 @@ def create_note_post(request):
 
 @login_required
 def edit_note_post(request, note_id):
+    """
+    Edit a note and update it in the database.
+
+    Parameters:
+        request (object): The Flask request object containing the form data.
+        note_id (int): The ID of the note to be edited.
+
+    Returns:
+        None
+
+    Notes:
+        - This function is decorated with the @login_required decorator, 
+          which ensures that the user is logged in before accessing this view.
+        - If the user is not logged in, they will be redirected to the login page with an error message.
+        - If the user is logged in and authorized to edit the note, 
+          the note will be updated in the database with the
+          new title, text, last edited timestamp, and optional image link.
+        - If the user is not authorized to edit the note, an error message will be flashed.
+
+    Example:
+        edit_note_post(request, note_id)
+    """
     try:
         upd = dbsession.query(Note).filter(Note.noteID == note_id).first()
         user_id = session["userID"]
@@ -117,6 +139,21 @@ def find_note(note_id):
     return note
 
 def searchbar(query):
+    """
+    Searches for notes and accounts based on a given query.
+
+    Parameters:
+    - query (str): The search query.
+
+    Returns:
+    - list: A list of search results, which includes notes and accounts.
+
+    Raises:
+    - Exception: If there is an error during the search process.
+
+    Example:
+    search_results = searchbar("python")
+    """
     try:
         search_results = (
             dbsession.query(Note)
