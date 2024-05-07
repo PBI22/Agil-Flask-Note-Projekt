@@ -16,9 +16,9 @@ session to perform CRUD operations on the notes.
 
 Routes:
 - /create/ : GET and POST methods to display a form and create a note.
-- /edit/<note_id> : GET and POST methods to display a form for editing and update a note.
-- /view/<note_id> : GET method to display a note.
-- /delete/<note_id> : GET method to delete a note.
+- /edit/<id> : GET and POST methods to display a form for editing and update a note.
+- /view/<id> : GET method to display a note.
+- /delete/<id> : GET method to delete a note.
 - /search : GET method to search for notes based on a query.
 
 The module uses Flask's rendering capabilities to return HTML pages that include forms 
@@ -67,14 +67,14 @@ def create_note():
     return redirect(url_for("home"))
 
 
-@notes.route("/edit/<note_id>", methods=["GET", "POST"])
+@notes.route("/edit/<id>", methods=["GET", "POST"])
 @login_required
-def edit(note_id=None):
+def edit(id=None):
     """
     Edit a note.
 
     Parameters:
-    - note_id (str): The ID of the note to be edited.
+    - id (str): The ID of the note to be edited.
 
     Returns:
     - None
@@ -83,24 +83,24 @@ def edit(note_id=None):
     - None
 
     """
-    note = find_note(note_id)
+    note = find_note(id)
     if note is None:
         flash(NOT_FOUND_MESSAGE, "error")
         return redirect(url_for("home"))
     if request.method == "GET":
         return render_template("editnote.html", note=note)
 
-    edit_note_post(request, note_id)
+    edit_note_post(request, id)
     return redirect(url_for("home"))
 
 
-@notes.route("/view/<note_id>")
-def view(note_id=None):
+@notes.route("/view/<id>")
+def view(id=None):
     """
     View a specific note.
 
     Parameters:
-    - note_id (str): The ID of the note to view.
+    - id (str): The ID of the note to view.
 
     Returns:
     - If the note is found, renders the 'mdnote.html' template with the note and its markdown content.
@@ -108,7 +108,7 @@ def view(note_id=None):
     - If an exception occurs, logs the error and redirects to the home page.
 
     """
-    note = find_note(note_id)
+    note = find_note(id)
     try:
         if note:
             note_markdown = markdown2.markdown(
@@ -135,9 +135,9 @@ def view(note_id=None):
         return redirect(url_for("home"))
 
 
-@notes.route("/delete/<note_id>")
+@notes.route("/delete/<id>")
 @login_required
-def delete_note(note_id=None):
+def delete_note(id=None):
     """
     Delete a note.
 
@@ -145,7 +145,7 @@ def delete_note(note_id=None):
     It requires the user to be logged in and have the necessary authorization to delete the note.
 
     Parameters:
-    - note_id (int): The ID of the note to be deleted.
+    - id (int): The ID of the note to be deleted.
 
     Returns:
     - redirect: Redirects the user to the home page after deleting the note.
@@ -155,7 +155,7 @@ def delete_note(note_id=None):
 
     """
     try:
-        note = find_note(note_id)
+        note = find_note(id)
         if note is None:
             flash(NOT_FOUND_MESSAGE, "error")
         else:
