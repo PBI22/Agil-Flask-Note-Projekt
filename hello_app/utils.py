@@ -67,7 +67,7 @@ def create_note_post(form):
         )
         dbsession.add(new_note)
         dbsession.commit()
-        flash("Note created successfully!", "success")
+        flash("Note created successfully", "success")
     except Exception as e:
         dbsession.rollback()
         flash(f"Failed to create note: {str(e)}", "error")
@@ -107,7 +107,7 @@ def edit_note_post(form, note_id):
             note.lastedited = datetime.now(timezone.utc)
             note.imagelink = form.imagelink.data
             dbsession.commit()
-            flash("Note updated successfully!", "success")
+            flash("Note updated successfully", "success")
         else:
             flash("You are not authorized to edit this note", "error")
     except Exception as e:

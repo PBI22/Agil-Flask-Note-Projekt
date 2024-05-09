@@ -15,6 +15,8 @@ from hello_app.webapp import app as flask_app
 from hello_app.models import Account, Note
 from hello_app.dbconnect import dbsession as db
 # pylint: enable=C0413
+
+flask_app.config["WTF_CSRF_ENABLED"] = False
 @pytest.fixture(scope="function")
 def client():
     """
