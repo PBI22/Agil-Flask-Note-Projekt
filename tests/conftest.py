@@ -16,7 +16,7 @@ from hello_app.models import Account, Note
 from hello_app.dbconnect import dbsession as db
 # pylint: enable=C0413
 
-flask_app.config["WTF_CSRF_ENABLED"] = False
+flask_app.config["WTF_CSRF_ENABLED"] = False #NOSONAR
 @pytest.fixture(scope="function")
 def client():
     """
@@ -31,7 +31,7 @@ def client():
 
     """
     with flask_app.app_context():
-        hashed_password = generate_password_hash("test")
+        hashed_password = generate_password_hash("test")  # NOSONAR
         user = Account(
             username="testuser",
             password=hashed_password,

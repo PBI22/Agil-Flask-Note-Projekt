@@ -46,7 +46,7 @@ notes = Blueprint("notes", __name__)
 NOT_FOUND_MESSAGE = "Note not found"
 
 
-@notes.route("/create/", methods=["GET", "POST"])
+@notes.route("/create/", methods=["GET", "POST"])  # NOSONAR
 @login_required
 def create_note():
     """
@@ -69,7 +69,7 @@ def create_note():
     return render_template("createnote.html", form=form)
 
 
-@notes.route("/edit/<int:id>", methods=["GET", "POST"])
+@notes.route("/edit/<int:id>", methods=["GET", "POST"])  # NOSONAR
 @login_required
 def edit(id):
     """

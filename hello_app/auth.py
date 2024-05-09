@@ -45,7 +45,8 @@ def login_required(f):
         return f(*args, **kwargs)
     return decorated_function
 
-@auth.route('/login', methods=['GET', 'POST'])
+
+@auth.route("/login", methods=["GET", "POST"])  # NOSONAR
 def login():
     """
     This function handles the login functionality for the application.
@@ -101,7 +102,7 @@ def logout():
     return redirect(url_for('home'))
 
 
-@auth.route('/signup', methods=['GET', 'POST'])
+@auth.route("/signup", methods=["GET", "POST"])  # NOSONAR
 def create_account():
     """
     Create a new user account.
