@@ -5,7 +5,7 @@ It includes functions for updating the list of notes from the database,
 and other helper functions used across the application.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from flask import flash, session
 from .dbconnect import dbsession
 from .models import Note, Account
@@ -34,86 +34,88 @@ def update_list():
     return notes_db
 
 
-def create_note_post(request):
+def create_note_post(form):
     """
-    Create a new note and save it to the database.
+    Create a new note and save it to the database using the provided form data.
 
     Parameters:
-    - request (object): The Flask request object containing the form data.
+    - form (Form): A FlaskForm object containing validated form data.
 
     Returns:
     None
 
     Raises:
     - Exception: If there is an error creating the note.
-
     """
     try:
+        # Extract data from form directly instead of request.form
+        title = form.title.data
+        note_text = form.text.data
+        imagelink = form.imagelink.data or None  # Uses None if imagelink is empty
+        created = datetime.now(timezone.utc)
+        lastedited = datetime.now(timezone.utc)
+        account_id = session["userID"]  # Make sure session is imported and available
 
-        title = request.form["title"]
-        note = request.form["note"]
-        created = datetime.now()
-        lastedited = datetime.now()
-        imagelink = request.form.get("imagelink", None)  # None hvis der ikke er noget
-        account_id = session["userID"]
-        note = Note(
+        # Create a new note instance
+        new_note = Note(
             title=title,
-            text=note,
+            text=note_text,
             created=created,
             lastedited=lastedited,
             imagelink=imagelink,
             author=account_id,
         )
-        dbsession.add(note)
+        dbsession.add(new_note)
         dbsession.commit()
         flash("Note created successfully!", "success")
     except Exception as e:
         dbsession.rollback()
         flash(f"Failed to create note: {str(e)}", "error")
-        app.logger.error("Failed to create note: %s from user: %s", e, session["user"])
+        app.logger.error(
+            "Failed to create note: %s from user: %s", e, session.get("user", "Unknown")
+        )
 
 
 @login_required
-def edit_note_post(request, note_id):
+def edit_note_post(form, note_id):
     """
     Edit a note and update it in the database.
 
     Parameters:
-        request (object): The Flask request object containing the form data.
+        form (FlaskForm): The form object containing the validated data.
         note_id (int): The ID of the note to be edited.
 
     Returns:
         None
 
     Notes:
-        - This function is decorated with the @login_required decorator, 
-          which ensures that the user is logged in before accessing this view.
-        - If the user is not logged in, they will be redirected to the login page with an error message.
-        - If the user is logged in and authorized to edit the note, 
-          the note will be updated in the database with the
-          new title, text, last edited timestamp, and optional image link.
+        - If the user is logged in and authorized to edit the note,
+          the note will be updated in the database with the new title, text, last edited timestamp, and optional image link.
         - If the user is not authorized to edit the note, an error message will be flashed.
-
-    Example:
-        edit_note_post(request, note_id)
     """
     try:
-        upd = dbsession.query(Note).filter(Note.noteID == note_id).first()
+        note = dbsession.query(Note).filter_by(noteID=note_id).first()
+        if note is None:
+            flash("Note not found.", "error")
+            return
+
         user_id = session["userID"]
         user_role = session["roleID"]
-        if user_id == upd.author or user_role == 2:  # admin skal tages fra db
-            upd = dbsession.query(Note).filter(Note.noteID == note_id).first()
-            upd.title = request.form["title"]
-            upd.text = request.form["note"]
-            upd.lastedited = datetime.now()
-            upd.imagelink = request.form.get("imagelink", None)
+        if user_id == note.author or user_role == 2:  # 2 is the admin role
+            note.title = form.title.data
+            note.text = form.text.data
+            note.lastedited = datetime.now(timezone.utc)
+            note.imagelink = form.imagelink.data
             dbsession.commit()
-            flash("Note created successfully!", "success")
+            flash("Note updated successfully!", "success")
         else:
             flash("You are not authorized to edit this note", "error")
     except Exception as e:
+        dbsession.rollback()
         flash(f"Failed to edit note: {str(e)}", "error")
-        app.logger.error("Failed to edit note: %s  from user: %s", e, session["user"])
+        app.logger.error(
+            "Failed to edit note: %s from user: %s", e, session.get("user", "Unknown")
+        )
 
 
 def find_note(note_id):

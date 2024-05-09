@@ -8,7 +8,7 @@ from flask import (
     session
     )
 from werkzeug.security import generate_password_hash, check_password_hash
-from .models import Account
+from .models import Account, LoginForm, SignUpForm
 from .utils import dbsession
 from . import app
 
@@ -50,26 +50,23 @@ def login():
     """
     This function handles the login functionality for the application.
 
-    Parameters:
-    - None
-
     Returns:
-    - If the request method is POST and the login is successful, it redirects the user to the home page.
-    - If the request method is POST and the login fails, it redirects the user back to the login page.
-    - If the request method is GET, it renders the login template.
-
-    Raises:
-    - None
-
+    - Redirects the user to the home page if the login is successful.
+    - Redirects the user back to the login page if the login fails.
+    - Renders the login template on GET request.
     """
-    if request.method == "POST":
-        username = request.form.get('username')
-        password = request.form.get('password')
+
+    form = LoginForm()
+
+    if form.validate_on_submit():
+
+        username = form.username.data
+        password = form.password.data
 
         account = dbsession.query(Account).filter_by(username=username).first()
         if account and check_password_hash(account.password, password):
             session.clear()
-            #gem bruger id og  role i session.
+            # gem bruger id og  role i session.
             session['user'] = account.username
             session['userID'] = account.accountID
             session['userEmail'] = account.email
@@ -77,12 +74,14 @@ def login():
 
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
-        flash('Invalid username or password', 'error')
-        app.logger.warning(f"Failed login attempt from: {request.remote_addr} with username: {username}")
-        return redirect(url_for('auth.login'))
+        else:
+            print("3")
+            flash('Invalid username or password', 'error')
+            app.logger.warning("Failed login attempt from: %s with username: %s", request.remote_addr, form.username.data)
+            return render_template("login.html", form=form)
 
-    # If request method is GET, render the login template
-    return render_template('login.html')
+    # If request method is GET or form is not valid, render the login template
+    return render_template("login.html", form=form)
 
 @auth.route('/logout')
 def logout():
@@ -128,53 +127,56 @@ def create_account():
     Raises:
         None
     """
-    if request.method == "POST":
+    form = SignUpForm()
+    if form.validate_on_submit(): # already checks for POST in this validate, so no need to check for POST again
         # Create account post logik
-
-        if not request.form['username']:
+        username = form.username.data
+        email = form.email.data
+        password = form.password.data
+        if not username:
             flash('Username is required', 'error')
             return redirect(url_for('create_account'))
-        if not request.form['password']:
+        if not email:
             flash('Password is required', 'error')
             return redirect(url_for('create_account'))
-        if not request.form['email']:
+        if not password:
             flash('Email is required', 'error')
             return redirect(url_for('create_account'))
 
-        # Check if username already exists
-        if dbsession.query(Account).filter_by(username=request.form['username']).first() is not None:
-            flash('Username already exists', 'error')
-            return redirect(url_for('auth.create_account'))
+        existing_user = dbsession.query(Account).filter_by(username=username).first()
+        existing_email = dbsession.query(Account).filter_by(email=email).first()
+        # Check if username or email already exists
+        if existing_user:
+            flash("Username already exists", "error")
+            return redirect(url_for("auth.create_account"))
+        if existing_email:
+            flash("Email already registered", "error")
+            return redirect(url_for("auth.create_account"))
 
         try:
-            username = request.form['username']
-            password = request.form['password']
-            email = request.form['email']
-            role_id = 1
-            hashed_password = generate_password_hash(password, method='pbkdf2', salt_length=16)
-
-            dbsession.add(
-                Account(
-                    username=username,
-                    password=hashed_password,
-                    email=email,
-                    roleID=role_id,
-                )
+            hashed_password = generate_password_hash(
+                password, method="pbkdf2:sha256", salt_length=16
             )
+            new_account = Account(
+                username=username,
+                password=hashed_password,
+                email=email,
+                roleID=1,  # default role ID
+            )
+            dbsession.add(new_account)
             dbsession.commit()
-            flash('Account created successfully!', 'success')
-            # Logger automatisk brugeren ind efter oprettelse
-            session.clear()
-            account = dbsession.query(Account).filter_by(username=username).first()
-            session['user'] = account.username
-            session['userID'] = account.accountID
-            session['userEmail'] = account.email
-            return redirect(url_for('home'))
+
+            # Log the user in automatically
+            session["user"] = username
+            session["userID"] = new_account.accountID
+            session["userEmail"] = email
+            flash("Account created successfully!", "success")
+            return redirect(url_for("home"))
 
         except Exception as e:
-            app.logger.error(f"Failed to create account: {e} from address: {request.remote_addr} with username: {username} and email: {email}")
+            app.logger.error("Failed to create account: %s from address: %s with username: %s and email: %s", e, request.remote_addr, username, email)
             flash('Error creating account', 'error')
             return redirect(url_for('auth.create_account'))
 
-    else:
-        return render_template("signup.html")
+    
+    return render_template("signup.html", form=form)
