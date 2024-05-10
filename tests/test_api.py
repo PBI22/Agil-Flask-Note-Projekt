@@ -278,3 +278,19 @@ def test_edit_note_with_invalid_id(client, dbsession):
     )  # Assuming 999999 does not exist
     assert response.status_code == 404
     assert "Note not found" or "the author does not exist" in response.get_json()["message"] # should fix this
+
+
+def test_swagger_ui_accessibility(client):
+    """
+    Test to ensure that the Swagger UI is accessible at the /apidocs endpoint.
+    """
+    response = client.get("/apidocs/")
+    assert (
+        response.status_code == 200
+    ), "Failed to access /apidocs/ with status code {}".format(response.status_code)
+    assert (
+        "text/html" in response.content_type
+    ), "Expected content type text/html but got {}".format(response.content_type)
+    assert "swagger" in response.data.decode(
+        "utf-8"
+    ), "swagger text not found in response"
