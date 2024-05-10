@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from functools import wraps
 from html import escape
 from logging import log
@@ -77,11 +77,14 @@ def login():
         - None
     """
     data = request.json
-    username = escape(data.get('username'))
-    password = escape(data.get('password'))
+    username = data.get('username') # cant escape directly here cause it cant handle if its None
+    password = data.get('password')
 
     if not username or not password:
         return jsonify({'message': 'Username or password missing'}), 400
+    
+    username = escape(username) # escape for sql injection protection
+    password = escape(password)
 
     account = dbsession.query(Account).filter_by(username=username).first()
     if not account or not check_password_hash(account.password, password):
@@ -173,6 +176,8 @@ def display_note(id):
     """
     try:
         note_from_id = dbsession.query(Note).filter(Note.noteID == id).all()
+        if not note_from_id:
+            return jsonify({"message": "Note not found"}), 404
         note_isoformat = [note.to_isoformat() for note in note_from_id] # Tager alle med specifikt id
         return jsonify(note_isoformat)
     except Exception:
@@ -205,9 +210,9 @@ def create_note():
         note = request.json
         title = escape(note.get('title'))
         text = escape(note.get('text'))
-        created = datetime.now()
-        lastedited = datetime.now()
-        imagelink = escape(note.get('imagelink'))
+        created = datetime.now(timezone.utc)
+        lastedited = datetime.now(timezone.utc)
+        imagelink = escape(note.get('imagelink',""))
         author = current_user['author']
 
         new_note = Note(
@@ -225,15 +230,17 @@ def create_note():
             jsonify(
                 {
                     "noteID": new_note.noteID,
-                    "Imagelink": new_note.imagelink,
-                    "Text": new_note.text,
-                    "Titel": new_note.title,
-                    "Author": new_note.author,
-                    "Message": "Note created successfully",
+                    "imagelink": new_note.imagelink,
+                    "text": new_note.text,
+                    "titel": new_note.title,
+                    "author": new_note.author,
+                    "message": "Note created successfully",
                 }
             ),
             201,
         )
+    except AttributeError:
+        return jsonify({"message": "Invalid data"}), 400 # Hvis der mangler data der hvor deres bruger escape metoden
     except Exception:
         dbsession.rollback()
         log(traceback.format_exc())
@@ -301,19 +308,19 @@ def edit_note(id):
     try:
         note_author_query = dbsession.query(Note).filter(Note.author == current_user['author']).first()
         if note_author_query is None:
-            return "The note does not exist"
+            return jsonify({"message": "The author does not exist"}), 404
 
         edit_query = dbsession.query(Note).filter(Note.noteID == id).first()
 
         if edit_query is None:
             return jsonify({"message": "Note not found"}), 404
-        
+
         if current_user['author'] != edit_query.author:
             return "Current user is not author of the note"
         note = request.json
         title = escape(note.get('title'))
         text = escape(note.get('text'))
-        lastedited = datetime.now()
+        lastedited = datetime.now(timezone.utc)
         imagelink = escape(note.get('imagelink'))
 
         # Laves så kun ændrede data tabeller bliver ændret(ellers gør den det andet tomt)
@@ -326,10 +333,10 @@ def edit_note(id):
 
         return jsonify(
             {
-                "Titel": title,
-                "Text": text,
-                "Imagelink": imagelink,
-                "Message": "Note edited successfully",
+                "titel": title,
+                "text": text,
+                "imagelink": imagelink,
+                "message": "Note edited successfully",
             }
         )
     except Exception:
