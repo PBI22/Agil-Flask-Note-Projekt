@@ -7,8 +7,10 @@
 
 
   <p>
-    Agile development project build on https://learn.microsoft.com/en-us/azure/developer/python/python-web-app-github-actions-app-service?tabs=azure-cli
-    <br><br>
+    Agile development project build on:
+
+    https://learn.microsoft.com/en-us/azure/developer/python/python-web-app-github-actions-app-service?tabs=azure-cli
+
     Afterwards modified by PBI22.
   </p>
 
@@ -66,16 +68,21 @@ Useraccounts are stored locally in the database and a basic version of OAuth is 
 
 Cloning the project to your workstation:
 
-```
-  git clone https://github.com/PBI22/Agil-Flask-Note-Projekt.git
+```sh
+git clone https://github.com/PBI22/Agil-Flask-Note-Projekt.git
 ```
 
+Create and activate virtual environment
+```sh
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 To run the application
-```Open your favourite ZSH terminal app
- cd hello_app
- pip install -r requirements.txt
- flask --app webapp run
+```sh
+cd hello_app
+flask --app webapp run
 ```
 You should now be able to access the application homepage in your browser at http://localhost:5000
  
