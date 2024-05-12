@@ -3,12 +3,27 @@
   --- 
   
   <h1>Agil Note Project - PBI22</h1>
-  
+
+
+
   <p>
     Agile development project build on https://learn.microsoft.com/en-us/azure/developer/python/python-web-app-github-actions-app-service?tabs=azure-cli
     <br><br>
     Afterwards modified by PBI22.
   </p>
+
+[![BuildTest](https://github.com/PBI22/Agil-Flask-Note-Projekt/actions/workflows/build-and-test.yml/badge.svg)](https://github.com/PBI22/Agil-Flask-Note-Projekt/actions/workflows/build-and-test.yml)
+
+  [![SonarCloud](https://sonarcloud.io/images/project_badges/sonarcloud-white.svg)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt)
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=coverage)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt)  [![linting: pylint](https://img.shields.io/badge/linting-pylint-yellowgreen)](https://github.com/pylint-dev/pylint) 
+
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt)
+ [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) 
+
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=bugs)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt)  [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=PBI22_Agil-Flask-Note-Projekt&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=PBI22_Agil-Flask-Note-Projekt)
+
+---
 
   <h4>
     <a href="#om-projektet">Introduction</a>
