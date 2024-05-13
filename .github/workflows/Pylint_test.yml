@@ -2,7 +2,7 @@ name: pylint-test
 
 on:
   push:
-    branches: [ main ]
+    branches: [ 154-920---konfiguration-af-pylint-til-at-tjekke-score-p-hver-fil-for-sigsamt-st-ny-threshold ] 
   pull_request:
     types: [opened, synchronize, reopened]
   workflow_dispatch:
