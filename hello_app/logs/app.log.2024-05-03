@@ -1,0 +1,19 @@
+2024-05-03 09:32:45,214 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:54:04,367 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:56:56,650 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:56:56,664 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:10,065 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:14,193 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:57:14,206 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:15,620 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:57:15,631 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:16,905 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:57:16,916 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:20,621 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:57:20,628 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:57:22,061 - ERROR - hello_app: Failed to delete note: 'roleID' from user: test123
+2024-05-03 09:57:22,075 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 09:58:44,947 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 10:27:56,877 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 12:44:21,535 - INFO - hello_app: Home page requested from: 127.0.0.1
+2024-05-03 13:01:59,122 - INFO - hello_app: Home page requested from: 127.0.0.1
