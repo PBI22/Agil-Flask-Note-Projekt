@@ -31,7 +31,6 @@ jobs:
     - name: Run Pylint on all files
       continue-on-error: true
       run: |
-        > tests/pylint_testreport.txt
         find hello_app tests -type f -name '*.py' | while read file; do pylint --max-line-length=128 -j 0 "$file" >> pylint_testreport.txt; done
         echo "Pylint tests done"
         
