@@ -12,7 +12,8 @@ from .models import Note, Account
 from .auth import login_required
 from . import app
 
-
+def create_quiz_post():
+    return
 def update_list():
     """
     Update the list of notes from the database.
@@ -33,19 +34,7 @@ def update_list():
         app.logger.critical("Failed to update list: %s", e)
     return notes_db
 
-<<<<<<< HEAD
-def create_quiz_post(request):
-    try:
-        flash("Test")
-    except Exception as e:
-        dbsession.rollback()
-        flash(f"Failed to create note: {str(e)}", "error")
-        app.logger.error("Failed to create note: %s from user: %s", e, session["user"])
-def create_note_post(request):
-=======
-
 def create_note_post(form):
->>>>>>> fd6ce65cf2366ee3ed601069d5ea50a21f67220f
     """
     Create a new note and save it to the database using the provided form data.
 
