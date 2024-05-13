@@ -76,7 +76,6 @@ def login():
             flash(f'Login successful for {account.username}', 'success')
             return redirect(url_for('home'))
         else:
-            print("3")
             flash('Invalid username or password', 'error')
             app.logger.warning("Failed login attempt from: %s with username: %s", request.remote_addr, form.username.data)
             return render_template("login.html", form=form)
