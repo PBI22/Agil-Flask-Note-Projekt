@@ -2,13 +2,40 @@ PRAGMA foreign_keys=OFF;
 
 BEGIN TRANSACTION;
 
-DROP TABLE role;
-Drop table note;
-drop table account;
+DROP TABLE IF EXISTS quiz;
+DROP TABLE IF EXISTS question;
+DROP TABLE IF EXISTS choice;
+DROP TABLE IF EXISTS role;
+DROP TABLE IF EXISTS note;
+DROP TABLE IF EXISTS account;
+
+CREATE TABLE quiz (
+quizID int primary key not null,
+name varchar2(255),
+author int not null,
+foreign key(author) references account(accountID)
+);
+
+CREATE TABLE question (
+questionID int primary key not null,
+text varchar2(255),
+quizID int not null,
+foreign key (quizID) references quiz(quizID)
+);
+
+CREATE TABLE choice (
+choiceID int primary key not null,
+text varchar2(255),
+iscorrect boolean,
+questionID int not null,
+foreign key (questionID) references question(questionID)
+);
+
+
 
 CREATE TABLE role (
 roleID int primary key not null,
-rolename varchar(255) not null);
+rolename varchar2(255) not null);
 insert into role (roleID, rolename)
 values (1, "User"), (2, "Admin");
 
