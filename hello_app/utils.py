@@ -140,6 +140,9 @@ def find_note(note_id):
         app.logger.error("Failed to find note: %s from user: %s", e, session["user"])
     return note
 
+def create_quiz_post():
+    return
+
 def searchbar(query):
     """
     Searches for notes and accounts based on a given query.

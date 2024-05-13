@@ -9,6 +9,7 @@ from .api import api
 from .log_config import setup_app_logging
 from .notes import notes
 from .oauth import oauth, oauth_bp
+from .quiz import quiz
 
 # inits til vores app
 oauth.init_app(app)
@@ -17,6 +18,7 @@ app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(api, url_prefix='/api')
 csrf.exempt(api) # csrf is disabled for api, cause we are using jwt for validation
 app.register_blueprint(notes, url_prefix='/notes')
+app.register_blueprint(quiz, url_prefix='/quiz')
 setup_app_logging(app)
 
 SWAGGER_URL = '/swagger'
