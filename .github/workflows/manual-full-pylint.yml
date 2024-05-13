@@ -1,10 +1,6 @@
-name: pylint-test # will be deleted when integrated with the main workflow
+name: pylint-manual-test
 
 on:
-  push:
-    branches: [ 154-920---konfiguration-af-pylint-til-at-tjekke-score-p-hver-fil-for-sigsamt-st-ny-threshold ] 
-  pull_request:
-    types: [opened, synchronize, reopened]
   workflow_dispatch:
     inputs:
       pylint_threshold:
@@ -26,13 +22,17 @@ jobs:
         python-version: 3.9
         
     - name: Install dependencies
-      run: pip install -r requirements.txt
-      
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
     - name: Run Pylint on all files
       continue-on-error: true
       run: |
         > tests/pylint_testreport.txt
-        find hello_app tests -type f -name '*.py' | while read file; do pylint --max-line-length=128 -j 0 "$file" >> pylint_testreport.txt || true; done
+        find hello_app tests -type f -name '*.py' | while read file; do
+          pylint --max-line-length=128 -j 0 "$file" >> tests/pylint_testreport.txt || true
+        done
         echo "Pylint tests done"
         
     - name: Check Pylint scores
