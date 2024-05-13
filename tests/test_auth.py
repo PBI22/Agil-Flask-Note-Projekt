@@ -122,45 +122,37 @@ def test_signup(client, dbsession):
     """
     Test the signup functionality of the application.
 
-    Parameters:
-    - client: The Flask test client object.
-    - dbsession: The database session object.
-
-    Returns:
-    None
-
-    Raises:
-    None
-
-    Description:
-    This function tests the signup functionality of the application by making a POST request to 
-    the '/auth/signup' endpoint with the provided username, password, and email. 
-    It then checks if the user is successfully added to the database and if 
-    the response status code is 200. It also checks if the response data contains 
-    the expected strings indicating a successful signup and login.
-
-    Example Usage:
-    test_signup(client, dbsession)
+    This function sends a POST request to the '/auth/signup' endpoint with the necessary
+    data for creating a new user account, checks if the user is successfully added to the
+    database, verifies that the response status code is 200, and ensures that the response
+    data includes the expected strings indicating a successful signup.
     """
     response = client.post(
         "/auth/signup",
         data={
             "username": "testsignupuser",
-            "password": "test",
             "email": "testsignup@test.dk",
+            "password": "test",
+            "confirm_password": "test",  # Ensure the confirmation password matches
         },
         follow_redirects=True,
     )
-    # Tjek brugeren er i databasen
+    # Verify that the user is correctly added to the database
     user = dbsession.query(Account).filter_by(username="testsignupuser").first()
     assert user is not None
     assert user.username == "testsignupuser"
-    assert user.password != "test"  # fordi password er hashed
+    assert user.email == "testsignup@test.dk"
+    # Ensure password is hashed and does not equal the plaintext
+    assert user.password != "test"
+
+    # Check response status code and body content
     assert response.status_code == 200
-    assert b"Hjem" in response.data
-    assert "Logged in as:" in response.data.decode("utf-8")
-    assert "Logout" in response.data.decode("utf-8")
-    assert "Invalid username or password" not in response.data.decode("utf-8")
+    # Check for success message and user redirection/logged-in indicators
+    response_data = response.data.decode("utf-8")
+    assert "Account created successfully!" in response_data
+    assert "Logged in as:" in response_data
+    assert "Logout" in response_data
+    assert "Invalid username or password" not in response_data
 
 
 def test_logout(client):
