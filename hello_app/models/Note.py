@@ -1,3 +1,4 @@
+from datetime import datetime, timezone
 from sqlalchemy import Column,ForeignKey, Integer, DateTime, Text, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship
 
@@ -44,8 +45,8 @@ class Note(Base):
     noteID = Column(Integer, autoincrement=True, primary_key=True)
     title = Column(VARCHAR(255), nullable=False)
     text = Column(Text, nullable=False)
-    created = Column(DateTime, nullable=False)
-    lastedited = Column(DateTime, nullable=True)
+    created = Column(DateTime, nullable=False, default=datetime.now(timezone.utc))
+    lastedited = Column(DateTime, nullable=True, default=datetime.now(timezone.utc))
     imagelink = Column(VARCHAR(255), nullable=True)
     author = Column(Integer, ForeignKey("account.accountID"), nullable=False)
 

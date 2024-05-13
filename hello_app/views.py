@@ -2,7 +2,7 @@ import os
 from datetime import datetime
 from flask import render_template, send_from_directory, request
 from flask_swagger_ui import get_swaggerui_blueprint
-from . import app
+from . import app, csrf
 from .utils import update_list
 from .auth import auth
 from .api import api
@@ -16,6 +16,7 @@ oauth.init_app(app)
 app.register_blueprint(oauth_bp, url_prefix='/oauth')
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(api, url_prefix='/api')
+csrf.exempt(api) # csrf is disabled for api, cause we are using jwt for validation
 app.register_blueprint(notes, url_prefix='/notes')
 app.register_blueprint(quiz, url_prefix='/quiz')
 setup_app_logging(app)
@@ -65,8 +66,6 @@ def robots_txt():
 
     """
     try:
-        root_dir = os.path.abspath(os.path.dirname(__file__))
-        folder_path = os.path.join(root_dir, 'static')
         app.logger.info("robots.txt requested from: %s", request.remote_addr)
         return send_from_directory(app.static_folder, 'robots.txt')
     except Exception as e:
