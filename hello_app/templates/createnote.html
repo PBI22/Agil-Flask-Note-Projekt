@@ -21,12 +21,11 @@ Create Note
 <h1>Opret Note</h1>
 
 <form action="/notes/create/" method="post">
-    <input type="text" name="title" placeholder="Name" /><br>
-    <textarea name="note"></textarea><br>
-    <!-- <input type="text" name="author" placeholder="Author" /><br> -->
-    <input type="hidden" name="created" value=" {{ datetime }}"/><br>
-    <input type="hidden" name="imagelink" placeholder="Image Link"/><br>
-    <input type="submit" value="Create Note" />
+    {{ form.hidden_tag() }}
+    {{ form.title(size=32, placeholder="Name") }}<br>
+    {{ form.text(rows=4) }}<br>
+    {{ form.imagelink() }}<br>
+    {{ form.submit(value="Create Note") }}
 </form>
 
 </div>

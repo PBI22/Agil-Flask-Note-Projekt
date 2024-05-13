@@ -25,9 +25,10 @@ The module uses Flask's rendering capabilities to return HTML pages that include
 and note content, and leverages Flask's messaging and redirection features to enhance 
 user interaction and feedback.
 """
-
+from datetime import datetime, timezone
 import markdown2
 from flask import Blueprint, render_template, request, redirect, url_for, flash
+from .models import NoteForm, EditNoteForm
 from .auth import login_required
 from .utils import (
     create_note_post,
@@ -45,7 +46,7 @@ notes = Blueprint("notes", __name__)
 NOT_FOUND_MESSAGE = "Note not found"
 
 
-@notes.route("/create/", methods=["GET", "POST"])
+@notes.route("/create/", methods=["GET", "POST"])  # NOSONAR
 @login_required
 def create_note():
     """
@@ -60,38 +61,37 @@ def create_note():
         None
 
     """
-    if request.method == "GET":
-        return render_template("createnote.html")
+    form = NoteForm()
+    if form.validate_on_submit():
+        create_note_post(form)
+        return redirect(url_for("home"))
 
-    create_note_post(request)
-    return redirect(url_for("home"))
+    return render_template("createnote.html", form=form)
 
 
-@notes.route("/edit/<id>", methods=["GET", "POST"])
+@notes.route("/edit/<int:id>", methods=["GET", "POST"])  # NOSONAR
 @login_required
-def edit(id=None):
+def edit(id):
     """
     Edit a note.
 
     Parameters:
-    - id (str): The ID of the note to be edited.
+    - id (int): The ID of the note to be edited.
 
     Returns:
     - None
-
-    Raises:
-    - None
-
     """
     note = find_note(id)
     if note is None:
-        flash(NOT_FOUND_MESSAGE, "error")
+        flash("Note not found.", "error")
         return redirect(url_for("home"))
-    if request.method == "GET":
-        return render_template("editnote.html", note=note)
 
-    edit_note_post(request, id)
-    return redirect(url_for("home"))
+    form = EditNoteForm(obj=note)  # Pre-populate form with note data
+    if form.validate_on_submit():
+        edit_note_post(form, id)  # Pass the form and note ID
+        return redirect(url_for("home"))
+
+    return render_template("editnote.html", form=form, note_id=id)
 
 
 @notes.route("/view/<id>")

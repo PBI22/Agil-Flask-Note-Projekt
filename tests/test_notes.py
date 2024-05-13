@@ -174,7 +174,7 @@ def test_create_note_post(client, log_in_test_user, dbsession):
         "/notes/create/",
         data={
             "title":"Test Note", 
-            "note":"This is a test note"
+            "text":"This is a test note"
             },
         follow_redirects=True,
     )
@@ -296,14 +296,14 @@ def test_edit_note_post(client, log_in_test_user, dbsession):
         f"/notes/edit/{note.noteID}",
         data={
             "title":"EDITED Test Post",
-            "note":"This is a test edit note, for testing edit endpoint in pytest, and this is the edited text",
+            "text":"This is a test edit note, for testing edit endpoint in pytest, and this is the edited text",
         },
         follow_redirects=True,
     )
     assert response.status_code == 200
     assert b"Hjem" in response.data
     assert "Failed to edit note" not in response.data.decode("utf-8")
-    assert "Note created successfully" in response.data.decode("utf-8")
+    assert "Note updated successfully" in response.data.decode("utf-8")
     assert "EDITED Test Post" in response.data.decode("utf-8")
 
 

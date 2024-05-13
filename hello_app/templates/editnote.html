@@ -20,13 +20,12 @@ Edit Note
 
 <div class="main-body">
 <!-- Lav input felter -->
-<form action="/notes/edit/{{ note.noteID }}" method="post">
-    <input type="text" name="title" placeholder="Name"value="{{ note.title }}" /><br>
-    <textarea name="note" placeholder="Note">{{ note.text }}</textarea><br>
-    <!-- <input type="text" name="author" placeholder="Author" /><br> -->
-    <input type="hidden" name="created" value=" {{ note.created }}"/><br>
-    <input type="hidden" name="imagelink" placeholder="Image Link" value="{{ note.imagelink }}"/><br>
-    <input type="submit" value="Edit Note" />
+<form action="/notes/edit/{{ note_id }}" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.title(size=32, placeholder="Name", value=form.title.data) }}<br>
+    {{ form.text(rows=4, placeholder="Note", value=form.text.data) }}<br>
+    {{ form.imagelink() }}<br>
+    {{ form.submit(value="Edit Note") }}
 </form>
 </div>
 {% endblock %}
