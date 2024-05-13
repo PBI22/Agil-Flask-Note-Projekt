@@ -30,7 +30,9 @@ jobs:
       
     - name: Run Pylint on all files
       run: |
-        find hello_app tests -type f -name '*.py' -exec pylint --max-line-length=128 {} + > tests/pylint_testreport.txt
+        > tests/pylint_testreport.txt
+        find hello_app tests -type f -name '*.py' | while read file; do pylint --max-line-length=128 -j 0 "$file" >> pylint_testreport.txt; done
+        echo "Pylint tests done"
         
     - name: Check Pylint scores
       run: python tests/eval_pylint_scores.py ${{ github.event.inputs.pylint_threshold }}
