@@ -1,0 +1,36 @@
+name: pylint-test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+    inputs:
+      pylint_threshold:
+        description: 'Pylint score threshold'
+        required: true
+        default: '8.0'  # Default threshold
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+      
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.9
+        
+    - name: Install Pylint
+      run: pip install pylint
+      
+    - name: Run Pylint on all files
+      run: |
+        find hello_app tests -type f -name '*.py' -exec pylint --max-line-length=128 -j 0 {} + > tests/pylint_testreport.txt
+        
+    - name: Check Pylint scores
+      run: python tests/eval_pylint_scores.py ${{ github.event.inputs.pylint_threshold }}
