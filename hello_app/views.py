@@ -15,7 +15,7 @@ oauth.init_app(app)
 app.register_blueprint(oauth_bp, url_prefix='/oauth')
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(api, url_prefix='/api')
-csrf.exempt(api) # csrf er disabled for api, cause we are using jwt for validation
+csrf.exempt(api) # csrf is disabled for api, cause we are using jwt for validation
 app.register_blueprint(notes, url_prefix='/notes')
 setup_app_logging(app)
 
