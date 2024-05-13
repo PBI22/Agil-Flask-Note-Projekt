@@ -36,4 +36,4 @@ jobs:
         echo "Pylint tests done"
         
     - name: Check Pylint scores
-      run: python tests/eval_pylint_scores.py ${{ github.event.inputs.pylint_threshold }}
+      run: python tests/eval_pylint_scores.py ${{ github.event.inputs.pylint_threshold || '8.0' }}
