@@ -1,5 +1,5 @@
 from datetime import datetime, timezone
-from sqlalchemy import Boolean, Column,ForeignKey, Integer, DateTime, Text, VARCHAR
+from sqlalchemy import Boolean, Column,ForeignKey, Integer, DateTime, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
@@ -7,6 +7,15 @@ Base = declarative_base()
 class Quiz(Base):
     """
     A class representing a Quiz.
+
+    Attributes:
+        quizID (int): The ID of the quiz.
+        name (str): The name of the quiz.
+        created (datetime): The datetime when the quiz was created.
+        lastedited (datetime): The datetime when the quiz was last edited.
+        accountID (int): The ID of the account associated with the quiz.
+        account (Account): The account associated with the quiz.
+        questions (list of Question): The questions associated with the quiz.
     """
 
     __tablename__ = 'quiz'
@@ -22,7 +31,7 @@ class Quiz(Base):
         primaryjoin="and_(Account.accountID==Quiz.accountID)",
         foreign_keys=[accountID],
     )
-    
+
     questions = relationship("Question", backref="quiz", cascade="all, delete-orphan")
 
 # Duplicate code from Note.py (due to time constraints and issues this will have to do, otherwise import from Note or something)
