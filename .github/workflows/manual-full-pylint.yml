@@ -1,0 +1,39 @@
+name: pylint-manual-test
+
+on:
+  workflow_dispatch:
+    inputs:
+      pylint_threshold:
+        description: 'Pylint score threshold'
+        required: true
+        default: '8.0'  # Default threshold
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v5
+      with:
+        python-version: 3.9
+        
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Pylint on all files
+      continue-on-error: true
+      run: |
+        > tests/pylint_testreport.txt
+        find hello_app tests -type f -name '*.py' | while read file; do
+          pylint --max-line-length=128 -j 0 "$file" >> tests/pylint_testreport.txt || true
+        done
+        echo "Pylint tests done"
+        
+    - name: Check Pylint scores
+      run: python tests/eval_pylint_scores.py ${{ github.event.inputs.pylint_threshold || '8.0' }}

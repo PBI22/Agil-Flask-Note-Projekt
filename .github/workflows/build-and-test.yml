@@ -26,17 +26,21 @@ jobs:
     - name: Running pytest
       run: |
         pytest tests/ --cov=hello_app --cov-report=xml --cov-report=html --disable-warnings
-    # kører pylint og threshold er sat til 5.0 (for ikke at fejl for meget i første omgang, inden vi får rettet alle issues)
-    - name: Analysing the code with pylint 
+   
+    - name: Run Pylint on all files # to validate each file based on threshold
+      continue-on-error: true
+      run: |
+        > tests/pylint_testreport.txt
+        find hello_app tests -type f -name '*.py' | while read file; do pylint --max-line-length=128 -j 0 "$file" >> pylint_testreport.txt || true; done
+        echo "Pylint tests done"
+    
+    - name: Check Pylint scores
+      run: python tests/eval_pylint_scores.py 8.0 # threshold value , should probaly be a env variable later on
+
+    - name: Making a combined pylint report for all files # to pass to SonarCloud
       continue-on-error: true
       run: |
        pylint --max-line-length=128 hello_app tests > tests/pylint_report.txt
-
-    - name: Check Pylint score
-      run: |
-        score=$(sed -n 's/^Your code has been rated at \([-0-9.]*\)\/.*/\1/p' tests/pylint_report.txt)
-        echo "Pylint score: $score"
-        python -c "import sys; sys.exit(0 if $score >= 5.0 else 1)" 
 
     - name: SonarCloud Scan
       uses: SonarSource/sonarcloud-github-action@master

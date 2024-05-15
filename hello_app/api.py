@@ -1,20 +1,34 @@
+"""
+This module defines the API endpoints for a note-taking application using Flask.
+It includes routes for user authentication, note management (create, read, update, delete),
+and a test route. The module utilizes Flask-JWT-Extended for handling JWT tokens,
+Flask-Swagger for API documentation, and SQLAlchemy for database interactions.
+
+Functions:
+- login(): Authenticate users and provide JWT tokens.
+- unprotected(): A test route accessible without authentication.
+- protected(): A route that requires JWT authentication.
+- display_notes(): Fetch and display all notes.
+- display_note(id): Fetch and display a specific note by ID.
+- create_note(): Create a new note.
+- delete_note(id): Delete a specific note by ID.
+- edit_note(id): Update a specific note by ID.
+
+Each route is documented with Swagger for easy testing and integration.
+"""
+
 from datetime import datetime, timedelta, timezone
 from functools import wraps
 from html import escape
 from logging import log
 import traceback
-from flask import (
-    Blueprint,
-    jsonify,
-    request,
-    make_response
-    )
+from flask import Blueprint, jsonify, request, make_response
 from flask_jwt_extended import (
     JWTManager,
     get_jwt_identity,
     create_access_token,
-    verify_jwt_in_request
-    )
+    verify_jwt_in_request,
+)
 from werkzeug.security import check_password_hash
 from flasgger import Swagger
 from flasgger import swag_from
@@ -23,17 +37,19 @@ from .models import Note, Account
 
 CONNECTION_ERROR = "A Connection Error Has Occured"
 
-api = Blueprint('api', __name__)
+
+api = Blueprint("api", __name__)
 swagger = Swagger(app)
 
 # Laver en JWTManager
 jwt = JWTManager()
 # Indstiller JWT secret key og token expiry date - Senere så skal den flyttes ud af filen for at være sikker
-app.config['JWT_SECRET_KEY'] = 'my_secret'
-app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=120)
+app.config["JWT_SECRET_KEY"] = "my_secret"
+app.config["JWT_ACCESS_TOKEN_EXPIRES"] = timedelta(minutes=120)
 
 # Initialize JWTManager
 jwt.init_app(app)
+
 
 # allows swagger to start up before getting asked for a jwt, will still require a jwt when sending requests
 def jwt_or_swagger_required(f):
@@ -48,21 +64,24 @@ def jwt_or_swagger_required(f):
     - The decorated function
 
     """
+
     @wraps(f)
     def decorated_function(*args, **kwargs):
-        """ Check if the request is from Swagger (potential safety concern,
-            but would take more time to fetch jwt with e.g. javascript) """
-        if 'swagger' in request.url.lower():
+        """Check if the request is from Swagger (potential safety concern,
+        but would take more time to fetch jwt with e.g. javascript)"""
+        if "swagger" in request.url.lower():
             # If from Swagger UI
             return f(*args, **kwargs)
         # If not from Swagger UI, verify jwt
         verify_jwt_in_request()
         return f(*args, **kwargs)
+
     return decorated_function
 
+
 # Logger ind og giver brugeren en JWT Token
-@api.route('/login', methods=['POST'])
-@swag_from('static/swaggerformatting/login.yml')
+@api.route("/login", methods=["POST"])
+@swag_from("static/swaggerformatting/login.yml")
 def login():
     """
     This function handles the login process for the API.
@@ -77,30 +96,33 @@ def login():
         - None
     """
     data = request.json
-    username = data.get('username') # cant escape directly here cause it cant handle if its None
-    password = data.get('password')
+    username = data.get(
+        "username"
+    )  # cant escape directly here cause it cant handle if its None
+    password = data.get("password")
 
     if not username or not password:
-        return jsonify({'message': 'Username or password missing'}), 400
-    
-    username = escape(username) # escape for sql injection protection
+        return jsonify({"message": "Username or password missing"}), 400
+
+    username = escape(username)  # escape for sql injection protection
     password = escape(password)
 
     account = dbsession.query(Account).filter_by(username=username).first()
     if not account or not check_password_hash(account.password, password):
-        return jsonify({'message': 'Invalid credentials!'}), 401
+        return jsonify({"message": "Invalid credentials!"}), 401
 
     access_token = create_access_token(
         identity={"username": username, "author": account.accountID}
     )
-    return jsonify({'access_token': access_token}), 200
+    return jsonify({"access_token": access_token}), 200
+
 
 # Test route: Alle kan få adgang hertil
-@api.route('/unprotected')
-@swag_from('static/swaggerformatting/unprotected.yml')
+@api.route("/unprotected")
+@swag_from("static/swaggerformatting/unprotected.yml")
 def unprotected():
     """
-    This function is a route that can be accessed by anyone without requiring a valid JWT token. 
+    This function is a route that can be accessed by anyone without requiring a valid JWT token.
     It returns a JSON response with a message indicating that anyone can view this route.
 
     Parameters:
@@ -112,15 +134,16 @@ def unprotected():
     Raises:
         None
     """
-    return jsonify({'message': 'Anyone can view this!'})
+    return jsonify({"message": "Anyone can view this!"})
+
 
 # Test route: Kun folk med en valid token kan få adgang
-@api.route('/protected', methods=['GET'])
+@api.route("/protected", methods=["GET"])
 @jwt_or_swagger_required
-@swag_from('static/swaggerformatting/protected.yml')
+@swag_from("static/swaggerformatting/protected.yml")
 def protected():
     """
-    This function is a protected route that requires a valid JWT token for access. 
+    This function is a protected route that requires a valid JWT token for access.
     It returns the current user's identity as a JSON response.
 
     Parameters:
@@ -134,9 +157,11 @@ def protected():
     """
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
+
+
 # Tager alle noter
-@api.route('/notes', methods=['GET'])
-@swag_from('static/swaggerformatting/view.yml')
+@api.route("/notes", methods=["GET"])
+@swag_from("static/swaggerformatting/view.yml")
 def display_notes():
     """
     This function retrieves all notes from the database and returns them as a JSON response.
@@ -155,12 +180,13 @@ def display_notes():
         note_isoformat = [note.to_isoformat() for note in all_notes]
         return jsonify(note_isoformat)
     except Exception:
-        log(traceback.format_exc())
+        log(traceback.format_exc(), "An internal error has occurred in /notes")
         return CONNECTION_ERROR
 
+
 # Tager en note fra id
-@api.route('/notes/<id>', methods=['GET'])
-@swag_from('static/swaggerformatting/viewid.yml')
+@api.route("/notes/<id>", methods=["GET"])
+@swag_from("static/swaggerformatting/viewid.yml")
 def display_note(id):
     """
     This function retrieves a note from the database based on the provided ID and returns it as a JSON response.
@@ -178,19 +204,24 @@ def display_note(id):
         note_from_id = dbsession.query(Note).filter(Note.noteID == id).all()
         if not note_from_id:
             return jsonify({"message": "Note not found"}), 404
-        note_isoformat = [note.to_isoformat() for note in note_from_id] # Tager alle med specifikt id
+        note_isoformat = [
+            note.to_isoformat() for note in note_from_id
+        ]  # Tager alle med specifikt id
         return jsonify(note_isoformat)
     except Exception:
-        log(traceback.format_exc())
+        log(traceback.format_exc(), "An internal error has occurred in GET /notes/<id>")
         return CONNECTION_ERROR
+
 
 """
 Tager title, text og imagelink til at lave en post request
 (curl kan eksempelvis bruges. Check "curl requests.md" i Artefakter/API)
 """
-@api.route('/notes/create', methods=['POST'])
+
+
+@api.route("/notes/create", methods=["POST"])
 @jwt_or_swagger_required
-@swag_from('static/swaggerformatting/create.yml')
+@swag_from("static/swaggerformatting/create.yml")
 def create_note():
     """
     Create a new note in the database.
@@ -199,7 +230,7 @@ def create_note():
         None
 
     Returns:
-        A JSON response containing the details of the newly created note, 
+        A JSON response containing the details of the newly created note,
         including the note ID, image link, text, title, author, and a success message.
 
     Raises:
@@ -208,12 +239,12 @@ def create_note():
     current_user = get_jwt_identity()
     try:
         note = request.json
-        title = escape(note.get('title'))
-        text = escape(note.get('text'))
+        title = escape(note.get("title"))
+        text = escape(note.get("text"))
         created = datetime.now(timezone.utc)
         lastedited = datetime.now(timezone.utc)
-        imagelink = escape(note.get('imagelink',""))
-        author = current_user['author']
+        imagelink = escape(note.get("imagelink", ""))
+        author = current_user["author"]
 
         new_note = Note(
             title=title,
@@ -240,16 +271,20 @@ def create_note():
             201,
         )
     except AttributeError:
-        return jsonify({"message": "Invalid data"}), 400 # Hvis der mangler data der hvor deres bruger escape metoden
+        return (
+            jsonify({"message": "Invalid data"}),
+            400,
+        )  # Hvis der mangler data der hvor deres bruger escape metoden
     except Exception:
         dbsession.rollback()
-        log(traceback.format_exc())
+        log(traceback.format_exc(), "An internal error has occurred in /notes/create")
         return CONNECTION_ERROR
 
+
 # Sletter en note ud fra id
-@api.route('/notes/<id>', methods=['DELETE'])
+@api.route("/notes/<id>", methods=["DELETE"])
 @jwt_or_swagger_required
-@swag_from('static/swaggerformatting/delete.yml')
+@swag_from("static/swaggerformatting/delete.yml")
 def delete_note(id):
     """
     Delete a note from the database based on the provided ID.
@@ -263,9 +298,11 @@ def delete_note(id):
     Raises:
         - Exception: If an internal error occurs while deleting the note.
     """
-    current_user = get_jwt_identity() # takes author id from jwt
+    current_user = get_jwt_identity()  # takes author id from jwt
     try:
-        note_author_query = dbsession.query(Note).filter(Note.author == current_user['author']).first()
+        note_author_query = (
+            dbsession.query(Note).filter(Note.author == current_user["author"]).first()
+        )
         if note_author_query is None:
             return "The author does not exist"
 
@@ -274,7 +311,7 @@ def delete_note(id):
         if note is None:
             return "The note does not exist"
 
-        if current_user['author'] != note.author:
+        if current_user["author"] != note.author:
             return "Current user is not the author of note"
 
         dbsession.delete(note)
@@ -283,13 +320,14 @@ def delete_note(id):
         return make_response("Note with id:" + escape(id) + " has been deleted", 200)
     except Exception:
         dbsession.rollback()
-        log(traceback.format_exc())
+        log(traceback.format_exc(), "An internal error has occurred in DELETE /notes/<id>")
         return CONNECTION_ERROR
 
+
 # Redigere en eksisterende note ud fra id og input
-@api.route('/notes/<id>', methods=['PUT'])
+@api.route("/notes/<id>", methods=["PUT"])
 @jwt_or_swagger_required
-@swag_from('static/swaggerformatting/editid.yml')
+@swag_from("static/swaggerformatting/editid.yml")
 def edit_note(id):
     """
     Edit a note in the database based on the provided ID and input.
@@ -304,9 +342,11 @@ def edit_note(id):
     Raises:
         - Exception: If an internal error occurs while editing the note.
     """
-    current_user = get_jwt_identity() # takes author id from jwt
+    current_user = get_jwt_identity()  # takes author id from jwt
     try:
-        note_author_query = dbsession.query(Note).filter(Note.author == current_user['author']).first()
+        note_author_query = (
+            dbsession.query(Note).filter(Note.author == current_user["author"]).first()
+        )
         if note_author_query is None:
             return jsonify({"message": "The author does not exist"}), 404
 
@@ -315,13 +355,13 @@ def edit_note(id):
         if edit_query is None:
             return jsonify({"message": "Note not found"}), 404
 
-        if current_user['author'] != edit_query.author:
+        if current_user["author"] != edit_query.author:
             return "Current user is not author of the note"
         note = request.json
-        title = escape(note.get('title'))
-        text = escape(note.get('text'))
+        title = escape(note.get("title"))
+        text = escape(note.get("text"))
         lastedited = datetime.now(timezone.utc)
-        imagelink = escape(note.get('imagelink'))
+        imagelink = escape(note.get("imagelink"))
 
         # Laves så kun ændrede data tabeller bliver ændret(ellers gør den det andet tomt)
         edit_query.title = title
@@ -341,5 +381,5 @@ def edit_note(id):
         )
     except Exception:
         dbsession.rollback()
-        log(traceback.format_exc())
+        log(traceback.format_exc(), "An internal error has occurred in PUT /notes/<id>")
         return "An internal error has occurred!"
