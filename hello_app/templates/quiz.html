@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+View Quiz
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='quiz.css') }}" />
+{% endblock %}
+
+{% block content %}
+<!--
+    # name
+    # questions (list)
+        # text
+        # choices (list)
+            # text
+            # iscorrect
+-->
+<div class="resources">
+    <h2>{{ quiz.name }}</h2>
+    <hr>
+
+    <!-- Render questions -->
+    <form action="/quizzes/submit/{{ quiz.quizID }}", method="post">
+        {% for question in questions %}
+        <div class="question">
+            <p>{{ question.text }}</p>
+            <ul class="choices">
+                <!-- Render choices for the question -->
+                {% for choice in question.choices %}
+                <li>
+                    <input type="radio" id="choice{{ loop.index }}" name="question{{ question.questionID }}" value="{{ choice.choiceID }}" required>
+                    <label for="choice{{ loop.index }}">{{ choice.text }}</label>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endfor %}
+        <button type="submit">Submit Quiz</button>
+    </form>
+</div>
+{% endblock %}
