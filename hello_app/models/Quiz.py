@@ -1,3 +1,33 @@
+"""
+This module defines the data models for a quiz system using SQLAlchemy ORM.
+
+Classes:
+    Quiz: Represents a quiz with attributes like quiz ID, name, creation and
+    last edited times, and associated account and questions.
+    Account: Represents a user account with attributes like
+    account ID, username, and relationships to other models.
+    Question: Represents a question within a quiz,
+    including the question text and associated choices.
+    Choice: Represents a choice for a question in a quiz,
+    including the choice text and whether it is the correct answer.
+
+Each class is mapped to a corresponding table in a database using SQLAlchemy's declarative base system.
+Relationships between tables are defined using SQLAlchemy's relationship function, 
+allowing for easy navigation between linked records.
+
+The module uses the following imports:
+- datetime from datetime: For handling date and time information.
+- Boolean, Column, ForeignKey, Integer, DateTime, VARCHAR from 
+  sqlalchemy: For defining column types in database tables.
+- declarative_base, relationship from sqlalchemy.orm: For creating the base class for the models and 
+  defining relationships between them.
+
+Example Usage:
+    Creating a new quiz and adding it to a session:
+    >>> new_quiz = Quiz(name="Sample Quiz", accountID=1)
+    >>> session.add(new_quiz)
+    >>> session.commit()
+"""
 from datetime import datetime, timezone
 from sqlalchemy import Boolean, Column,ForeignKey, Integer, DateTime, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship

@@ -1,5 +1,36 @@
+"""
+This file contains three classes: Note, Account, and Role, which represent models for a note taking app.
+
+Note Class:
+- Represents a note in the app.
+- Attributes: noteID (int), title (str), text (str), created (datetime), lastedited (datetime), imagelink (str), author (int).
+- Relationships: account (Account).
+- Methods: to_isoformat().
+
+Account Class:
+- Represents a user account in the app.
+- Attributes: accountID (int), username (str), password (str), email (str), roleID (int).
+- Relationships: role (Role).
+
+Role Class:
+- Represents a role in the app.
+- Attributes: roleID (int), rolename (str).
+
+Note:
+- The Note model is linked to the Account model through the author attribute.
+
+Account:
+- The Account model is linked to the Role model through the roleID attribute.
+
+Example Usage:
+- Create instances of the classes and set their attributes accordingly.
+
+Note:
+- The Note class has a to_isoformat() method that converts the Note object to a dictionary with ISO formatted values.
+
+"""
 from datetime import datetime, timezone
-from sqlalchemy import Boolean, Column,ForeignKey, Integer, DateTime, Text, VARCHAR
+from sqlalchemy import Column,ForeignKey, Integer, DateTime, Text, VARCHAR
 from sqlalchemy.orm import declarative_base, relationship
 
 Base = declarative_base()
