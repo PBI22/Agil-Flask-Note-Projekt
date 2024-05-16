@@ -197,7 +197,7 @@ def delete_quiz(id=None):
         )
 
     # Redirect to the page where the quiz was deleted from
-    return redirect(request.referrer or url_for("home"))
+    return redirect(url_for("home"))
 
 @quizzes.route("/submit/<id>", methods=["POST"])
 def submit_quiz(id=None):
