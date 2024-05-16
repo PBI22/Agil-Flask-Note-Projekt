@@ -39,7 +39,7 @@
     </tr>
 
   {% for note in notes %}
-    <tr onclick="redirectToPage('{{note.noteID}}', 'note')"> 
+    <tr onclick="redirectToPage('{{note.noteID}}', 'note')" onkeypress="redirectToPage('{{note.noteID}}', 'note')"> 
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
@@ -68,7 +68,7 @@
   </tr>
 
   {% for quiz in quiz %}
-  <tr onclick="redirectToPage('{{quiz.quizID}}', 'quiz')">
+  <tr onclick="redirectToPage('{{quiz.quizID}}', 'quiz')" onkeypress="redirectToPage('{{note.noteID}}', 'note')">
     <!-- Display maximum of 50 characters-->
     <td>{{ quiz.name[:50] }}</td>
     <td>{{ quiz.account.username }}</td>

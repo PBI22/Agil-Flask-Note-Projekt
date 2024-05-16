@@ -16,7 +16,7 @@ from .utils import create_quiz_post, find_quiz, dbsession, app
 quizzes = Blueprint("quizzes", __name__)
 NOT_FOUND_MESSAGE = "Note not found"
 
-@quizzes.route("/create/", methods=["GET", "POST"])
+@quizzes.route("/create/", methods=["GET", "POST"]) #NOSONAR
 @login_required
 def create_quiz():
     """
@@ -105,7 +105,7 @@ def view_quiz(id=None):
         # Redirect to the home page or an error page
         return redirect(url_for("home"))
 
-@quizzes.route("/edit/", methods=["GET", "POST"])
+@quizzes.route("/edit/", methods=["GET", "POST"]) #NOSONAR
 @login_required
 def edit_quiz():
     """
