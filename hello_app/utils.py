@@ -8,10 +8,10 @@ and other helper functions used across the application.
 from datetime import datetime, timezone
 from flask import flash, session
 from .dbconnect import dbsession
-from .models import Note, Account
+from .models.Note import Note, Account
+from .models.Quiz import Quiz, Question, Choice
 from .auth import login_required
 from . import app
-
 
 def update_list():
     """
@@ -32,6 +32,24 @@ def update_list():
     except Exception as e:
         app.logger.critical("Failed to update list: %s", e)
     return notes_db
+def update_quiz_list():
+    """
+    Update the list of quizzes from the database.
+
+    Returns:
+        list: A list of Quiz objects representing the quizzes in the database.
+
+    Raises:
+        Exception: If there is an error while updating the list.
+
+    """
+    try:
+        quizzes_db = []
+        for row in dbsession.query(Quiz).order_by(Quiz.quizID):
+            quizzes_db.append(row)
+    except Exception as e:
+        app.logger.critical("Failed to update quiz list: %s", e)
+    return quizzes_db
 
 
 def create_note_post(form):
@@ -139,6 +157,128 @@ def find_note(note_id):
     except Exception as e:
         app.logger.error("Failed to find note: %s from user: %s", e, session["user"])
     return note
+
+def find_quiz(quiz_id):
+    """
+    Find a note by its ID.
+
+    Args:
+        note_id (int): The ID of the note to find.
+
+    Returns:
+        Note or None: The Note object with the specified ID, or None if no note is found.
+
+    Raises:
+        Exception: If there is an error while finding the note.
+
+    """
+    try:
+        quiz = next(
+            (quiz for quiz in update_quiz_list() if quiz.quizID == int(quiz_id)), None
+        )
+    except Exception as e:
+        app.logger.error("Failed to find note: %s from user: %s", e, session["user"])
+    return quiz
+
+def create_quiz_post(form):
+    """
+    Create a new quiz and save it to the database.
+
+    Parameters:
+        form (dict): A dictionary containing the form data submitted by the user.
+
+    Returns:
+        None
+
+    Raises:
+        Exception: If there is an error creating the quiz.
+
+    Description:
+        This function takes in the form data submitted by the user and creates a new quiz in the database.
+        It extracts the quiz name from the form and creates a new Quiz instance with the name,
+        current timestamp, and the user's account ID. 
+        The new quiz is then added to the database session and flushed to generate a unique quiz ID.
+
+        Next, the function parses the questions and choices from the form. 
+        It iterates over the question keys in the form and extracts the question text. 
+        For each question, a new Question instance is created with the text and the quiz ID. 
+        The new question is added to the database session and flushed to generate a unique question ID.
+
+        Then, the function iterates over the choice keys in the form and 
+        extracts the choice text and checkbox value. 
+        It constructs the corresponding checkbox key and checks if the checkbox is checked. 
+        If the choice key starts with the current question key, 
+        a new Choice instance is created with the text, checkbox value, and the question ID. 
+        The new choice is added to the database session.
+
+        Finally, the function commits the changes to the database, flashes a success message, 
+        and logs the successful creation of the quiz. If there is an error during the process, 
+        the function rolls back the database session, flashes an error message with error details, 
+        and logs the failed creation of the quiz.
+    """
+    try:
+        # Extract quiz name
+        quiz_name = form['quiz-name']
+
+        # Structure insert query quiz
+        new_quiz = Quiz(
+            name=quiz_name,
+            created=datetime.now(timezone.utc),
+            lastedited=datetime.now(timezone.utc),
+            accountID=session["userID"],
+        )
+
+        # Add the new quiz to the database session
+        dbsession.add(new_quiz)
+        dbsession.flush()
+
+        # Parse questions and choices from the form
+        question_keys = [key for key in form.keys() if key.startswith("question")]
+        for question_key in question_keys:
+            # Extract question text from the form
+            question_text = form[question_key]
+
+            # Create a new question instance associated with the quiz
+            new_question = Question(text=question_text, quizID=new_quiz.quizID)
+
+            # Add the new question to the database session
+            dbsession.add(new_question)
+            dbsession.flush()
+
+            # Parse choices for the current question
+            choice_keys = [
+                key
+                for key in form.keys()
+                if key.startswith("choice") and not key.endswith("-correct")
+            ]
+            for choice_key in choice_keys:
+                # Extract choice text from the form
+                choice_text = form[choice_key]
+
+                # Construct the corresponding checkbox key
+                checkbox_key = f"{choice_key}-correct"
+
+                # Extract the checkbox value
+                is_correct = form.get(checkbox_key, False) == 'on'
+
+                choice_input = 'choice-' + question_key
+                if choice_key.startswith(choice_input):
+
+                    # Create a new choice instance associated with the current question
+                    new_choice = Choice(text=choice_text, iscorrect=is_correct, questionID=new_question.questionID)
+
+                    # Add the new choice to the database session
+                    dbsession.add(new_choice)
+
+        # Commit changes to the database
+        dbsession.commit()
+
+        flash("Quiz created successfully", "success")
+    except Exception as e:
+        dbsession.rollback()
+        flash(f"Failed to create quiz: {str(e)}", "error")
+        app.logger.error("Failed to create quiz: %s from user: %s", e, session.get("user", "Unknown"))
+
 
 def searchbar(query):
     """

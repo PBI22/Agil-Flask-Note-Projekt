@@ -15,7 +15,20 @@
   <button type="submit" id="searchbutton"><i class="fa-solid fa-magnifying-glass"></i></button>
 </form>
 <a href="{{ url_for('home') }}" class="clear">Ryd søgning</a>
-<table class="resources" style="border-collapse: collapse;">
+
+<div class="view-type">
+  <div class="radio-option">
+    <p>Note</p>
+    <input type="radio" name="view-choice-radio" id="view-note-radio" onclick="handleRadioButtonClick('note')" onkeydown="handleRadioButtonClick('note')" tabindex="0">
+  </div>
+  <div class="radio-option">
+    <p>Quiz</p>
+    <input type="radio" name="view-choice-radio" id="view-quiz-radio" onclick="handleRadioButtonClick('quiz')" onkeydown="handleRadioButtonClick('quiz')" tabindex="0">
+  </div>
+</div>
+
+
+<table class="resources" style="border-collapse: collapse; display: none;" id="notes-table">
 
     <tr>
       <th>Titel</th>
@@ -26,7 +39,7 @@
     </tr>
 
   {% for note in notes %}
-    <tr onclick="redirectToPage('{{ note.noteID}}')"> 
+    <tr onclick="redirectToPage('{{note.noteID}}', 'note')" onkeypress="redirectToPage('{{note.noteID}}', 'note')"> 
       <td>{{ note.title }}</td>
       <!-- Display maximum of 50 characters-->
       <td>{{ note.text[:50] }}...</td>
@@ -45,13 +58,70 @@
   {% endfor %}
 
 </table>
+
+<table class="resources" style="border-collapse: collapse; display: none;" id="quiz-table">
+  <tr>
+    <th>Quiz navn</th>
+    <th>Forfatter</th>
+    <th>Sidst ændret</th>
+    <th>Handlinger</th>
+  </tr>
+
+  {% for quiz in quiz %}
+  <tr onclick="redirectToPage('{{quiz.quizID}}', 'quiz')" onkeypress="redirectToPage('{{note.noteID}}', 'note')">
+    <!-- Display maximum of 50 characters-->
+    <td>{{ quiz.name[:50] }}</td>
+    <td>{{ quiz.account.username }}</td>
+    <td>{{ quiz.lastedited.strftime("%Y-%m-%d %H:%M")}}</td>
+    <td class="icons">
+      <a href="{{ url_for('quizzes.edit_quiz', id=quiz.quizID) }}" class="icon-link">
+          <i class="fa-solid fa-wrench"></i>
+      </a>
+      <a href="{{ url_for('quizzes.delete_quiz', id=quiz.quizID) }}" class="icon-link">
+        <i class="fa-solid fa-trash"></i>
+      </a>
+
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+
 <script>
-  function redirectToPage(id) {
+  function redirectToPage(id, type) {
            // Redirect to detail page with the specified ID
-           window.location.href = '/notes/view/' + id;
-       }
+          if (type == 'note') {
+              window.location.href = '/notes/view/' + id;
+          }
+          if (type == 'quiz') {
+              window.location.href = '/quizzes/view/' + id;
+          }
+       } 
+
+  function handleRadioButtonClick(type) {
+    console.log("Handling radio button click for: " + type);
+    
+    if (type === 'note') {
+      console.log("Showing notes table");
+      document.getElementById('notes-table').classList.add('show-table');
+      if (document.getElementById('quiz-table')) {
+        console.log("Hiding quiz table");
+        document.getElementById('quiz-table').classList.remove('show-table');
+      }
+    } else if (type === 'quiz') {
+      console.log("Showing quiz table");
+      document.getElementById('notes-table').classList.remove('show-table'); // Hide note table
+      if (document.getElementById('quiz-table')) {
+        console.log("Hiding notes table");
+        document.getElementById('quiz-table').classList.add('show-table');
+      }
+    }
+  }
+
+
+
+handleRadioButtonClick('note')
 </script>
 {% endif %}
 
 {% endblock %}
-

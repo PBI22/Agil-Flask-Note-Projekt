@@ -280,3 +280,40 @@ footer p {
   100% {top: 71.33px; z-index: 1;}
 }
 
+.view-type {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.view-type {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-option {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 40px; 
+}
+
+.radio-option p {
+  margin: 0;
+  margin-bottom: 7px;
+  font-weight: bold;
+  font-size: 1.35em;
+}
+
+.radio-option input[type="radio"] {
+  width: 25px;
+  height: 25px;
+}
+
+.show-table {
+  display: flex !important; /* Ensure the table is displayed as flex */
+  flex-direction: column; /* Ensure vertical alignment */
+  align-items: center; /* Center horizontally */
+}
+

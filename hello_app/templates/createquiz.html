@@ -1,0 +1,169 @@
+{% extends "layout.html" %}
+<!-- import datetime-->
+{% block title %}
+Create Note    
+{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='quiz.css') }}"  />
+{% endblock %}
+
+{% block content %}
+<div align="center">
+<h1>Create Quiz</h1>
+<form action="/quizzes/create/" id="quiz-form" method="POST">
+    <label for="quiz-name-input">Quiz name: </label>
+    <input type="text" name="quiz-name" id="quiz-name-input" placeholder="Quiz name" required>
+    <div>
+        <p>Enter your question and choices and choose a correct choice</p>
+        <div id="questions-container">
+            <!-- Questions are added dynamically -->
+        </div>
+        <div>
+            <label for="num-choices-input">Number of Choices:</label>
+            <input type="number" id="num-choices-input" min="1" max="8" value="2">
+        </div>
+        <br>
+        <button type="button" id="add-question-btn">Add Question</button>
+        <button type="submit" id="submit-btn">Submit</button>
+    </div>
+</form>
+</div>
+<script>
+
+let questionCount = 0;
+
+function addQuestion() {
+    questionCount++;
+
+    const numChoicesInput = document.getElementById('num-choices-input');
+    const numChoices = parseInt(numChoicesInput.value);
+    if (isNaN(numChoices) || numChoices <= 0) {
+        alert('Please enter a valid number of choices.');
+        return;
+    }
+
+    let choicesHTML = '';
+    for (let i = 1; i <= numChoices; i++) {
+        choicesHTML += `
+            <div class="choice" id="choice${questionCount}&${i}">
+                <label for="question${questionCount}-choice-id${i}">Correct:</label>
+                <input type="checkbox" name="choice-question${questionCount}-choice${i}-correct" id="question${questionCount}-choice-id${i}">
+                <label for="question${questionCount}-choice-text${i}">Choice:</label>
+                <input type="text" name="choice-question${questionCount}-choice${i}" id="question${questionCount}-choice-text${i}" placeholder="Choice ${i}" required>
+                <button type="button" onclick="deleteChoice(${i}, ${questionCount})"><i class="fa-solid fa-trash"></i></button>
+            </div>
+        `;
+    }
+
+    const questionDiv = document.createElement('div');
+    questionDiv.classList.add('question');
+    questionDiv.id = `question${questionCount}`;
+    questionDiv.innerHTML = `
+        <div>
+            <p>Question ${questionCount}</p>
+            <button type="button" class="delete-question-btn" onclick="deleteQuestion(${questionCount})">Delete</button>
+        </div>
+        <label for="question-id${questionCount}">Question:</label>
+        <input type="text" name="question${questionCount}" id="question-id${questionCount}" placeholder="Question"> <br>
+        <div id="choice-container">${choicesHTML}</div>
+        <button type="button" onclick="addChoice(${questionCount})">Add choice</button>
+    `;
+    
+    const questionsContainer = document.getElementById('questions-container');
+    questionsContainer.appendChild(questionDiv);
+}
+
+
+function addChoice(questionNumber) {
+    const questionContainer = document.getElementById(`question${questionNumber}`);
+    const choicesContainer = questionContainer.querySelector(`#choice-container`);
+
+    // Select all existing choices inside the choices container
+    // Max length of 8 to ensure no spam
+    const existingChoices = choicesContainer.querySelectorAll('.choice');
+    if (existingChoices.length >= 8) {
+        alert('Maximum number of choices reached (8).');
+        return;
+    }
+
+    // Find the highest existing choice ID
+    let highestChoiceId = 0;
+    existingChoices.forEach(choice => {
+        const choiceIdParts = choice.id.split('&');
+        const choiceNumber = parseInt(choiceIdParts[1]);
+        if (choiceNumber > highestChoiceId) {
+            highestChoiceId = choiceNumber;
+        }
+    });
+
+    // Calculate the number for the new choice
+    const newChoiceNumber = highestChoiceId + 1;
+
+    // Create HTML elements for the new choice
+    const newChoice = document.createElement('div');
+    newChoice.classList.add('choice');
+    newChoice.id = `choice${questionNumber}&${newChoiceNumber}`;
+    newChoice.innerHTML = `
+        <label for="question${questionNumber}-choice-id${newChoiceNumber}">Correct:</label>
+        <input type="checkbox" name="choice-question${questionNumber}-choice${newChoiceNumber}-correct" id="question${questionNumber}-choice-id${newChoiceNumber}">
+        <label for="id="question${questionNumber}-choice-text${newChoiceNumber}"">Choice:</label>
+        <input type="text" name="choice-question${questionNumber}-choice${newChoiceNumber}" id="question${questionNumber}-choice-text${newChoiceNumber}" placeholder="Choice ${newChoiceNumber}" required>
+        <button type="button" class="delete-choice-btn" onclick="deleteChoice(${newChoiceNumber}, ${questionNumber})"><i class="fa-solid fa-trash"></i></button>
+        <br>
+    `;
+
+    // Append the new choice to the choices container
+    choicesContainer.appendChild(newChoice);
+}
+
+function deleteChoice(choiceNumber, questionNumber) {
+    const removeChoice = document.getElementById(`choice${questionNumber}&${choiceNumber}`);
+    removeChoice.remove();
+
+    // Reorder the remaining choices and update their IDs and names
+    const questionContainer = document.getElementById(`question${questionNumber}`);
+    const remainingChoices = questionContainer.querySelectorAll('.choice');
+    for (let i = 0; i < remainingChoices.length; i++) {
+        // Update choice IDs
+        remainingChoices[i].id = `choice${questionNumber}&${i + 1}`;
+        
+        // Update input IDs and names for text fields
+        const choiceInputText = remainingChoices[i].querySelector('input[type="text"]');
+        choiceInputText.id = `question${questionNumber}-choice-text${i + 1}`;
+        choiceInputText.name = `choice-question${questionNumber}-choice${i + 1}`;
+        choiceInputText.setAttribute('placeholder', `Choice ${i + 1}`);
+
+        // Update input IDs and names for checkboxes
+        const choiceInputCheckbox = remainingChoices[i].querySelector('input[type="checkbox"]');
+        choiceInputCheckbox.id = `question${questionNumber}-choice-id${i + 1}`;
+        choiceInputCheckbox.name = `choice-question${questionNumber}-choice${i + 1}-correct`;
+
+        // Update delete button onclick attribute
+        const deleteBtn = remainingChoices[i].querySelector('button');
+        deleteBtn.setAttribute('onclick', `deleteChoice(${i + 1}, ${questionNumber})`);
+    }
+}
+
+function deleteQuestion(questionNumber) {
+    const removeQuestion = document.getElementById(`question${questionNumber}`);
+    removeQuestion.remove();
+
+    const questionsContainer = document.getElementById('questions-container');
+    const remainingQuestions = questionsContainer.getElementsByClassName('question');
+    questionCount = 0;
+    for (let i = 0; i < remainingQuestions.length; i++) {
+        remainingQuestions[i].id = `question${i + 1}`;
+        remainingQuestions[i].querySelector('p').textContent = `Question ${i + 1}`;
+        const deleteBtn = remainingQuestions[i].querySelector('.delete-question-btn');
+        deleteBtn.setAttribute('onclick', `deleteQuestion(${i + 1})`);
+        questionCount++;
+    }
+}
+
+const addQuestionBtn = document.getElementById('add-question-btn');
+addQuestionBtn.addEventListener('click', addQuestion);
+
+addQuestion();
+</script>
+{% endblock %}

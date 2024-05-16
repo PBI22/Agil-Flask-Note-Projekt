@@ -3,12 +3,13 @@ from datetime import datetime
 from flask import render_template, send_from_directory, request
 from flask_swagger_ui import get_swaggerui_blueprint
 from . import app, csrf
-from .utils import update_list
+from .utils import update_list, update_quiz_list
 from .auth import auth
 from .api import api
 from .log_config import setup_app_logging
 from .notes import notes
 from .oauth import oauth, oauth_bp
+from .quizzes import quizzes
 
 # inits til vores app
 oauth.init_app(app)
@@ -17,6 +18,8 @@ app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(api, url_prefix='/api')
 csrf.exempt(api) # csrf is disabled for api, cause we are using jwt for validation
 app.register_blueprint(notes, url_prefix='/notes')
+app.register_blueprint(quizzes, url_prefix='/quizzes')
+csrf.exempt(quizzes) # Disabled for testing environment
 setup_app_logging(app)
 
 SWAGGER_URL = '/swagger'
@@ -46,7 +49,7 @@ def home():
 
     """
     app.logger.info("Home page requested from: %s", request.remote_addr)
-    return render_template("home.html", notes = update_list(), datetime = datetime.now())
+    return render_template("home.html", notes = update_list(), quiz = update_quiz_list(), datetime = datetime.now())
 
 @app.route('/robots.txt')
 def robots_txt():
